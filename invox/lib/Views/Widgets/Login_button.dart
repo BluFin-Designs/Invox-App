@@ -12,26 +12,27 @@ class ReusableCard extends StatelessWidget {
       onTap: onPress,
       child: Container(
         height: 60.0,
+        margin: const EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: Colors.white,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               width: 30.0,
             ),
             Image(image: AssetImage(icon), height: 38.0, width: 38.0),
-            SizedBox(
+            const SizedBox(
               width: 20.0,
             ),
             Text(
               text,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
             )
           ],
-        ),
-        margin: EdgeInsets.only(left: 20.0, top: 15.0, right: 20.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: Colors.white,
         ),
       ),
     );

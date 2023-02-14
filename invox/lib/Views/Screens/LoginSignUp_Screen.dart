@@ -1,47 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:invox/Views/Widgets/Login_button.dart';
+
+import '../Widgets/Login_button.dart';
 
 class LoginSignUp extends StatelessWidget {
-  static const routeName = '/product-detail';
+  static const routeName = '/login-signup';
 
   const LoginSignUp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFF7B54),
+      backgroundColor: const Color(0xFFFF7B54),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(
+          const Image(
             image: AssetImage(
-              'images/Asset 3@4x 1.png',
+              'assets/images/logo.png',
             ),
             height: 50.0,
           ),
-          SizedBox(
+          const SizedBox(
             height: 40.0,
           ),
-          Text(
+          const Text(
             'Begin your Journey in\nSaving\nWith just one click!',
             style: TextStyle(color: Colors.white, fontSize: 25.0),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 40.0,
           ),
-          Image(
-            image: AssetImage('images/pngwing 1.png'),
+          const Image(
+            image: AssetImage('assets/images/loginPage_Asset.png'),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25.0,
           ),
           ReusableCard(
-              icon: 'images/ion_logo-google.png',
+              icon: 'assets/images/google_logo.png',
               text: 'Continue with Google',
               onPress: () {}),
           ReusableCard(
-              icon: 'images/clarity_email-solid.png',
+              icon: 'assets/images/email_logo.png',
               text: 'Continue with Email',
               onPress: () {}),
         ],
