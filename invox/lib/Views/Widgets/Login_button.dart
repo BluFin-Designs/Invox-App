@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({required this.icon, required this.text, required this.onPress});
+  ReusableCard({
+    required this.icon,
+    required this.text,
+    required this.onPress,
+  });
   final String icon;
   final String text;
   final VoidCallback onPress;
