@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../Widgets/Login_button.dart';
+import '../Screens/HomePage_Screen.dart';
 
 class LoginSignUp extends StatelessWidget {
   static const routeName = '/login-signup';
@@ -40,7 +41,10 @@ class LoginSignUp extends StatelessWidget {
           ReusableCard(
               icon: 'assets/images/google_logo.png',
               text: 'Continue with Google',
-              onPress: () {}),
+              onPress: () {
+                print("trigger!");
+                Navigator.of(context).pushNamed(HomePage.routeName);
+              }),
           ReusableCard(
               icon: 'assets/images/email_logo.png',
               text: 'Continue with Email',
