@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Widgets/HomePage_Graph.dart';
 import '../Widgets/TransactionCard.dart';
+import '../Widgets/MenuDrawer.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -13,9 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _key = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _key,
       extendBody: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -30,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             Icons.menu,
             size: 30,
           ),
-          onPressed: () {},
+          onPressed: () => _key.currentState!.openDrawer(),
         ),
         actions: [
           IconButton(
@@ -106,6 +109,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+      drawer: const MenuDrawer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
