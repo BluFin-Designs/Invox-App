@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFFFF7B54),
         accentColor: const Color(0xffFFB26B),
       ),
-      home: const Profile(),
+      home: const LoginSignUp(),
       routes: {
         LoginSignUp.routeName: (ctx) => const LoginSignUp(),
         HomePage.routeName: (ctx) => const HomePage(),

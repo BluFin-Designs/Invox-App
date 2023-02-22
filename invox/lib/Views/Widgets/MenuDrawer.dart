@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invox/Views/Screens/Profile_Screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
@@ -75,8 +76,13 @@ class MenuDrawer extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              MenuItems(
-                menu: "About",
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, Profile.routeName);
+                },
+                child: MenuItems(
+                  menu: "About",
+                ),
               ),
               MenuItems(
                 menu: "Privacy Policy",

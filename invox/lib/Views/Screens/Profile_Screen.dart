@@ -10,6 +10,11 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        elevation: 0,
+        leading: const Text(""),
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -48,10 +53,8 @@ class Profile extends StatelessWidget {
                     ),
                   ),
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 50.0,
-                      ),
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white,
