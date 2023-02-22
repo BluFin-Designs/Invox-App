@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/Profile_card.dart';
 import '../Widgets/pie_chart.dart';
+import 'dart:math';
 
 class Profile extends StatelessWidget {
   static const routeName = '/profile';
@@ -102,23 +103,97 @@ class Profile extends StatelessWidget {
                       const SizedBox(
                         height: 25.0,
                       ),
-                      const Text(
-                        'Your Buying Streak',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: Color(0xFFD9D9D9),
-                        ),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          const Text(
+                            'Your Buying Streak',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Color(0xFFD9D9D9),
+                            ),
+                          ),
+                        ],
                       ),
                       Row(
                         children: [
-                          Container(
-                            height: 20.0,
-                            margin: const EdgeInsets.only(
-                                left: 7.0, top: 10.0, right: 7.0, bottom: 10.0),
-                            color: Colors.white,
-                            child: Column(
-                              children: [],
+                          Padding(
+                            padding: const EdgeInsets.all(14.0),
+                            child: Container(
+                              height: 14,
+                              child: RotatedBox(
+                                quarterTurns: -3,
+                                child: AspectRatio(
+                                  aspectRatio: 0.05,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xffF0F0F0),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: BarChart(
+                                        BarChartData(
+                                          barGroups: [
+                                            BarChartGroupData(
+                                              x: 0,
+                                              barRods: [
+                                                BarChartRodData(
+                                                  width: 10,
+                                                  toY: 20,
+                                                  gradient: _barsGradient,
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0)),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                          gridData: FlGridData(
+                                              drawHorizontalLine: false,
+                                              drawVerticalLine: false),
+                                          alignment:
+                                              BarChartAlignment.spaceAround,
+                                          maxY: 31,
+                                          barTouchData: BarTouchData(
+                                              enabled: false,
+                                              touchTooltipData:
+                                                  BarTouchTooltipData(
+                                                tooltipBgColor:
+                                                    Colors.transparent,
+                                                tooltipPadding: EdgeInsets.zero,
+                                                tooltipMargin: 8,
+                                                getTooltipItem: (
+                                                  BarChartGroupData group,
+                                                  int groupIndex,
+                                                  BarChartRodData rod,
+                                                  int rodIndex,
+                                                ) {
+                                                  return BarTooltipItem(
+                                                    rod.toY.round().toString(),
+                                                    const TextStyle(
+                                                        color:
+                                                            Color(0xFFFF7B54),
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  );
+                                                },
+                                              )),
+                                          titlesData: titlesData,
+                                          borderData: FlBorderData(
+                                            show: true,
+                                            border: const Border(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                           Text(
@@ -348,4 +423,30 @@ class Profile extends StatelessWidget {
       ),
     );
   }
+
+  LinearGradient get _barsGradient => const LinearGradient(
+        colors: [
+          Color(0xffFF7B54),
+          Color(0xFF0A2647),
+        ],
+        begin: Alignment.bottomCenter,
+        end: Alignment.topCenter,
+      );
+  FlTitlesData get titlesData => FlTitlesData(
+        show: false,
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: false,
+          ),
+        ),
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        topTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        rightTitles: AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+      );
 }
