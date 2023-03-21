@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import "package:hive/hive.dart";
+import 'package:hive_flutter/hive_flutter.dart';
 
 import './Views/Screens/LoginSignUp_Screen.dart';
 import './Views/Screens/HomePage_Screen.dart';
@@ -7,7 +9,8 @@ import '../Views/Screens/Transaction_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/MyWallets_Screen.dart';
 
-void main() {
+main() async {
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFFFF7B54),
         accentColor: const Color(0xffFFB26B),
       ),
-      home: MyWalletsScreen(),
+      home: const LoginSignUp(),
       routes: {
         LoginSignUp.routeName: (ctx) => const LoginSignUp(),
         HomePage.routeName: (ctx) => const HomePage(),

@@ -77,9 +77,7 @@ class MenuDrawer extends StatelessWidget {
                 height: 10,
               ),
               InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, Profile.routeName);
-                },
+                onTap: () {},
                 child: MenuItems(
                   menu: "About",
                 ),

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:invox/Views/Screens/MyWallets_Screen.dart';
+import 'package:invox/Views/Screens/Profile_Screen.dart';
+import 'package:invox/Views/Screens/Statistics_Screen.dart';
+import 'package:invox/Views/Screens/Transaction_Screen.dart';
 
+import '../Widgets/Add_Transaction_PopUp.dart';
 import '../Widgets/HomePage_Graph.dart';
 import '../Widgets/TransactionCard.dart';
 import '../Widgets/MenuDrawer.dart';
@@ -84,6 +89,22 @@ class _HomePageState extends State<HomePage> {
         shape: const CircularNotchedRectangle(),
         notchMargin: 5,
         child: BottomNavigationBar(
+          onTap: (int x) {
+            switch (x) {
+              case 0:
+                Navigator.pushNamed(context, Transaction.routeName);
+                break;
+              case 1:
+                Navigator.pushNamed(context, MyWalletsScreen.routeName);
+                break;
+              case 2:
+                Navigator.pushNamed(context, Statistics.routeName);
+                break;
+              case 3:
+                Navigator.pushNamed(context, Profile.routeName);
+                break;
+            }
+          },
           elevation: 0,
           backgroundColor: const Color(0xff706F6F),
           type: BottomNavigationBarType.fixed,
@@ -117,7 +138,43 @@ class _HomePageState extends State<HomePage> {
           "assets/images/logo_icon.png",
           width: 35,
         ),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            barrierDismissible: false,
+            useSafeArea: true,
+            context: context,
+            builder: (_) => Dialog(
+              insetPadding:
+                  const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 530,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: const <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "New Transaction",
+                        style: TextStyle(
+                          color: Color(0xFFFF7B54),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      AddTransactionPopUp(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
