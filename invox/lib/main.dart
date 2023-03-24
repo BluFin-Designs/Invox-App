@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:invox/Views/Screens/Preferences_Screen.dart';
 
 import './Views/Screens/LoginSignUp_Screen.dart';
 import './Views/Screens/HomePage_Screen.dart';
@@ -9,6 +8,7 @@ import '../Views/Screens/Profile_Screen.dart';
 import '../Views/Screens/Transaction_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/MyWallets_Screen.dart';
+import '../Views/Screens/Preferences_Screen.dart';
 
 main() async {
   await Hive.initFlutter();
