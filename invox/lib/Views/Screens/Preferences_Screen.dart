@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invox/Views/Screens/Categories_Screen.dart';
 
 import '../Widgets/PreferenceButtonWidget.dart';
 import '../Widgets/PreferenceSwitchWidget.dart';
@@ -84,7 +85,9 @@ class Preferences extends StatelessWidget {
               PreferenceButtonWidget(
                 title: "Categories",
                 icon: Icons.category,
-                onClick: () {},
+                onClick: () {
+                  Navigator.of(context).pushNamed(CategoriesPage.routeName);
+                },
               ),
               PreferenceButtonWidget(
                 title: "Budgets",

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
 
-import './Views/Screens/LoginSignUp_Screen.dart';
-import './Views/Screens/HomePage_Screen.dart';
+import '../Views/Screens/Categories_Screen.dart';
+import '../Views/Screens/LoginSignUp_Screen.dart';
+import '../Views/Screens/HomePage_Screen.dart';
 import '../Views/Screens/Profile_Screen.dart';
 import '../Views/Screens/Transaction_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         Statistics.routeName: (ctx) => const Statistics(),
         MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
         Preferences.routeName: (ctx) => const Preferences(),
+        CategoriesPage.routeName: (ctx) => const CategoriesPage(),
       },
     );
   }
