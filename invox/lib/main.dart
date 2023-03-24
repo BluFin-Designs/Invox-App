@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:invox/Views/Screens/Preferences_Screen.dart';
 
 import './Views/Screens/LoginSignUp_Screen.dart';
 import './Views/Screens/HomePage_Screen.dart';
@@ -23,7 +24,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: const Color(0xFFFF7B54),
-        accentColor: const Color(0xffFFB26B),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          secondary: const Color(0xffFFB26B),
+        ),
       ),
       home: const LoginSignUp(),
       routes: {
@@ -33,6 +36,7 @@ class MyApp extends StatelessWidget {
         Transaction.routeName: (ctx) => const Transaction(),
         Statistics.routeName: (ctx) => const Statistics(),
         MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
+        Preferences.routeName: (ctx) => const Preferences(),
       },
     );
   }

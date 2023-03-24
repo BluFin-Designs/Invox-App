@@ -215,7 +215,7 @@ class Profile extends StatelessWidget {
                 children: [
                   ProfileStatsCard(
                     color_1: Theme.of(context).primaryColor,
-                    color_2: Theme.of(context).accentColor,
+                    color_2: Theme.of(context).colorScheme.secondary,
                     value_1: 980.0,
                     value_2: 2000.0,
                   ),
@@ -223,7 +223,7 @@ class Profile extends StatelessWidget {
                     width: 20.0,
                   ),
                   ProfileStatsCard(
-                    color_1: Theme.of(context).accentColor,
+                    color_1: Theme.of(context).colorScheme.secondary,
                     color_2: Theme.of(context).primaryColor,
                     value_1: 1280.0,
                     value_2: 2000.0,

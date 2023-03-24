@@ -31,7 +31,7 @@ class TransactionCard extends StatelessWidget {
                 height: 50,
                 width: 50,
                 decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(5)),
                 child: const Icon(
                   Icons.shopping_basket,
@@ -45,7 +45,7 @@ class TransactionCard extends StatelessWidget {
                 height: 50,
                 width: 80,
                 decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(5)),
                 child: const Center(
                   child: Text(
@@ -89,7 +89,7 @@ class TransactionCard extends StatelessWidget {
                 width: 10,
                 height: 50,
                 decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(10)),
               )
             ],

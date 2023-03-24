@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invox/Views/Screens/Preferences_Screen.dart';
 import 'package:invox/Views/Screens/Profile_Screen.dart';
 
 class MenuDrawer extends StatelessWidget {
@@ -15,7 +16,7 @@ class MenuDrawer extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             Theme.of(context).primaryColor,
-            Theme.of(context).accentColor
+            Theme.of(context).colorScheme.secondary,
           ],
         ),
       ),
@@ -85,8 +86,16 @@ class MenuDrawer extends StatelessWidget {
               MenuItems(
                 menu: "Privacy Policy",
               ),
-              MenuItems(
-                menu: "Preferences",
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    Preferences.routeName,
+                  );
+                },
+                child: MenuItems(
+                  menu: "Preferences",
+                ),
               ),
               MenuItems(
                 menu: "GitHub Repo",
