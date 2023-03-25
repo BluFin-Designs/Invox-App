@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invox/Views/Screens/Categories_Screen.dart';
 
+import './Categories_Screen.dart';
+import './Budget_Screen.dart';
 import '../Widgets/PreferenceButtonWidget.dart';
 import '../Widgets/PreferenceSwitchWidget.dart';
 
@@ -92,7 +93,9 @@ class Preferences extends StatelessWidget {
               PreferenceButtonWidget(
                 title: "Budgets",
                 icon: Icons.attach_money_rounded,
-                onClick: () {},
+                onClick: () {
+                  Navigator.of(context).pushNamed(BudgetPage.routeName);
+                },
               ),
               PreferenceButtonWidget(
                 title: "Saving Goals",

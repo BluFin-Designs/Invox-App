@@ -10,6 +10,7 @@ import '../Views/Screens/Transaction_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/MyWallets_Screen.dart';
 import '../Views/Screens/Preferences_Screen.dart';
+import '../Views/Screens/Budget_Screen.dart';
 
 main() async {
   await Hive.initFlutter();
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
         Preferences.routeName: (ctx) => const Preferences(),
         CategoriesPage.routeName: (ctx) => const CategoriesPage(),
+        BudgetPage.routeName: (ctx) => const BudgetPage(),
       },
     );
   }
