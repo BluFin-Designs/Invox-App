@@ -4,6 +4,7 @@ import './Categories_Screen.dart';
 import './Budget_Screen.dart';
 import '../Widgets/PreferenceButtonWidget.dart';
 import '../Widgets/PreferenceSwitchWidget.dart';
+import './GoalDetails_Screen.dart';
 
 class Preferences extends StatelessWidget {
   static const routeName = '/preferences';

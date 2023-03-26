@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import './GoalDetails_Screen.dart';
 import '../Widgets/SavingGoals_Card.dart';
 import '../Widgets/SavingGoalsAdd_PopUp.dart';
 import '../Widgets/SavingGoalsCommonCard.dart';
@@ -33,16 +35,23 @@ class _SavingGoalsState extends State<SavingGoals> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                  childAspectRatio: .9,
+                  crossAxisCount: 2,
+                ),
                 itemBuilder: (ctx, index) {
                   if (index < Data.details.length) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0, vertical: 5.0),
-                      child: SavingGoalsCard(
-                          value_1: Data.details[index]["SavingsAmount"],
-                          value_2: Data.details[index]["RequiredAmount"],
-                          itemName: Data.details[index]["ItemName"]),
+                    return InkWell(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0, vertical: 5.0),
+                        child: SavingGoalsCard(
+                            value_1: Data.details[index]["SavingsAmount"],
+                            value_2: Data.details[index]["RequiredAmount"],
+                            itemName: Data.details[index]["ItemName"]),
+                      ),
+                      onTap: () {
+                        Navigator.pushNamed(context, GoalDetailsPage.routeName);
+                      },
                     );
                   } else {
                     return Padding(
@@ -50,7 +59,7 @@ class _SavingGoalsState extends State<SavingGoals> {
                           horizontal: 5.0, vertical: 5.0),
                       child: InkWell(
                         child: Container(
-                          height: 180,
+                          height: 190,
                           width: 172,
                           decoration: BoxDecoration(
                             color: const Color(0xFFC1C1C1),
@@ -59,8 +68,8 @@ class _SavingGoalsState extends State<SavingGoals> {
                           child: Padding(
                             padding: const EdgeInsets.all(40.0),
                             child: Container(
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF0F0F0),
+                                decoration: const BoxDecoration(
+                                  color: Color(0xFFF0F0F0),
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Icon(
@@ -70,7 +79,7 @@ class _SavingGoalsState extends State<SavingGoals> {
                         ),
                         onTap: () {
                           showDialog(
-                            barrierDismissible: false,
+                            // barrierDismissible: false,
                             useSafeArea: true,
                             context: context,
                             builder: (_) => Dialog(

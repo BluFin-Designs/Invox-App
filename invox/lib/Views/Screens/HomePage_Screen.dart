@@ -108,7 +108,7 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           backgroundColor: const Color(0xff706F6F),
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Theme.of(context).primaryColor,
+          selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white,
           items: const [
             BottomNavigationBarItem(
