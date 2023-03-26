@@ -11,6 +11,7 @@ import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/MyWallets_Screen.dart';
 import '../Views/Screens/Preferences_Screen.dart';
 import '../Views/Screens/Budget_Screen.dart';
+import '../Views/Screens/SavingGoals_Screen.dart';
 
 main() async {
   await Hive.initFlutter();
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           secondary: const Color(0xffFFB26B),
         ),
       ),
-      home: const LoginSignUp(),
+      home: const SavingGoals(),
       routes: {
         LoginSignUp.routeName: (ctx) => const LoginSignUp(),
         HomePage.routeName: (ctx) => const HomePage(),
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         Preferences.routeName: (ctx) => const Preferences(),
         CategoriesPage.routeName: (ctx) => const CategoriesPage(),
         BudgetPage.routeName: (ctx) => const BudgetPage(),
+        SavingGoals.routeName: (ctx) => const SavingGoals(),
       },
     );
   }

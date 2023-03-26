@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import './SavingGoals_Screen.dart';
 import './Categories_Screen.dart';
 import './Budget_Screen.dart';
 import '../Widgets/PreferenceButtonWidget.dart';
@@ -100,7 +100,9 @@ class Preferences extends StatelessWidget {
               PreferenceButtonWidget(
                 title: "Saving Goals",
                 icon: Icons.savings_sharp,
-                onClick: () {},
+                onClick: () {
+                  Navigator.of(context).pushNamed(SavingGoals.routeName);
+                },
               ),
               PreferenceButtonWidget(
                 title: "Export Statements",
