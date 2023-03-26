@@ -3,6 +3,7 @@ import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../Views/Screens/Categories_Screen.dart';
+import '../Views/Screens/GoalDetails_Screen.dart';
 import '../Views/Screens/LoginSignUp_Screen.dart';
 import '../Views/Screens/HomePage_Screen.dart';
 import '../Views/Screens/Profile_Screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         Preferences.routeName: (ctx) => const Preferences(),
         CategoriesPage.routeName: (ctx) => const CategoriesPage(),
         BudgetPage.routeName: (ctx) => const BudgetPage(),
+        BudgetDetailsPage.routeName: (ctx) => const BudgetDetailsPage(),
       },
     );
   }

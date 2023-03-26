@@ -4,6 +4,7 @@ import './Categories_Screen.dart';
 import './Budget_Screen.dart';
 import '../Widgets/PreferenceButtonWidget.dart';
 import '../Widgets/PreferenceSwitchWidget.dart';
+import './GoalDetails_Screen.dart';
 
 class Preferences extends StatelessWidget {
   static const routeName = '/preferences';
@@ -100,7 +101,9 @@ class Preferences extends StatelessWidget {
               PreferenceButtonWidget(
                 title: "Saving Goals",
                 icon: Icons.savings_sharp,
-                onClick: () {},
+                onClick: () {
+                  Navigator.of(context).pushNamed(BudgetDetailsPage.routeName);
+                },
               ),
               PreferenceButtonWidget(
                 title: "Export Statements",
