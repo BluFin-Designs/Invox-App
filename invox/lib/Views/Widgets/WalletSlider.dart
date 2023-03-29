@@ -34,9 +34,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
               builder: (BuildContext context) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal: 20,
-                  ),
+                      vertical: 10.0, horizontal: 14),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -78,8 +76,8 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                             ),
                           ),
                           Positioned(
-                            top: -150,
-                            right: -150,
+                            top: -140,
+                            right: -140,
                             child: Container(
                               height: 300,
                               width: 300,
@@ -91,7 +89,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                           ),
                           Positioned(
                             top: 20,
-                            left: 30,
+                            left: 20,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

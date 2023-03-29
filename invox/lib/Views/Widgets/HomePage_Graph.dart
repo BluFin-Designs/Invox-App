@@ -273,7 +273,7 @@ class HomePageGraph extends StatelessWidget {
     String text;
     switch (value.toInt()) {
       case 0:
-        text = 'Mn';
+        text = 'Mon';
         break;
       case 1:
         text = 'Tue';

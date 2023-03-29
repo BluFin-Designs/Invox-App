@@ -1,34 +1,31 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class TransactionCard extends StatelessWidget {
-  const TransactionCard({Key? key}) : super(key: key);
+  final double? amount;
+  const TransactionCard({this.amount, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double? _amt = (amount != null) ? amount : 0.00;
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
         horizontal: 5.0,
       ),
       child: Container(
-        height: 80,
+        height: 65,
         decoration: BoxDecoration(
           color: const Color(0xffF0F0F0),
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.25),
-              blurRadius: 2,
-              offset: Offset(4, 4),
-            ),
-          ],
+          borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 14.0),
           child: Row(
             children: [
               Container(
-                height: 50,
+                height: 40,
                 width: 50,
                 decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
@@ -39,26 +36,7 @@ class TransactionCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 10,
-              ),
-              Container(
-                height: 50,
-                width: 80,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(5)),
-                child: const Center(
-                  child: Text(
-                    "₹ 2000.00",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 12),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
+                width: 15,
               ),
               Expanded(
                 child: Column(
@@ -83,14 +61,18 @@ class TransactionCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                width: 10,
+                width: 20,
               ),
-              Container(
-                width: 10,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.secondary,
-                    borderRadius: BorderRadius.circular(10)),
+              Text(
+                (_amt! > 0)
+                    ? "+ ₹${_amt.toStringAsFixed(2)}"
+                    : "- ₹${(_amt.abs()).toStringAsFixed(2)}",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontStyle: FontStyle.italic,
+                  fontSize: 16,
+                  color: (_amt > 0) ? Colors.green : Colors.red,
+                ),
               )
             ],
           ),

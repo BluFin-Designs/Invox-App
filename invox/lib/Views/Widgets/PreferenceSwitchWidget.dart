@@ -46,14 +46,16 @@ class _PreferenceSwitchWidgetState extends State<PreferenceSwitchWidget> {
                   fontSize: 16,
                 ),
               ),
-              CupertinoSwitch(
+              Switch(
                 value: widget.switchValue,
                 onChanged: (bool val) {
                   setState(() {
                     widget.switchValue = val;
                   });
                 },
-                thumbColor: Theme.of(context).primaryColor,
+                thumbColor: MaterialStateProperty.all(
+                  Theme.of(context).primaryColor,
+                ),
                 activeColor: const Color(0xffA5C000),
               ),
             ],

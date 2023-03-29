@@ -18,6 +18,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+List<double> _txns = [
+  -100.00,
+  -500.00,
+  2000.75,
+  -150.50,
+  -290.00,
+];
+
 class _HomePageState extends State<HomePage> {
   final _key = GlobalKey<ScaffoldState>();
   @override
@@ -51,35 +59,44 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            HomePageGraph(),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  "Recent Transactions",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 14,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 14,
+              ),
+              HomePageGraph(),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Recent Transactions",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                ),
-                Icon(Icons.tune),
-              ],
-            ),
-            Expanded(
-              child: ListView.builder(
+                  Icon(Icons.tune),
+                ],
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (ctx, index) {
-                  return const TransactionCard();
+                  return TransactionCard(
+                    amount: _txns[index],
+                  );
                 },
                 itemCount: 5,
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(

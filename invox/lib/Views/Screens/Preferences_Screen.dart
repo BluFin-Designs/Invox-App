@@ -24,12 +24,12 @@ class Preferences extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(14.0),
           child: Column(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 70,
+                height: 50,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Theme.of(context).colorScheme.secondary,
@@ -49,8 +49,8 @@ class Preferences extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        width: 80,
-                        height: 40,
+                        width: 55,
+                        height: 30,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(50),
@@ -60,15 +60,15 @@ class Preferences extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              height: 30,
-                              width: 30,
+                              height: 20,
+                              width: 20,
                               decoration: BoxDecoration(
                                   color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(30)),
                             ),
                             Container(
-                              height: 30,
-                              width: 30,
+                              height: 20,
+                              width: 20,
                               decoration: BoxDecoration(
                                   color:
                                       Theme.of(context).colorScheme.secondary,
@@ -82,7 +82,7 @@ class Preferences extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               PreferenceButtonWidget(
                 title: "Categories",

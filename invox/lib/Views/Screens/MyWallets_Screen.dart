@@ -53,14 +53,14 @@ class MyWalletsScreen extends StatelessWidget {
             const Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 10.0,
-                horizontal: 20,
+                horizontal: 14,
               ),
               child: Total_Balance_Card(amount: 25000),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 10.0,
-                horizontal: 20,
+                horizontal: 14,
               ),
               child: Container(
                 height: 200,
@@ -101,6 +101,7 @@ class MyWalletsScreen extends StatelessWidget {
                         child: Center(
                           child: ListView.builder(
                             shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (_, i) {
                               return Padding(
                                 padding:
@@ -149,7 +150,7 @@ class MyWalletsScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10.0,
-                  horizontal: 20,
+                  horizontal: 14,
                 ),
                 child: Container(
                   height: 60,

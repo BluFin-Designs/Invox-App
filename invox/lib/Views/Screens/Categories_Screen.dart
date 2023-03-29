@@ -26,8 +26,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 10.0,
-          horizontal: 20,
+          vertical: 14.0,
+          horizontal: 14,
         ),
         child: Column(
           children: [
@@ -39,7 +39,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     padding: const EdgeInsets.only(bottom: 10.0),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 70,
+                      height: 60,
                       decoration: BoxDecoration(
                         color: const Color(0xffF0F0F0),
                         borderRadius: BorderRadius.circular(5),
@@ -52,8 +52,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                             Row(
                               children: [
                                 Container(
-                                  height: 50,
-                                  width: 80,
+                                  height: 40,
+                                  width: 60,
                                   decoration: BoxDecoration(
                                     color: Data.allCategories[index]["color"],
                                     borderRadius: BorderRadius.circular(5),
@@ -62,6 +62,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                     child: Icon(
                                       Data.allCategories[index]["icon"],
                                       color: Colors.white,
+                                      size: 25,
                                     ),
                                   ),
                                 ),
@@ -101,11 +102,11 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
             InkWell(
               child: Container(
-                height: 60,
+                height: 50,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: const Color(0xffC1C1C1),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

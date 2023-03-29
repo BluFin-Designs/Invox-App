@@ -15,28 +15,29 @@ class PreferenceButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 7.0),
+      padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: InkWell(
         onTap: onClick,
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: 65,
+          height: 55,
           decoration: BoxDecoration(
             color: const Color(0xffC1C1C1),
             borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
                       icon!,
                       color: Colors.white,
-                      size: 30,
+                      size: 25,
                     ),
                     const SizedBox(
                       width: 15,
@@ -46,7 +47,7 @@ class PreferenceButtonWidget extends StatelessWidget {
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -54,7 +55,7 @@ class PreferenceButtonWidget extends StatelessWidget {
                 const Icon(
                   Icons.arrow_forward_outlined,
                   color: Colors.white,
-                  size: 30,
+                  size: 25,
                 ),
               ],
             ),
