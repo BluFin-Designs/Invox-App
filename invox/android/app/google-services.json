@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "377736655306",
+    "project_id": "invox-93ca0",
+    "storage_bucket": "invox-93ca0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377736655306:android:3aea4b2556ad7d0ba89f33",
+        "android_client_info": {
+          "package_name": "com.example.invox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377736655306-tvoh82lodg4pe90c5d7fb7uuoke82jqk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnzPvIQ6E6SbPR_MnQ5RS3-BBu3BAc6Cs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377736655306-tvoh82lodg4pe90c5d7fb7uuoke82jqk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
