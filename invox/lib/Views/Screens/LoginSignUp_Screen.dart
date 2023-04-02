@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invox/blocs/cubits/auth_cubit.dart';
 
 import '../Widgets/Login_button.dart';
 import '../Screens/HomePage_Screen.dart';
@@ -38,13 +40,42 @@ class LoginSignUp extends StatelessWidget {
           const SizedBox(
             height: 25.0,
           ),
-          ReusableCard(
-              icon: 'assets/images/google_logo.png',
-              text: 'Continue with Google',
-              onPress: () {
-                print("trigger!");
-                Navigator.of(context).pushNamed(HomePage.routeName);
-              }),
+          BlocConsumer<AuthCubit, AuthState>(
+            listener: (context, state) {
+              if (state is LoggedInState) {
+                Navigator.pushReplacementNamed(context, HomePage.routeName);
+              }
+            },
+            builder: (context, state) {
+              if (state is LoadingState) {
+                return Stack(
+                  children: [
+                    ReusableCard(
+                      icon: 'assets/images/google_logo.png',
+                      text: 'Continue with Google',
+                      onPress: () {},
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.white30,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return ReusableCard(
+                  icon: 'assets/images/google_logo.png',
+                  text: 'Continue with Google',
+                  onPress: () {
+                    BlocProvider.of<AuthCubit>(context).signInWithGoogle();
+                  });
+            },
+          ),
           ReusableCard(
               icon: 'assets/images/email_logo.png',
               text: 'Continue with Email',

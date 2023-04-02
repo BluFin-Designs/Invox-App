@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "377736655306-tvoh82lodg4pe90c5d7fb7uuoke82jqk.apps.googleusercontent.com",
+          "client_id": "377736655306-hktugprdh1krs39bjkiqqs5ovr2t7tq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.invox",
+            "certificate_hash": "c4f8d300f0ae0604c3bb816c68985d5a710093c5"
+          }
+        },
+        {
+          "client_id": "377736655306-gm2sk29mv2v4ro6g78i48efkrvn1h6r6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +35,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "377736655306-tvoh82lodg4pe90c5d7fb7uuoke82jqk.apps.googleusercontent.com",
+              "client_id": "377736655306-gm2sk29mv2v4ro6g78i48efkrvn1h6r6.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "377736655306-72nagta1eacsbs25auqfepp1pe9o91il.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.invox"
+              }
             }
           ]
         }

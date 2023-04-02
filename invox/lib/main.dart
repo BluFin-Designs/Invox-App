@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:invox/blocs/cubits/auth_cubit.dart';
 
 import '../Views/Screens/Categories_Screen.dart';
 import '../Views/Screens/GoalDetails_Screen.dart';
@@ -15,7 +18,9 @@ import '../Views/Screens/Budget_Screen.dart';
 import '../Views/Screens/SavingGoals_Screen.dart';
 
 main() async {
-  await Hive.initFlutter();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // initialise Firebase
+  await Hive.initFlutter(); // initialise Hive DataBase
   runApp(const MyApp());
 }
 
@@ -24,28 +29,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: const Color(0xFFFF7B54),
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: const Color(0xffFFB26B),
+    return BlocProvider(
+      create: (context) => AuthCubit(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primaryColor: const Color(0xFFFF7B54),
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            secondary: const Color(0xffFFB26B),
+          ),
         ),
+        home: BlocBuilder<AuthCubit, AuthState>(
+          buildWhen: (oldState, newState) {
+            return oldState is AuthInitial;
+          },
+          builder: (context, state) {
+            if (state is LoggedInState) {
+              return const HomePage();
+            }
+            return const LoginSignUp();
+          },
+        ),
+        routes: {
+          LoginSignUp.routeName: (ctx) => const LoginSignUp(),
+          HomePage.routeName: (ctx) => const HomePage(),
+          Profile.routeName: (ctx) => const Profile(),
+          Transaction.routeName: (ctx) => const Transaction(),
+          Statistics.routeName: (ctx) => const Statistics(),
+          MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
+          Preferences.routeName: (ctx) => const Preferences(),
+          CategoriesPage.routeName: (ctx) => const CategoriesPage(),
+          BudgetPage.routeName: (ctx) => const BudgetPage(),
+          SavingGoals.routeName: (ctx) => const SavingGoals(),
+          GoalDetailsPage.routeName: (ctx) => const GoalDetailsPage(),
+        },
       ),
-      home: const LoginSignUp(),
-      routes: {
-        LoginSignUp.routeName: (ctx) => const LoginSignUp(),
-        HomePage.routeName: (ctx) => const HomePage(),
-        Profile.routeName: (ctx) => const Profile(),
-        Transaction.routeName: (ctx) => const Transaction(),
-        Statistics.routeName: (ctx) => const Statistics(),
-        MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
-        Preferences.routeName: (ctx) => const Preferences(),
-        CategoriesPage.routeName: (ctx) => const CategoriesPage(),
-        BudgetPage.routeName: (ctx) => const BudgetPage(),
-        SavingGoals.routeName: (ctx) => const SavingGoals(),
-        GoalDetailsPage.routeName: (ctx) => const GoalDetailsPage(),
-      },
     );
   }
 }
