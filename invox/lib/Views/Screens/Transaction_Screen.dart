@@ -25,7 +25,7 @@ class _TransactionState extends State<Transaction> {
           centerTitle: false,
         ),
         body: Padding(
-          padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+          padding: const EdgeInsets.only(left: 14.0, right: 14.0),
           child: Column(
             children: [
               const SizedBox(

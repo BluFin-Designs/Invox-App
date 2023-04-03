@@ -17,13 +17,6 @@ class StatisticsGraph extends StatelessWidget {
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Color(0xFFC1C1C1),
-                blurRadius: 4,
-                offset: Offset(4, 4), // Shadow position
-              ),
-            ],
           ),
           child: const Text(
             "Last 7 Days Spendings",
@@ -43,13 +36,6 @@ class StatisticsGraph extends StatelessWidget {
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
               ),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color(0xFFC1C1C1),
-                  blurRadius: 4,
-                  offset: Offset(4, 4), // Shadow position
-                ),
-              ],
             ),
             child: Padding(
               padding: const EdgeInsets.only(top: 5.0, left: 40.0, right: 40.0),
