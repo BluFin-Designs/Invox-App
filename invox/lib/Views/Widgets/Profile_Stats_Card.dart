@@ -23,7 +23,7 @@ class ProfileStatsCard extends StatelessWidget {
       width: 170,
       decoration: BoxDecoration(
         color: color_1,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +83,7 @@ class ProfileStatsCard extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 22),
+                    fontSize: 20),
               ),
               Text(
                 "${value_1.toStringAsFixed(0)} ",

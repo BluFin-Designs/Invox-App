@@ -50,14 +50,14 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                   ),
                   focusColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                       color: Colors.white,
                       style: BorderStyle.solid,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                       color: Colors.white,
                       style: BorderStyle.solid,
@@ -85,14 +85,14 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                   ),
                   focusColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                       color: Colors.white,
                       style: BorderStyle.solid,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                       color: Colors.white,
                       style: BorderStyle.solid,
@@ -122,14 +122,14 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                   ),
                   focusColor: Colors.white,
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                       color: Colors.white,
                       style: BorderStyle.solid,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(8),
                     borderSide: const BorderSide(
                       color: Colors.white,
                       style: BorderStyle.solid,
@@ -168,14 +168,14 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         ),
                         focusColor: Colors.white,
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: const BorderSide(
                             color: Colors.white,
                             style: BorderStyle.solid,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: const BorderSide(
                             color: Colors.white,
                             style: BorderStyle.solid,
@@ -184,7 +184,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         fillColor: Colors.grey,
                         filled: true,
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       hint: const Text(
                         "Category",
                         style: TextStyle(
@@ -215,7 +215,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                     vertical: 5,
                   ),
                   child: SizedBox(
-                    width: 130,
+                    width: 120,
                     child: DropdownButtonFormField(
                       isDense: true,
                       icon: const Icon(
@@ -234,14 +234,14 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         ),
                         focusColor: Colors.white,
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: const BorderSide(
                             color: Colors.white,
                             style: BorderStyle.solid,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: const BorderSide(
                             color: Colors.white,
                             style: BorderStyle.solid,
@@ -250,7 +250,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         fillColor: Colors.grey,
                         filled: true,
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       hint: const Text(
                         "Credit",
                         style: TextStyle(
@@ -296,7 +296,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                           width: 180,
                           decoration: BoxDecoration(
                             color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -334,7 +334,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                     vertical: 5,
                   ),
                   child: SizedBox(
-                    width: 130,
+                    width: 120,
                     child: DropdownButtonFormField(
                       isDense: true,
                       icon: const Icon(
@@ -353,14 +353,14 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         ),
                         focusColor: Colors.white,
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: const BorderSide(
                             color: Colors.white,
                             style: BorderStyle.solid,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: const BorderSide(
                             color: Colors.white,
                             style: BorderStyle.solid,
@@ -369,7 +369,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         fillColor: Colors.grey,
                         filled: true,
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                       hint: const Icon(
                         Icons.movie_creation,
                         color: Colors.white,

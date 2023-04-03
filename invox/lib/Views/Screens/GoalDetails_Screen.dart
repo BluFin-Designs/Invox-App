@@ -54,7 +54,7 @@ class _GoalDetailsPageState extends State<GoalDetailsPage> {
                                       content: const Text(
                                           "Are you sure you want to delete ?"),
                                       actions: <Widget>[
-                                        FlatButton(
+                                        TextButton(
                                           child: const Text(
                                             "Cancel",
                                             style:
@@ -64,7 +64,7 @@ class _GoalDetailsPageState extends State<GoalDetailsPage> {
                                             Navigator.of(context).pop(false);
                                           },
                                         ),
-                                        FlatButton(
+                                        TextButton(
                                           child: const Text(
                                             "Delete",
                                             style: TextStyle(color: Colors.red),

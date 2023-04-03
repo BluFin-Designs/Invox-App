@@ -25,6 +25,15 @@ class Profile extends StatelessWidget {
                     color: const Color(0xFFFF7B54),
                   ),
                   Positioned(
+                      top: 18,
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.arrow_back,
+                            color: Colors.white, size: 25.0),
+                      )),
+                  Positioned(
                     bottom: -5,
                     right: -80,
                     child: Container(
@@ -107,7 +116,7 @@ class Profile extends StatelessWidget {
                               'Your Buying Streak',
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                fontSize: 15.0,
+                                fontSize: 16.0,
                                 color: Color(0xFFD9D9D9),
                               ),
                             ),
@@ -210,7 +219,7 @@ class Profile extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(14.0),
               child: Row(
                 children: [
                   ProfileStatsCard(
@@ -247,13 +256,6 @@ class Profile extends StatelessWidget {
             Container(
               height: 170,
               decoration: const BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFFC1C1C1),
-                    blurRadius: 4,
-                    offset: Offset(4, 4), // Shadow position
-                  ),
-                ],
                 color: Color(0xFFF0F0F0),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),

@@ -45,26 +45,20 @@ class _StatisticsState extends State<Statistics> {
         centerTitle: false,
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 22.0, right: 22.0),
+        padding: const EdgeInsets.only(left: 14.0, right: 14.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
                 height: 22.0,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0),
-                child: Total_Balance_Card(
-                  amount: 2000,
-                ),
+              Total_Balance_Card(
+                amount: 2000,
               ),
               const SizedBox(
                 height: 22.0,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0),
-                child: StatisticsGraph(),
-              ),
+              StatisticsGraph(),
               const SizedBox(
                 height: 18.0,
               ),
@@ -87,14 +81,11 @@ class _StatisticsState extends State<Statistics> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (ctx, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                    child: StatisticsCard(
-                      text: details[index]["Category"],
-                      amount: details[index]["value"],
-                      icon: details[index]["icon"],
-                      color: details[index]["color"],
-                    ),
+                  return StatisticsCard(
+                    text: details[index]["Category"],
+                    amount: details[index]["value"],
+                    icon: details[index]["icon"],
+                    color: details[index]["color"],
                   );
                 },
                 itemCount: details.length,

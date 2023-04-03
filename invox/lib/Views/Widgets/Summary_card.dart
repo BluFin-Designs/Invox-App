@@ -15,13 +15,6 @@ class SummaryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFFF0F0F0),
         borderRadius: BorderRadius.circular(10.0),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0xFFC1C1C1),
-            blurRadius: 4,
-            offset: Offset(4, 4), // Shadow position
-          ),
-        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -37,13 +30,25 @@ class SummaryCard extends StatelessWidget {
                   PieChartSectionData(
                       color: Color(0xFFA5C000),
                       value: _percentage,
-                      showTitle: false,
-                      radius: 20.0),
+                      showTitle: true,
+                      title: ('${(_percentage).toStringAsFixed(0)}%'),
+                      titleStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.0,
+                          fontStyle: FontStyle.italic),
+                      radius: 22.0),
                   PieChartSectionData(
                       color: Theme.of(context).primaryColor,
                       value: 100 - _percentage,
-                      showTitle: false,
-                      radius: 20.0),
+                      showTitle: true,
+                      title: ('${(100 - _percentage).toStringAsFixed(0)}%'),
+                      titleStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.0,
+                          fontStyle: FontStyle.italic),
+                      radius: 22.0),
                 ],
               ),
             ),
