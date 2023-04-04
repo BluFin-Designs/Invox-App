@@ -45,6 +45,13 @@ class LoginSignUp extends StatelessWidget {
               if (state is LoggedInState) {
                 Navigator.pushReplacementNamed(context, HomePage.routeName);
               }
+              if (state is LoggedInErrorState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.error),
+                  ),
+                );
+              }
             },
             builder: (context, state) {
               if (state is LoadingState) {

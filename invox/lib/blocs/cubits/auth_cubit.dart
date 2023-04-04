@@ -20,28 +20,32 @@ class AuthCubit extends Cubit<AuthState> {
     //Emitting Loading State
     emit(LoadingState());
 
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    // Once signed in, return the UserCredential
     try {
-      UserCredential userCredential =
-          await _auth.signInWithCredential(credential);
-      if (userCredential.user != null) {
-        emit(LoggedInState(userCredential.user!));
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Create a new credential
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // Once signed in, return the UserCredential
+      try {
+        UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        if (userCredential.user != null) {
+          emit(LoggedInState(userCredential.user!));
+        }
+      } on FirebaseAuthException catch (e) {
+        emit(LoggedInErrorState(e.message.toString()));
       }
-    } on FirebaseAuthException catch (e) {
-      emit(LoggedInErrorState(e.message.toString()));
+    } catch (ex) {
+      emit(LoggedInErrorState(ex.toString()));
     }
   }
 }
