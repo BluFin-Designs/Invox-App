@@ -51,29 +51,16 @@ class MyWalletsScreen extends StatelessWidget {
         child: Column(
           children: [
             const Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 14,
-              ),
+              padding: EdgeInsets.all(14.0),
               child: Total_Balance_Card(amount: 25000),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 10.0,
-                horizontal: 14,
-              ),
+              padding: EdgeInsets.all(14.0),
               child: Container(
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: const Color(0xffF0F0F0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.25),
-                      blurRadius: 2,
-                      offset: Offset(4, 4),
-                    ),
-                  ],
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
@@ -157,13 +144,6 @@ class MyWalletsScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Theme.of(context).primaryColor,
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color.fromRGBO(0, 0, 0, 0.25),
-                        blurRadius: 2,
-                        offset: Offset(4, 4),
-                      ),
-                    ],
                   ),
                   child: const Center(
                     child: Text(

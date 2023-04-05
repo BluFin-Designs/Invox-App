@@ -23,7 +23,7 @@ class _SavingGoalsState extends State<SavingGoals> {
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(14.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -35,86 +35,80 @@ class _SavingGoalsState extends State<SavingGoals> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
                   childAspectRatio: .9,
                   crossAxisCount: 2,
                 ),
                 itemBuilder: (ctx, index) {
                   if (index < Data.details.length) {
                     return InkWell(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5.0, vertical: 5.0),
-                        child: SavingGoalsCard(
-                            value_1: Data.details[index]["SavingsAmount"],
-                            value_2: Data.details[index]["RequiredAmount"],
-                            itemName: Data.details[index]["ItemName"]),
-                      ),
+                      child: SavingGoalsCard(
+                          value_1: Data.details[index]["SavingsAmount"],
+                          value_2: Data.details[index]["RequiredAmount"],
+                          itemName: Data.details[index]["ItemName"]),
                       onTap: () {
                         Navigator.pushNamed(context, GoalDetailsPage.routeName);
                       },
                     );
                   } else {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 5.0, vertical: 5.0),
-                      child: InkWell(
-                        child: Container(
-                          height: 190,
-                          width: 172,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFC1C1C1),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(40.0),
-                            child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF0F0F0),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                )),
-                          ),
+                    return InkWell(
+                      child: Container(
+                        height: 190,
+                        width: 172,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFC1C1C1),
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                        onTap: () {
-                          showDialog(
-                            // barrierDismissible: false,
-                            useSafeArea: true,
-                            context: context,
-                            builder: (_) => Dialog(
-                              insetPadding: const EdgeInsets.symmetric(
-                                  vertical: 20, horizontal: 10),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                        child: Padding(
+                          padding: const EdgeInsets.all(40.0),
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                color: Color(0xFFF0F0F0),
+                                shape: BoxShape.circle,
                               ),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width - 40,
-                                height: 280,
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: const <Widget>[
-                                      SizedBox(
-                                        height: 20,
+                              child: const Icon(
+                                Icons.add,
+                              )),
+                        ),
+                      ),
+                      onTap: () {
+                        showDialog(
+                          // barrierDismissible: false,
+                          useSafeArea: true,
+                          context: context,
+                          builder: (_) => Dialog(
+                            insetPadding: const EdgeInsets.symmetric(
+                                vertical: 20, horizontal: 10),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 40,
+                              height: 280,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: const <Widget>[
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(
+                                      "Your New Goal",
+                                      style: TextStyle(
+                                        color: Color(0xFFFF7B54),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
                                       ),
-                                      Text(
-                                        "Your New Goal",
-                                        style: TextStyle(
-                                          color: Color(0xFFFF7B54),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      SavingGoalsAddPopUp(),
-                                    ],
-                                  ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    SavingGoalsAddPopUp(),
+                                  ],
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     );
                   }
                 },
