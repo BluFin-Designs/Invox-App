@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../Widgets/Profile_Stats_Card.dart';
+import '../../Repositories/UserRepository.dart';
 
 class Profile extends StatelessWidget {
   static const routeName = '/profile';
@@ -30,7 +31,7 @@ class Profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: Icon(Icons.arrow_back,
+                        icon: const Icon(Icons.arrow_back,
                             color: Colors.white, size: 25.0),
                       )),
                   Positioned(
@@ -68,21 +69,21 @@ class Profile extends StatelessWidget {
                                 color: Colors.white,
                                 width: 4,
                               )),
-                          child: const CircleAvatar(
+                          child: CircleAvatar(
                             backgroundColor: Colors.white,
                             maxRadius: 55,
                             backgroundImage: NetworkImage(
-                                "https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2786&q=80"),
+                                UserRepository.user?.profileImg as String),
                           ),
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        const Text(
-                          'Hi, Emily Wills!',
-                          style: TextStyle(
+                        Text(
+                          "Hi, ${UserRepository.user?.name as String}!",
+                          style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 30.0,
+                            fontSize: 28.0,
                           ),
                         ),
                         Row(
@@ -221,6 +222,7 @@ class Profile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(14.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ProfileStatsCard(
                     color_1: Theme.of(context).primaryColor,
@@ -297,13 +299,13 @@ class Profile extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        children: const [
-                          SizedBox(
+                        children: [
+                          const SizedBox(
                             width: 20.0,
                           ),
                           Text(
-                            'Emily Wills',
-                            style: TextStyle(
+                            UserRepository.user?.name as String,
+                            style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -328,13 +330,13 @@ class Profile extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        children: const [
-                          SizedBox(
+                        children: [
+                          const SizedBox(
                             width: 20.0,
                           ),
                           Text(
-                            'willsemily@example.com',
-                            style: TextStyle(
+                            UserRepository.user?.email as String,
+                            style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),

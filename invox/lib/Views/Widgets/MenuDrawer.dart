@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invox/Views/Screens/Preferences_Screen.dart';
-import 'package:invox/Views/Screens/Profile_Screen.dart';
+import '../../Repositories/UserRepository.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
@@ -46,21 +46,21 @@ class MenuDrawer extends StatelessWidget {
                       color: Colors.white,
                       width: 4,
                     )),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   backgroundColor: Colors.white,
                   maxRadius: 50,
-                  backgroundImage: NetworkImage(
-                      "https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2786&q=80"),
+                  backgroundImage:
+                      NetworkImage(UserRepository.user?.profileImg as String),
                 ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "Emily Wills",
-                style: TextStyle(
+              Text(
+                UserRepository.user?.name as String,
+                style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 30,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:invox/Repositories/UserRepository.dart';
 import 'package:invox/Views/Screens/MyWallets_Screen.dart';
 import 'package:invox/Views/Screens/Profile_Screen.dart';
 import 'package:invox/Views/Screens/Statistics_Screen.dart';
@@ -27,6 +28,12 @@ List<double> _txns = [
 ];
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    UserRepository();
+    super.initState();
+  }
+
   final _key = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {

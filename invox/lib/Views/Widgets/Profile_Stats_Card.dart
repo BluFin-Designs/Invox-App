@@ -20,7 +20,7 @@ class ProfileStatsCard extends StatelessWidget {
     double _percentage = ((value_2 - value_1) / value_2) * 100;
     return Container(
       height: 240,
-      width: 170,
+      width: (MediaQuery.of(context).size.width / 2) - 30,
       decoration: BoxDecoration(
         color: color_1,
         borderRadius: BorderRadius.circular(10),
