@@ -23,7 +23,7 @@ class Profile extends StatelessWidget {
                 children: [
                   Container(
                     height: 400,
-                    color: const Color(0xFFFF7B54),
+                    color: const Color(0xFF7286D3),
                   ),
                   Positioned(
                       top: 18,
@@ -41,7 +41,7 @@ class Profile extends StatelessWidget {
                       height: 200,
                       width: 200,
                       decoration: BoxDecoration(
-                          color: const Color.fromRGBO(255, 178, 107, .5),
+                          color: const Color.fromRGBO(142, 167, 233, .5),
                           borderRadius: BorderRadius.circular(200)),
                     ),
                   ),
@@ -52,7 +52,7 @@ class Profile extends StatelessWidget {
                       height: 300,
                       width: 300,
                       decoration: BoxDecoration(
-                          color: const Color.fromRGBO(255, 178, 107, .5),
+                          color: const Color.fromRGBO(142, 167, 233, .5),
                           borderRadius: BorderRadius.circular(200)),
                     ),
                   ),
@@ -100,7 +100,7 @@ class Profile extends StatelessWidget {
                               'Impulsive Buyer',
                               style: TextStyle(
                                 fontSize: 20.0,
-                                color: Color(0xFFF80000),
+                                color: Color(0xFF91D8E4),
                               ),
                             ),
                           ],
@@ -185,7 +185,7 @@ class Profile extends StatelessWidget {
                                                           .toString(),
                                                       const TextStyle(
                                                           color:
-                                                              Color(0xFFFF7B54),
+                                                              Color(0xFF7286D3),
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     );
@@ -258,7 +258,7 @@ class Profile extends StatelessWidget {
             Container(
               height: 170,
               decoration: const BoxDecoration(
-                color: Color(0xFFF0F0F0),
+                color: Color(0xFFF6F8FF),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
               ),
               margin: const EdgeInsets.only(
@@ -269,9 +269,11 @@ class Profile extends StatelessWidget {
                     right: 8.0,
                     top: 8.0,
                     child: CircleAvatar(
-                      backgroundColor: Color(0xFFC1C1C1),
-                      child: Image(
-                        image: AssetImage('assets/images/Vector.png'),
+                      backgroundColor: Color(0xFF8EA7E9),
+                      child: Icon(
+                        Icons.edit,
+                        size: 20.0,
+                        color: Color(0xffF0F5FF),
                       ),
                     ),
                   ),
@@ -387,7 +389,7 @@ class Profile extends StatelessWidget {
 
   LinearGradient get _barsGradient => const LinearGradient(
         colors: [
-          Color(0xffFF7B54),
+          Color(0xff7286D3),
           Color(0xFF0A2647),
         ],
         begin: Alignment.bottomCenter,

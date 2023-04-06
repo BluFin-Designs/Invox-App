@@ -5,17 +5,17 @@ class Data {
     {
       "title": "Essential Items",
       "icon": Icons.label_important,
-      "color": const Color(0xffFF7B54),
+      "color": const Color(0xff5269B3),
     },
     {
       "title": "Entertainment",
       "icon": Icons.movie,
-      "color": const Color(0xffFFB26B),
+      "color": const Color(0xff91D8E4),
     },
     {
       "title": "Others",
       "icon": Icons.shopping_bag,
-      "color": const Color(0xff0A2647),
+      "color": const Color(0xff8EA7E9),
     },
   ];
 }

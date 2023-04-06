@@ -41,7 +41,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       width: MediaQuery.of(context).size.width,
                       height: 60,
                       decoration: BoxDecoration(
-                        color: const Color(0xffF0F0F0),
+                        color: const Color(0xffF0F5FF),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Padding(
@@ -105,7 +105,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 height: 50,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: const Color(0xffC1C1C1),
+                  color: const Color(0xff8EA7E9),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -146,14 +146,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
                       height: 260,
                       child: SingleChildScrollView(
                         child: Column(
-                          children: const <Widget>[
+                          children: <Widget>[
                             SizedBox(
                               height: 20,
                             ),
                             Text(
                               "New Category",
                               style: TextStyle(
-                                color: Color(0xFFFF7B54),
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),

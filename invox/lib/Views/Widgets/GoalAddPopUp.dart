@@ -106,7 +106,7 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.grey,
+                  fillColor: Color(0xff8EA7E9),
                   filled: true,
                 ),
                 onChanged: (value) {
@@ -125,7 +125,7 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
                     height: 50,
                     width: 330,
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Color(0xff8EA7E9),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Row(
@@ -165,7 +165,7 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFFF7B54),
+                  primary: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   )),

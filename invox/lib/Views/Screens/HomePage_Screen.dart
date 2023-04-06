@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomAppBar(
         clipBehavior: Clip.antiAlias,
         elevation: 0,
-        color: const Color(0xff706F6F),
+        color: const Color(0xffF0F5FF),
         shape: const CircularNotchedRectangle(),
         notchMargin: 5,
         child: BottomNavigationBar(
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
             }
           },
           elevation: 0,
-          backgroundColor: const Color(0xff706F6F),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white,
@@ -178,14 +178,14 @@ class _HomePageState extends State<HomePage> {
                 height: 530,
                 child: SingleChildScrollView(
                   child: Column(
-                    children: const <Widget>[
+                    children: <Widget>[
                       SizedBox(
                         height: 20,
                       ),
                       Text(
                         "New Transaction",
                         style: TextStyle(
-                          color: Color(0xFFFF7B54),
+                          color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),

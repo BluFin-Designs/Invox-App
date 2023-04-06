@@ -18,7 +18,7 @@ class StatisticsCard extends StatelessWidget {
       child: Container(
         height: 70,
         decoration: BoxDecoration(
-          color: const Color(0xffF0F0F0),
+          color: const Color(0xffF0F5FF),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(

@@ -17,7 +17,7 @@ class TransactionCard extends StatelessWidget {
       child: Container(
         height: 65,
         decoration: BoxDecoration(
-          color: const Color(0xffF0F0F0),
+          color: const Color(0xffF0F5FF),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Padding(

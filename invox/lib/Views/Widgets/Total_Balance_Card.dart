@@ -14,7 +14,7 @@ class Total_Balance_Card extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: const Color(0xFFF0F0F0),
+        color: const Color(0xffF0F5FF),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),

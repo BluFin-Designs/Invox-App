@@ -13,22 +13,22 @@ class MyWalletsScreen extends StatelessWidget {
     {
       "name": "Cash",
       "value": 5000.0,
-      "color": 0xffFF7B54,
+      "color": 0xff8EA7E9,
     },
     {
       "name": "Bank Account",
       "value": 1000.0,
-      "color": 0xffA5C000,
+      "color": 0xff91D8E4,
     },
     {
       "name": "Digital Wallet",
       "value": 500.0,
-      "color": 0xffC1C1C1,
+      "color": 0xff7286D3,
     },
     {
       "name": "Others",
       "value": 1000.0,
-      "color": 0xffFFB26B,
+      "color": 0xff5269B3,
     },
   ];
 
@@ -60,7 +60,7 @@ class MyWalletsScreen extends StatelessWidget {
                 height: 200,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: const Color(0xffF0F0F0),
+                  color: const Color(0xffF0F5FF),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

@@ -52,7 +52,7 @@ class GoalsCard extends StatelessWidget {
                   aspectRatio: 0.05,
                   child: Container(
                     decoration: BoxDecoration(
-                        color: const Color(0xffF0F0F0),
+                        color: const Color(0xffF0F5FF),
                         borderRadius: BorderRadius.circular(20)),
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),
@@ -138,7 +138,7 @@ class GoalsCard extends StatelessWidget {
 
   LinearGradient get _barsGradient => const LinearGradient(
         colors: [
-          Color(0xffFF7B54),
+          Color(0xff7286D3),
           Color(0xFF0A2647),
         ],
         begin: Alignment.bottomCenter,

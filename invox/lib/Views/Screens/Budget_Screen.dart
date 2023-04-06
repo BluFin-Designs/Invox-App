@@ -60,7 +60,7 @@ class BudgetCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 60,
       decoration: BoxDecoration(
-        color: const Color(0xffF0F0F0),
+        color: const Color(0xffF0F5FF),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
@@ -121,10 +121,10 @@ class BudgetCard extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text(
+                            Text(
                               "New Category",
                               style: TextStyle(
-                                color: Color(0xFFFF7B54),
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),

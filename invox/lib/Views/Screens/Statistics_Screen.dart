@@ -18,19 +18,19 @@ class _StatisticsState extends State<Statistics> {
     {
       "Category": "Essential Items",
       "value": 8400.00,
-      "color": Colors.black,
+      "color": Color(0xff5269B3),
       "icon": Icons.label_important
     },
     {
       "Category": "Entertainment",
       "value": 6600.00,
-      "color": Colors.deepOrangeAccent,
+      "color": Color(0xff8EA7E9),
       "icon": Icons.movie_creation
     },
     {
       "Category": "Others",
       "value": 5000.00,
-      "color": Colors.blueAccent,
+      "color": Color(0xff91D8E4),
       "icon": Icons.male_sharp
     },
   ];

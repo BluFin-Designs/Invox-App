@@ -57,7 +57,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                               width: 300,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(200),
-                                color: const Color.fromRGBO(255, 178, 107, .5),
+                                color: const Color.fromRGBO(142, 167, 233, .5),
                               ),
                             ),
                           ),
@@ -69,7 +69,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                               width: 300,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(200),
-                                color: const Color.fromRGBO(255, 178, 107, .5),
+                                color: const Color.fromRGBO(142, 167, 233, .5),
                               ),
                             ),
                           ),

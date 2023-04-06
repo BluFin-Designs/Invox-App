@@ -26,7 +26,7 @@ class _PreferenceSwitchWidgetState extends State<PreferenceSwitchWidget> {
         height: 50,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
-          color: const Color(0xffF0F0F0),
+          color: const Color(0xffF0F5FF),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Padding(
@@ -56,7 +56,7 @@ class _PreferenceSwitchWidgetState extends State<PreferenceSwitchWidget> {
                 thumbColor: MaterialStateProperty.all(
                   Theme.of(context).primaryColor,
                 ),
-                activeColor: const Color(0xffA5C000),
+                activeColor: const Color(0xff91D8E4),
               ),
             ],
           ),

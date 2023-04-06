@@ -52,7 +52,7 @@ class _SavingGoalsAddPopUpState extends State<SavingGoalsAddPopUp> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.grey,
+                  fillColor: Color(0xff8EA7E9),
                   filled: true,
                 ),
                 onChanged: (value) {
@@ -91,7 +91,7 @@ class _SavingGoalsAddPopUpState extends State<SavingGoalsAddPopUp> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.grey,
+                  fillColor: Color(0xff8EA7E9),
                   filled: true,
                 ),
                 onChanged: (value) {
@@ -106,7 +106,7 @@ class _SavingGoalsAddPopUpState extends State<SavingGoalsAddPopUp> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFFF7B54),
+                  primary: const Color(0xFF7286D3),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   )),

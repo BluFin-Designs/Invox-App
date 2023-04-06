@@ -12,7 +12,7 @@ class StatisticsGraph extends StatelessWidget {
           alignment: Alignment.center,
           height: 40,
           decoration: const BoxDecoration(
-            color: Color(0xffC1C1C1),
+            color: Color(0xff8EA7E9),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -90,7 +90,7 @@ class StatisticsGraph extends StatelessWidget {
 
   LinearGradient get _barsGradient => const LinearGradient(
         colors: [
-          Color.fromRGBO(255, 178, 107, 0),
+          Color.fromRGBO(114, 134, 211, 0),
           Color(0xFFFFFFFF),
         ],
         end: Alignment.topCenter,

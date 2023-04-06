@@ -22,7 +22,7 @@ class PreferenceButtonWidget extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           height: 55,
           decoration: BoxDecoration(
-            color: const Color(0xffC1C1C1),
+            color: const Color(0xff8EA7E9),
             borderRadius: BorderRadius.circular(5),
           ),
           child: Padding(

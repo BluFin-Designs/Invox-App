@@ -57,14 +57,14 @@ class _SavingGoalsState extends State<SavingGoals> {
                         height: 190,
                         width: 172,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFC1C1C1),
+                          color: const Color(0xFF8EA7E9),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(40.0),
                           child: Container(
                               decoration: const BoxDecoration(
-                                color: Color(0xFFF0F0F0),
+                                color: Color(0xffF0F5FF),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(
@@ -95,7 +95,7 @@ class _SavingGoalsState extends State<SavingGoals> {
                                     Text(
                                       "Your New Goal",
                                       style: TextStyle(
-                                        color: Color(0xFFFF7B54),
+                                        color: Color(0xFF7286D3),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
                                       ),

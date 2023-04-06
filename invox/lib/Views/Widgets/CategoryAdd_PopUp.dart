@@ -55,7 +55,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.grey,
+                  fillColor: Color(0xff8EA7E9),
                   filled: true,
                 ),
                 onChanged: (value) {
@@ -74,7 +74,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                   SizedBox(
                     width: 150,
                     child: DropdownButtonFormField(
-                      dropdownColor: const Color(0xFFFF7B54),
+                      dropdownColor: const Color(0xFF7286D3),
                       isDense: true,
                       icon: const Icon(
                         Icons.arrow_drop_down_circle,
@@ -103,7 +103,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                             style: BorderStyle.solid,
                           ),
                         ),
-                        fillColor: Colors.grey,
+                        fillColor: Color(0xff8EA7E9),
                         filled: true,
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -166,7 +166,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                             style: BorderStyle.solid,
                           ),
                         ),
-                        fillColor: Colors.grey,
+                        fillColor: Color(0xff8EA7E9),
                         filled: true,
                       ),
                       borderRadius: BorderRadius.circular(10),
@@ -208,7 +208,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFFF7B54),
+                  primary: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   )),

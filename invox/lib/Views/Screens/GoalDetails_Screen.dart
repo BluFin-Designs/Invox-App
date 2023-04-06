@@ -103,10 +103,11 @@ class _GoalDetailsPageState extends State<GoalDetailsPage> {
                                           const SizedBox(
                                             height: 20,
                                           ),
-                                          const Text(
+                                          Text(
                                             "Your Today’s Saving",
                                             style: TextStyle(
-                                              color: Color(0xFFFF7B54),
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
                                             ),
@@ -134,7 +135,7 @@ class _GoalDetailsPageState extends State<GoalDetailsPage> {
                             height: 70,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                              color: const Color(0xffF0F0F0),
+                              color: const Color(0xffF0F5FF),
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: Padding(
@@ -221,14 +222,14 @@ class _GoalDetailsPageState extends State<GoalDetailsPage> {
                       height: 260,
                       child: SingleChildScrollView(
                         child: Column(
-                          children: const <Widget>[
+                          children: <Widget>[
                             SizedBox(
                               height: 20,
                             ),
                             Text(
                               "Your Today’s Saving",
                               style: TextStyle(
-                                color: Color(0xFFFF7B54),
+                                color: Theme.of(context).primaryColor,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),

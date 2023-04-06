@@ -34,9 +34,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primaryColor: const Color(0xFFFF7B54),
+          primaryColor: const Color(0xFF7286D3),
           colorScheme: ColorScheme.fromSwatch().copyWith(
-            secondary: const Color(0xffFFB26B),
+            secondary: const Color(0xff8EA7E9),
           ),
         ),
         home: BlocBuilder<AuthCubit, AuthState>(

@@ -21,7 +21,7 @@ class _HomePageGraphState extends State<HomePageGraph> {
                 aspectRatio: 2,
                 child: Container(
                   decoration: const BoxDecoration(
-                    color: Color(0xffF0F0F0),
+                    color: Color(0xffF0F5FF),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -173,7 +173,7 @@ class _HomePageGraphState extends State<HomePageGraph> {
                               return BarTooltipItem(
                                 rod.toY.round().toString(),
                                 const TextStyle(
-                                  color: Color(0xFFFF7B54),
+                                  color: Color(0xFF7286D3),
                                   fontWeight: FontWeight.bold,
                                 ),
                               );
@@ -194,7 +194,7 @@ class _HomePageGraphState extends State<HomePageGraph> {
                 aspectRatio: 2,
                 child: Container(
                   decoration: const BoxDecoration(
-                    color: Color(0xffF0F0F0),
+                    color: Color(0xffF0F5FF),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -345,8 +345,8 @@ class _HomePageGraphState extends State<HomePageGraph> {
                             ) {
                               return BarTooltipItem(
                                 rod.toY.round().toString(),
-                                const TextStyle(
-                                  color: Color(0xFFFF7B54),
+                                TextStyle(
+                                  color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               );
@@ -367,7 +367,7 @@ class _HomePageGraphState extends State<HomePageGraph> {
                 aspectRatio: 2,
                 child: Container(
                   decoration: const BoxDecoration(
-                    color: Color(0xffF0F0F0),
+                    color: Color(0xffF0F5FF),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10),
@@ -518,8 +518,8 @@ class _HomePageGraphState extends State<HomePageGraph> {
                             ) {
                               return BarTooltipItem(
                                 rod.toY.round().toString(),
-                                const TextStyle(
-                                  color: Color(0xFFFF7B54),
+                                TextStyle(
+                                  color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                               );
@@ -541,7 +541,7 @@ class _HomePageGraphState extends State<HomePageGraph> {
           Container(
             height: 50,
             decoration: const BoxDecoration(
-              color: Color(0xffC1C1C1),
+              color: Color(0xff8EA7E9),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10),
@@ -554,7 +554,7 @@ class _HomePageGraphState extends State<HomePageGraph> {
               ),
               child: TabBar(
                 indicator: BoxDecoration(
-                  color: const Color(0xFFFF7B54),
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 tabs: const [
@@ -590,8 +590,8 @@ class _HomePageGraphState extends State<HomePageGraph> {
 
   LinearGradient get _barsGradient => const LinearGradient(
         colors: [
-          Color.fromRGBO(255, 123, 84, .2),
-          Color(0xFFFF7B54),
+          Color.fromRGBO(114, 134, 211, .2),
+          Color(0xFF7286D3),
         ],
         begin: Alignment.bottomCenter,
         end: Alignment.topCenter,

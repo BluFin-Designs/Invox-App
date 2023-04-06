@@ -34,11 +34,11 @@ class _TransactionState extends State<Transaction> {
               Container(
                 height: 43.0,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFC1C1C1),
+                  color: const Color(0xFF8EA7E9),
                   borderRadius: BorderRadius.circular(23.0),
                 ),
                 child: TabBar(
-                  indicatorPadding: EdgeInsets.all(7.0),
+                  indicatorPadding: const EdgeInsets.all(7.0),
                   indicator: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(15.0),

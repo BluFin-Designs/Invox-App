@@ -19,7 +19,7 @@ class SavingGoalsCard extends StatelessWidget {
       height: 180,
       width: 172,
       decoration: BoxDecoration(
-        color: const Color(0xFFC1C1C1),
+        color: const Color(0xFF8EA7E9),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Column(
@@ -56,7 +56,7 @@ class SavingGoalsCard extends StatelessWidget {
                 Text(
                   '${_percentage.toStringAsFixed(0)}%',
                   style: TextStyle(
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.white,
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),

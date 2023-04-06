@@ -40,14 +40,14 @@ class AddTransaction extends StatelessWidget {
               height: 530,
               child: SingleChildScrollView(
                 child: Column(
-                  children: const <Widget>[
+                  children: <Widget>[
                     SizedBox(
                       height: 20,
                     ),
                     Text(
                       "New Transaction",
                       style: TextStyle(
-                        color: Color(0xFFFF7B54),
+                        color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),

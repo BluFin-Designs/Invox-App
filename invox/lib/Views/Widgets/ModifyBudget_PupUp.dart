@@ -56,7 +56,7 @@ class _ModifyBudgetPopUpState extends State<ModifyBudgetPopUp> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.grey,
+                  fillColor: Color(0xff8EA7E9),
                   filled: true,
                 ),
                 onChanged: (value) {
@@ -71,7 +71,7 @@ class _ModifyBudgetPopUpState extends State<ModifyBudgetPopUp> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFFF7B54),
+                  primary: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   )),
