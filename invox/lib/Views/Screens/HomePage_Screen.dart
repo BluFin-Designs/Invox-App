@@ -109,9 +109,7 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (ctx, index) {
-                          return TransactionCard(
-                            amount: allTxns[index].amount,
-                          );
+                          return TransactionCard(txn: allTxns[index]);
                         },
                         itemCount: allTxns.length,
                       );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './CategoryModel.dart';
 
+enum TransactionType { CREDIT, DEBIT }
+
 class TransactionModel {
   String? uid;
   String? title;
@@ -9,7 +11,7 @@ class TransactionModel {
   IconData? icons;
   DateTime? date;
   TransactionCategory? category;
-  String? txnType;
+  TransactionType? txnType;
 
   TransactionModel({
     this.uid,

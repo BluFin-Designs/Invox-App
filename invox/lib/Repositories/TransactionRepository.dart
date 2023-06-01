@@ -32,7 +32,9 @@ class TransactionRepository {
       description: description,
       date: date,
       amount: amount,
-      txnType: txnType,
+      txnType: (txnType == "Credit")
+          ? TransactionType.CREDIT
+          : TransactionType.DEBIT,
       category: category,
       icons: icon,
     );

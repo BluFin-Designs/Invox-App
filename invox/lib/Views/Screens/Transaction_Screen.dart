@@ -93,7 +93,7 @@ class _TransactionState extends State<Transaction> {
                         Expanded(
                           child: ListView.builder(
                             itemBuilder: (ctx, index) {
-                              return const TransactionCard();
+                              return TransactionCard();
                             },
                             itemCount: 5,
                           ),
@@ -119,7 +119,7 @@ class _TransactionState extends State<Transaction> {
                         Expanded(
                           child: ListView.builder(
                             itemBuilder: (ctx, index) {
-                              return const TransactionCard();
+                              return TransactionCard();
                             },
                             itemCount: 7,
                           ),
@@ -145,7 +145,7 @@ class _TransactionState extends State<Transaction> {
                         Expanded(
                           child: ListView.builder(
                             itemBuilder: (ctx, index) {
-                              return const TransactionCard();
+                              return TransactionCard();
                             },
                             itemCount: 9,
                           ),

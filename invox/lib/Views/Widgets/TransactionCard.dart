@@ -1,14 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 
+import '../../Models/Transaction_Model.dart';
+
 class TransactionCard extends StatelessWidget {
-  final double? amount;
-  const TransactionCard({this.amount, Key? key}) : super(key: key);
+  final TransactionModel? txn;
+  TransactionCard({this.txn, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double? _amt = (amount != null) ? amount : 0.00;
+    final double? _amt = (txn?.amount != null) ? txn?.amount : 0.00;
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
@@ -30,8 +31,8 @@ class TransactionCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(5)),
-                child: const Icon(
-                  Icons.shopping_basket,
+                child: Icon(
+                  txn?.icons,
                   color: Colors.white,
                 ),
               ),
@@ -42,16 +43,16 @@ class TransactionCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      "Groceries",
+                      txn?.title as String,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      "Apple, Milk, Dry Fruits",
+                      txn?.description as String,
                       style: TextStyle(
                         fontSize: 11,
                         color: Color(0xff0A2647),
@@ -64,14 +65,16 @@ class TransactionCard extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                (_amt! > 0)
-                    ? "+ ₹${_amt.toStringAsFixed(2)}"
-                    : "- ₹${(_amt.abs()).toStringAsFixed(2)}",
+                (txn?.txnType == TransactionType.CREDIT)
+                    ? "+ ₹${_amt?.toStringAsFixed(2)}"
+                    : "- ₹${(_amt?.abs())?.toStringAsFixed(2)}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
                   fontSize: 16,
-                  color: (_amt > 0) ? Colors.green : Colors.red,
+                  color: (txn?.txnType == TransactionType.CREDIT)
+                      ? Colors.green
+                      : Colors.red,
                 ),
               )
             ],

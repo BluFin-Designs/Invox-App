@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:invox/Repositories/TransactionRepository.dart';
-import 'package:invox/Models/CategoryModel.dart';
 
+import '../../Repositories/TransactionRepository.dart';
+import '../../Models/CategoryModel.dart';
 import '../../Models/WalletModel.dart';
 
 class AddTransactionPopUp extends StatefulWidget {
@@ -12,6 +12,11 @@ class AddTransactionPopUp extends StatefulWidget {
 }
 
 class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
+  final titleController = TextEditingController();
+  final descController = TextEditingController();
+  final amtController = TextEditingController();
+  String txnType = "";
+  IconData txnIcon = Icons.movie_creation;
   DateTime _selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext ctx) async {
@@ -44,6 +49,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                 vertical: 5,
               ),
               child: TextFormField(
+                controller: titleController,
                 style: const TextStyle(
                   color: Colors.white,
                 ),
@@ -78,6 +84,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                 vertical: 5,
               ),
               child: TextFormField(
+                controller: descController,
                 style: const TextStyle(
                   color: Colors.white,
                 ),
@@ -113,6 +120,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                 vertical: 5,
               ),
               child: TextFormField(
+                controller: amtController,
                 keyboardType:
                     const TextInputType.numberWithOptions(decimal: true),
                 style: const TextStyle(
@@ -274,7 +282,11 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                           ),
                         );
                       }).toList(),
-                      onChanged: (Object? value) {},
+                      onChanged: (Object? value) {
+                        setState(() {
+                          txnType = value.toString();
+                        });
+                      },
                     ),
                   ),
                 )
@@ -379,7 +391,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         color: Colors.white,
                       ),
                       items: <IconData>[
-                        Icons.movie,
+                        Icons.movie_creation,
                         Icons.shopping_basket,
                         Icons.import_contacts,
                         Icons.label_important,
@@ -392,7 +404,11 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                           ),
                         );
                       }).toList(),
-                      onChanged: (Object? value) {},
+                      onChanged: (Object? value) {
+                        setState(() {
+                          txnIcon = value as IconData;
+                        });
+                      },
                     ),
                   ),
                 )
@@ -410,18 +426,18 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
               onPressed: () {
                 TransactionRepository()
                     .addTransaction(
-                        "guehGRSbdwnj",
-                        "Test",
-                        "Test Txn",
-                        DateTime.now(),
-                        1000.0,
-                        "Debit",
+                        "3rtfg",
+                        titleController.text,
+                        descController.text,
+                        _selectedDate,
+                        double.parse(amtController.text),
+                        txnType,
                         Wallet(title: "Essentials"),
                         TransactionCategory(
                             title: "Movie",
                             color: Colors.blueAccent,
                             icon: Icons.ac_unit),
-                        Icons.access_alarm)
+                        txnIcon)
                     .then(
                       (value) => Navigator.pop(context),
                     );
