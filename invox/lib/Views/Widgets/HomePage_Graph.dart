@@ -16,527 +16,529 @@ class _HomePageGraphState extends State<HomePageGraph> {
           SizedBox(
             height: 200,
             width: MediaQuery.of(context).size.width,
-            child: TabBarView(children: [
-              AspectRatio(
-                aspectRatio: 2,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xffF0F5FF),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: BarChart(
-                      BarChartData(
-                        barGroups: [
-                          BarChartGroupData(
-                            x: 0,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 8,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 1,
-                            barRods: [
-                              BarChartRodData(
-                                toY: 10,
-                                width: 20,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 2,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 14,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 3,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 15,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 4,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 13,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 5,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 10,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 6,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 16,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                        ],
-                        gridData: FlGridData(
-                          drawHorizontalLine: true,
-                          drawVerticalLine: false,
+            child: TabBarView(
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  AspectRatio(
+                    aspectRatio: 2,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color(0xffF0F5FF),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
                         ),
-                        alignment: BarChartAlignment.spaceAround,
-                        maxY: 20,
-                        barTouchData: BarTouchData(
-                          enabled: false,
-                          touchTooltipData: BarTouchTooltipData(
-                            tooltipBgColor: Colors.transparent,
-                            tooltipPadding: EdgeInsets.zero,
-                            tooltipMargin: 8,
-                            getTooltipItem: (
-                              BarChartGroupData group,
-                              int groupIndex,
-                              BarChartRodData rod,
-                              int rodIndex,
-                            ) {
-                              return BarTooltipItem(
-                                rod.toY.round().toString(),
-                                const TextStyle(
-                                  color: Color(0xFF7286D3),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            },
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: BarChart(
+                          BarChartData(
+                            barGroups: [
+                              BarChartGroupData(
+                                x: 0,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 8,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 1,
+                                barRods: [
+                                  BarChartRodData(
+                                    toY: 10,
+                                    width: 20,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 2,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 14,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 3,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 15,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 4,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 13,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 5,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 10,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 6,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 16,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                            ],
+                            gridData: FlGridData(
+                              drawHorizontalLine: true,
+                              drawVerticalLine: false,
+                            ),
+                            alignment: BarChartAlignment.spaceAround,
+                            maxY: 20,
+                            barTouchData: BarTouchData(
+                              enabled: false,
+                              touchTooltipData: BarTouchTooltipData(
+                                tooltipBgColor: Colors.transparent,
+                                tooltipPadding: EdgeInsets.zero,
+                                tooltipMargin: 8,
+                                getTooltipItem: (
+                                  BarChartGroupData group,
+                                  int groupIndex,
+                                  BarChartRodData rod,
+                                  int rodIndex,
+                                ) {
+                                  return BarTooltipItem(
+                                    rod.toY.round().toString(),
+                                    const TextStyle(
+                                      color: Color(0xFF7286D3),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            titlesData: titlesData,
+                            borderData: FlBorderData(
+                              show: true,
+                              border: const Border(),
+                            ),
                           ),
-                        ),
-                        titlesData: titlesData,
-                        borderData: FlBorderData(
-                          show: true,
-                          border: const Border(),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              AspectRatio(
-                aspectRatio: 2,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xffF0F5FF),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: BarChart(
-                      BarChartData(
-                        barGroups: [
-                          BarChartGroupData(
-                            x: 0,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 8,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 1,
-                            barRods: [
-                              BarChartRodData(
-                                toY: 10,
-                                width: 20,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 2,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 14,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 3,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 15,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 4,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 13,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 5,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 10,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 6,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 16,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                        ],
-                        gridData: FlGridData(
-                          drawHorizontalLine: true,
-                          drawVerticalLine: false,
+                  AspectRatio(
+                    aspectRatio: 2,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color(0xffF0F5FF),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
                         ),
-                        alignment: BarChartAlignment.spaceAround,
-                        maxY: 20,
-                        barTouchData: BarTouchData(
-                          enabled: false,
-                          touchTooltipData: BarTouchTooltipData(
-                            tooltipBgColor: Colors.transparent,
-                            tooltipPadding: EdgeInsets.zero,
-                            tooltipMargin: 8,
-                            getTooltipItem: (
-                              BarChartGroupData group,
-                              int groupIndex,
-                              BarChartRodData rod,
-                              int rodIndex,
-                            ) {
-                              return BarTooltipItem(
-                                rod.toY.round().toString(),
-                                TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            },
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: BarChart(
+                          BarChartData(
+                            barGroups: [
+                              BarChartGroupData(
+                                x: 0,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 8,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 1,
+                                barRods: [
+                                  BarChartRodData(
+                                    toY: 10,
+                                    width: 20,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 2,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 14,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 3,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 15,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 4,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 13,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 5,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 10,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 6,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 16,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                            ],
+                            gridData: FlGridData(
+                              drawHorizontalLine: true,
+                              drawVerticalLine: false,
+                            ),
+                            alignment: BarChartAlignment.spaceAround,
+                            maxY: 20,
+                            barTouchData: BarTouchData(
+                              enabled: false,
+                              touchTooltipData: BarTouchTooltipData(
+                                tooltipBgColor: Colors.transparent,
+                                tooltipPadding: EdgeInsets.zero,
+                                tooltipMargin: 8,
+                                getTooltipItem: (
+                                  BarChartGroupData group,
+                                  int groupIndex,
+                                  BarChartRodData rod,
+                                  int rodIndex,
+                                ) {
+                                  return BarTooltipItem(
+                                    rod.toY.round().toString(),
+                                    TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            titlesData: titlesData,
+                            borderData: FlBorderData(
+                              show: true,
+                              border: const Border(),
+                            ),
                           ),
-                        ),
-                        titlesData: titlesData,
-                        borderData: FlBorderData(
-                          show: true,
-                          border: const Border(),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-              AspectRatio(
-                aspectRatio: 2,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Color(0xffF0F5FF),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: BarChart(
-                      BarChartData(
-                        barGroups: [
-                          BarChartGroupData(
-                            x: 0,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 8,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 1,
-                            barRods: [
-                              BarChartRodData(
-                                toY: 10,
-                                width: 20,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 2,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 14,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 3,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 15,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 4,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 13,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 5,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 10,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                          BarChartGroupData(
-                            x: 6,
-                            barRods: [
-                              BarChartRodData(
-                                width: 20,
-                                toY: 16,
-                                gradient: _barsGradient,
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.zero,
-                                  bottomRight: Radius.zero,
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                ),
-                              )
-                            ],
-                            showingTooltipIndicators: [0],
-                          ),
-                        ],
-                        gridData: FlGridData(
-                          drawHorizontalLine: true,
-                          drawVerticalLine: false,
+                  AspectRatio(
+                    aspectRatio: 2,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Color(0xffF0F5FF),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10),
+                          topRight: Radius.circular(10),
                         ),
-                        alignment: BarChartAlignment.spaceAround,
-                        maxY: 20,
-                        barTouchData: BarTouchData(
-                          enabled: false,
-                          touchTooltipData: BarTouchTooltipData(
-                            tooltipBgColor: Colors.transparent,
-                            tooltipPadding: EdgeInsets.zero,
-                            tooltipMargin: 8,
-                            getTooltipItem: (
-                              BarChartGroupData group,
-                              int groupIndex,
-                              BarChartRodData rod,
-                              int rodIndex,
-                            ) {
-                              return BarTooltipItem(
-                                rod.toY.round().toString(),
-                                TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              );
-                            },
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: BarChart(
+                          BarChartData(
+                            barGroups: [
+                              BarChartGroupData(
+                                x: 0,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 8,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 1,
+                                barRods: [
+                                  BarChartRodData(
+                                    toY: 10,
+                                    width: 20,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 2,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 14,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 3,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 15,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 4,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 13,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 5,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 10,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                              BarChartGroupData(
+                                x: 6,
+                                barRods: [
+                                  BarChartRodData(
+                                    width: 20,
+                                    toY: 16,
+                                    gradient: _barsGradient,
+                                    borderRadius: const BorderRadius.only(
+                                      bottomLeft: Radius.zero,
+                                      bottomRight: Radius.zero,
+                                      topLeft: Radius.circular(10),
+                                      topRight: Radius.circular(10),
+                                    ),
+                                  )
+                                ],
+                                showingTooltipIndicators: [0],
+                              ),
+                            ],
+                            gridData: FlGridData(
+                              drawHorizontalLine: true,
+                              drawVerticalLine: false,
+                            ),
+                            alignment: BarChartAlignment.spaceAround,
+                            maxY: 20,
+                            barTouchData: BarTouchData(
+                              enabled: false,
+                              touchTooltipData: BarTouchTooltipData(
+                                tooltipBgColor: Colors.transparent,
+                                tooltipPadding: EdgeInsets.zero,
+                                tooltipMargin: 8,
+                                getTooltipItem: (
+                                  BarChartGroupData group,
+                                  int groupIndex,
+                                  BarChartRodData rod,
+                                  int rodIndex,
+                                ) {
+                                  return BarTooltipItem(
+                                    rod.toY.round().toString(),
+                                    TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            titlesData: titlesData,
+                            borderData: FlBorderData(
+                              show: true,
+                              border: const Border(),
+                            ),
                           ),
-                        ),
-                        titlesData: titlesData,
-                        borderData: FlBorderData(
-                          show: true,
-                          border: const Border(),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            ]),
+                ]),
           ),
           Container(
             height: 50,

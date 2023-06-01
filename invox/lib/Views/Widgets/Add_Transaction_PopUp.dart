@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:invox/Repositories/TransactionRepository.dart';
+import 'package:invox/Models/CategoryModel.dart';
+
+import '../../Models/WalletModel.dart';
 
 class AddTransactionPopUp extends StatefulWidget {
   const AddTransactionPopUp({Key? key}) : super(key: key);
@@ -404,7 +408,23 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                     borderRadius: BorderRadius.circular(100),
                   )),
               onPressed: () {
-                Navigator.of(context).pop();
+                TransactionRepository()
+                    .addTransaction(
+                        "guehGRSbdwnj",
+                        "Test",
+                        "Test Txn",
+                        DateTime.now(),
+                        1000.0,
+                        "Debit",
+                        Wallet(title: "Essentials"),
+                        TransactionCategory(
+                            title: "Movie",
+                            color: Colors.blueAccent,
+                            icon: Icons.ac_unit),
+                        Icons.access_alarm)
+                    .then(
+                      (value) => Navigator.pop(context),
+                    );
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(

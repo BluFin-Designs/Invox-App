@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:invox/Repositories/UserRepository.dart';
-import 'package:invox/Views/Screens/MyWallets_Screen.dart';
-import 'package:invox/Views/Screens/Profile_Screen.dart';
-import 'package:invox/Views/Screens/Statistics_Screen.dart';
-import 'package:invox/Views/Screens/Transaction_Screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import './MyWallets_Screen.dart';
+import './Profile_Screen.dart';
+import './Statistics_Screen.dart';
+import './Transaction_Screen.dart';
 import '../Widgets/Add_Transaction_PopUp.dart';
 import '../Widgets/HomePage_Graph.dart';
 import '../Widgets/TransactionCard.dart';
 import '../Widgets/MenuDrawer.dart';
+import '../../Repositories/UserRepository.dart';
+import '../../Repositories/TransactionRepository.dart';
+import '../../Models/Transaction_Model.dart';
+import '../../blocs/transactions_bloc.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -19,22 +23,16 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-List<double> _txns = [
-  -100.00,
-  -500.00,
-  2000.75,
-  -150.50,
-  -290.00,
-];
-
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     UserRepository();
+    TransactionRepository().getTransactions();
     super.initState();
   }
 
   final _key = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,15 +90,50 @@ class _HomePageState extends State<HomePage> {
                   Icon(Icons.tune),
                 ],
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (ctx, index) {
-                  return TransactionCard(
-                    amount: _txns[index],
-                  );
+              BlocBuilder<TransactionsBloc, TransactionsState>(
+                builder: (context, state) {
+                  if (state is TransactionsInitialState) {
+                    BlocProvider.of<TransactionsBloc>(context)
+                        .add(TransactionLoadingEvent());
+                    return SizedBox(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  } else if (state is TransactionsLoadedState) {
+                    List<TransactionModel> allTxns = state.allTransactions;
+                    if (allTxns.length != 0) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (ctx, index) {
+                          return TransactionCard(
+                            amount: allTxns[index].amount,
+                          );
+                        },
+                        itemCount: allTxns.length,
+                      );
+                    } else {
+                      return SizedBox(
+                        height: 200,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: Text("Oops, No Transactions yet!"),
+                        ),
+                      );
+                    }
+                  } else {
+                    return SizedBox(
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text("Error Loading Data!"),
+                      ),
+                    );
+                  }
                 },
-                itemCount: 5,
               )
             ],
           ),
@@ -179,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Text(
@@ -191,13 +224,13 @@ class _HomePageState extends State<HomePage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      AddTransactionPopUp(),
+                      const AddTransactionPopUp(),
                     ],
                   ),
                 ),
               ),
             ),
-          );
+          ).then((value) => setState(() {}));
         },
       ),
     );

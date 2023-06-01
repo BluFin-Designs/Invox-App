@@ -16,6 +16,7 @@ import '../Views/Screens/MyWallets_Screen.dart';
 import '../Views/Screens/Preferences_Screen.dart';
 import '../Views/Screens/Budget_Screen.dart';
 import '../Views/Screens/SavingGoals_Screen.dart';
+import 'blocs/transactions_bloc.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +46,10 @@ class MyApp extends StatelessWidget {
           },
           builder: (context, state) {
             if (state is LoggedInState) {
-              return const HomePage();
+              return BlocProvider(
+                create: (context) => TransactionsBloc(),
+                child: const HomePage(),
+              );
             }
             return const LoginSignUp();
           },
