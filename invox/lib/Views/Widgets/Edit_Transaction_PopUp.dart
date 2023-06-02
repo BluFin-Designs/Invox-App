@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
+import 'package:invox/Models/Transaction_Model.dart';
 
 import '../../Repositories/TransactionRepository.dart';
 import '../../Models/CategoryModel.dart';
 import '../../Models/WalletModel.dart';
 
-class AddTransactionPopUp extends StatefulWidget {
-  const AddTransactionPopUp({Key? key}) : super(key: key);
+class EditTransactionPopUp extends StatefulWidget {
+  //Todo:accept transaction model to be edited
+  final TransactionModel txn;
+  const EditTransactionPopUp({required this.txn, Key? key}) : super(key: key);
 
   @override
-  State<AddTransactionPopUp> createState() => _AddTransactionPopUpState();
+  State<EditTransactionPopUp> createState() => _EditTransactionPopUpState();
 }
 
-class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
-  var uuid = Uuid();
-
+class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController amtController = TextEditingController();
@@ -22,6 +22,9 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
   String txnType = "";
   IconData txnIcon = Icons.movie_creation;
   DateTime _selectedDate = DateTime.now();
+  late TransactionCategory category;
+  late Wallet wallet = Wallet(title: "Cash");
+  String uuid = "";
 
   Future<void> _selectDate(BuildContext ctx) async {
     final DateTime? picked = await showDatePicker(
@@ -35,6 +38,20 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
         _selectedDate = picked;
       });
     }
+  }
+
+  @override
+  void initState() {
+    titleController.text = widget.txn.title!;
+    descController.text = widget.txn.description!;
+    amtController.text = widget.txn.amount!.toString();
+    txnType = widget.txn.txnType.toString();
+    _selectedDate = widget.txn.date!;
+    txnIcon = widget.txn.icons!;
+    category = widget.txn.category!;
+    uuid = widget.txn.uid!;
+    //wallet=widget.txn.wallet;
+    super.initState();
   }
 
   @override
@@ -429,18 +446,15 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                   )),
               onPressed: () {
                 TransactionRepository()
-                    .addTransaction(
-                        uuid.v1(),
+                    .editTransaction(
+                        uuid,
                         titleController.text,
                         descController.text,
                         _selectedDate,
                         double.parse(amtController.text),
                         txnType,
-                        Wallet(title: "Essentials"),
-                        TransactionCategory(
-                            title: "Movie",
-                            color: Colors.blueAccent,
-                            icon: Icons.ac_unit),
+                        wallet,
+                        category,
                         txnIcon)
                     .then(
                       (value) => Navigator.pop(context),
@@ -452,7 +466,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                   vertical: 10,
                 ),
                 child: Text(
-                  "Add",
+                  "Edit",
                   style: TextStyle(
                     fontSize: 20,
                   ),

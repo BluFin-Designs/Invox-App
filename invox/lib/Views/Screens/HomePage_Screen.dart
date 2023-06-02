@@ -6,6 +6,7 @@ import './Profile_Screen.dart';
 import './Statistics_Screen.dart';
 import './Transaction_Screen.dart';
 import '../Widgets/Add_Transaction_PopUp.dart';
+import '../Widgets/Edit_Transaction_PopUp.dart';
 import '../Widgets/HomePage_Graph.dart';
 import '../Widgets/TransactionCard.dart';
 import '../Widgets/MenuDrawer.dart';
@@ -154,7 +155,47 @@ class _HomePageState extends State<HomePage> {
                                         );
                                       });
                                   return res;
-                                } else {}
+                                } else {
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    useSafeArea: true,
+                                    context: context,
+                                    builder: (context) => Dialog(
+                                      insetPadding: const EdgeInsets.symmetric(
+                                          vertical: 20, horizontal: 10),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                40,
+                                        height: 530,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            children: <Widget>[
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text(
+                                                "Edit Transaction",
+                                                style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              EditTransactionPopUp(
+                                                  txn: allTxns[index]),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ).then((value) => setState(() {}));
+                                }
                               },
                               background: slideRightBackground(),
                               secondaryBackground: slideLeftBackground(),

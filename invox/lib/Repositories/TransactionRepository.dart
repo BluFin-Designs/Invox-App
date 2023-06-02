@@ -18,6 +18,35 @@ class TransactionRepository {
     return true;
   }
 
+  Future<TransactionModel> editTransaction(
+    String uui,
+    String title,
+    String description,
+    DateTime date,
+    double amount,
+    String txnType,
+    Wallet wallet,
+    TransactionCategory category,
+    IconData icon,
+  ) async {
+    TransactionModel tempTxn = TransactionModel(
+      uid: uui,
+      title: title,
+      description: description,
+      date: date,
+      amount: amount,
+      txnType: (txnType == "Credit")
+          ? TransactionType.CREDIT
+          : TransactionType.DEBIT,
+      category: category,
+      icons: icon,
+    );
+    final index = TransactionDatabase.transactions
+        .indexWhere((element) => element.uid == tempTxn.uid);
+    TransactionDatabase.transactions[index] = tempTxn;
+    return tempTxn;
+  }
+
   Future<TransactionModel> addTransaction(
     String uui,
     String title,
