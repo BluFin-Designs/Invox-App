@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../Repositories/TransactionRepository.dart';
 import '../../Models/CategoryModel.dart';
@@ -12,6 +13,7 @@ class AddTransactionPopUp extends StatefulWidget {
 }
 
 class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
+  var uuid = Uuid();
   final titleController = TextEditingController();
   final descController = TextEditingController();
   final amtController = TextEditingController();
@@ -426,7 +428,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
               onPressed: () {
                 TransactionRepository()
                     .addTransaction(
-                        "3rtfg",
+                        uuid.v1(),
                         titleController.text,
                         descController.text,
                         _selectedDate,

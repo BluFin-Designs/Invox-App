@@ -109,7 +109,57 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (ctx, index) {
-                          return TransactionCard(txn: allTxns[index]);
+                          return Dismissible(
+                              confirmDismiss: (direction) async {
+                                if (direction == DismissDirection.endToStart) {
+                                  final bool res = await showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          content: const Text(
+                                              "Are you sure you want to delete ?"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              child: const Text(
+                                                "Cancel",
+                                                style: TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context)
+                                                    .pop(false);
+                                              },
+                                            ),
+                                            TextButton(
+                                              child: const Text(
+                                                "Delete",
+                                                style: TextStyle(
+                                                    color: Colors.red),
+                                              ),
+                                              onPressed: () {
+                                                // TODO: Delete the item from DB etc..
+                                                setState(() {
+                                                  TransactionRepository
+                                                          .deleteTransaction(
+                                                              allTxns[index].uid
+                                                                  as String)
+                                                      .then(
+                                                    (value) =>
+                                                        Navigator.pop(context),
+                                                  );
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                  return res;
+                                } else {}
+                              },
+                              background: slideRightBackground(),
+                              secondaryBackground: slideLeftBackground(),
+                              key: Key(allTxns[index].title as String),
+                              child: TransactionCard(txn: allTxns[index]));
                         },
                         itemCount: allTxns.length,
                       );
@@ -230,6 +280,64 @@ class _HomePageState extends State<HomePage> {
             ),
           ).then((value) => setState(() {}));
         },
+      ),
+    );
+  }
+
+  Widget slideRightBackground() {
+    return Container(
+      color: Colors.blueAccent,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const <Widget>[
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              Icons.edit,
+              color: Colors.white,
+            ),
+            Text(
+              " Edit",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget slideLeftBackground() {
+    return Container(
+      color: Colors.redAccent,
+      child: Align(
+        alignment: Alignment.centerRight,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: const <Widget>[
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+            Text(
+              " Delete",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+              textAlign: TextAlign.right,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -12,6 +12,12 @@ class TransactionRepository {
     return TransactionDatabase.transactions;
   }
 
+  static Future<bool> deleteTransaction(String uui) async {
+    TransactionDatabase.transactions
+        .removeWhere((transactions) => transactions.uid == uui);
+    return true;
+  }
+
   Future<TransactionModel> addTransaction(
     String uui,
     String title,
