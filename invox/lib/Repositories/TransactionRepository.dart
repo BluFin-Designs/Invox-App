@@ -26,7 +26,7 @@ class TransactionRepository {
     double amount,
     String txnType,
     Wallet wallet,
-    TransactionCategory category,
+    TransactionCategoryModel category,
     IconData icon,
   ) async {
     TransactionModel tempTxn = TransactionModel(
@@ -55,7 +55,7 @@ class TransactionRepository {
     double amount,
     String txnType,
     Wallet wallet,
-    TransactionCategory category,
+    TransactionCategoryModel category,
     IconData icon,
   ) async {
     // var mainBox = await Hive.openBox('mainBox');

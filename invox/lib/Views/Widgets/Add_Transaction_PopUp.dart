@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../Repositories/TransactionRepository.dart';
+import '../../Repositories/CategoryRepository.dart';
 import '../../Models/CategoryModel.dart';
 import '../../Models/WalletModel.dart';
 
@@ -22,6 +23,10 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
   String txnType = "";
   IconData txnIcon = Icons.movie_creation;
   DateTime _selectedDate = DateTime.now();
+  late TransactionCategoryModel txnCategory;
+  CategoryRepository categoryRepo = CategoryRepository();
+  late List<TransactionCategoryModel> allCategories =
+      categoryRepo.getCategories();
 
   Future<void> _selectDate(BuildContext ctx) async {
     final DateTime? picked = await showDatePicker(
@@ -208,20 +213,20 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                           fontSize: 16,
                         ),
                       ),
-                      items: <String>[
-                        "Essential Items",
-                        "Entertainment",
-                        "Others",
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
+                      items: allCategories
+                          .map<DropdownMenuItem<TransactionCategoryModel>>(
+                              (TransactionCategoryModel value) {
+                        return DropdownMenuItem<TransactionCategoryModel>(
                           value: value,
                           child: Text(
-                            value,
+                            value.title,
                             style: const TextStyle(fontSize: 16),
                           ),
                         );
                       }).toList(),
-                      onChanged: (Object? value) {},
+                      onChanged: (Object? value) {
+                        txnCategory = value as TransactionCategoryModel;
+                      },
                     ),
                   ),
                 ),
@@ -437,10 +442,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         double.parse(amtController.text),
                         txnType,
                         Wallet(title: "Essentials"),
-                        TransactionCategory(
-                            title: "Movie",
-                            color: Colors.blueAccent,
-                            icon: Icons.ac_unit),
+                        txnCategory,
                         txnIcon)
                     .then(
                       (value) => Navigator.pop(context),

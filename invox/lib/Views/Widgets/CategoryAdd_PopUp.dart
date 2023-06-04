@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/CategoriesData.dart';
+import '../../Repositories/CategoryRepository.dart';
+import '../../Models/CategoryModel.dart';
+import 'package:uuid/uuid.dart';
 
 class CategoryAddPopUp extends StatefulWidget {
   const CategoryAddPopUp({Key? key}) : super(key: key);
@@ -10,9 +12,29 @@ class CategoryAddPopUp extends StatefulWidget {
 }
 
 class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
-  Color? _newItemColor;
-  String? _newItemTitle;
-  IconData? _newItemIcon;
+  var uuid = Uuid();
+
+  late Color _newItemColor;
+  late String _newItemTitle;
+  late IconData _newItemIcon;
+
+  _addNewCategory(BuildContext context, TransactionCategoryModel category) {
+    CategoryRepository catRepo = CategoryRepository();
+    try {
+      catRepo
+          .addCategories(category)
+          .then((value) => Navigator.of(context).pop());
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Failed to add new Category!",
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +153,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                         );
                       }).toList(),
                       onChanged: (IconData? value) {
-                        _newItemIcon = value;
+                        _newItemIcon = value!;
                       },
                     ),
                   ),
@@ -196,7 +218,7 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                         );
                       }).toList(),
                       onChanged: (Color? value) {
-                        _newItemColor = value;
+                        _newItemColor = value!;
                       },
                     ),
                   ),
@@ -212,25 +234,15 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   )),
-              onPressed: () {
-                if (_newItemColor != null &&
-                    _newItemIcon != null &&
-                    _newItemTitle != null) {
-                  Data.allCategories.add({
-                    "title": _newItemTitle,
-                    "icon": _newItemIcon,
-                    "color": _newItemColor,
-                  });
-                  Navigator.of(context).pop();
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Please Enter the Valid Values!"),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
-              },
+              onPressed: () => _addNewCategory(
+                context,
+                TransactionCategoryModel(
+                  title: _newItemTitle,
+                  color: _newItemColor,
+                  icon: _newItemIcon,
+                  Uid: uuid.v1(),
+                ),
+              ),
               child: const Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 60,

@@ -10,7 +10,7 @@ class TransactionModel {
   double? amount;
   IconData? icons;
   DateTime? date;
-  TransactionCategory? category;
+  TransactionCategoryModel? category;
   TransactionType? txnType;
 
   TransactionModel({

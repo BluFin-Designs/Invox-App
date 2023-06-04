@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/CategoriesData.dart';
+import '../../Repositories/CategoryRepository.dart';
+import '../../utils/Categories_Database.dart';
 import '../Widgets/CategoryAdd_PopUp.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -15,6 +16,34 @@ class CategoriesPage extends StatefulWidget {
 class _CategoriesPageState extends State<CategoriesPage> {
   void _refreshPage() {
     setState(() {});
+  }
+
+  //Delete Category
+  _deleteCategory(BuildContext context, String Uid) {
+    CategoryRepository catRepo = CategoryRepository();
+    try {
+      catRepo.deleteCategory(Uid).then(
+        (value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                "Category deleted!",
+              ),
+              backgroundColor: Colors.redAccent,
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Failed to add new Category!",
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
   }
 
   @override
@@ -55,12 +84,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   height: 40,
                                   width: 60,
                                   decoration: BoxDecoration(
-                                    color: Data.allCategories[index]["color"],
+                                    color: CategoriesDatabase
+                                        .categories[index].color,
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Center(
                                     child: Icon(
-                                      Data.allCategories[index]["icon"],
+                                      CategoriesDatabase.categories[index].icon,
                                       color: Colors.white,
                                       size: 25,
                                     ),
@@ -70,9 +100,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   width: 10,
                                 ),
                                 Text(
-                                  Data.allCategories[index]["title"],
+                                  CategoriesDatabase.categories[index].title,
                                   style: TextStyle(
-                                    color: Data.allCategories[index]["color"],
+                                    color: CategoriesDatabase
+                                        .categories[index].color,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),
@@ -80,12 +111,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                               ],
                             ),
                             IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  Data.allCategories
-                                      .remove(Data.allCategories[index]);
-                                });
-                              },
+                              onPressed: () => setState(() {
+                                _deleteCategory(context,
+                                    CategoriesDatabase.categories[index].Uid);
+                              }),
                               icon: const Icon(
                                 Icons.delete,
                                 color: Colors.red,
@@ -97,7 +126,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     ),
                   );
                 },
-                itemCount: Data.allCategories.length,
+                itemCount: CategoriesDatabase.categories.length,
               ),
             ),
             InkWell(

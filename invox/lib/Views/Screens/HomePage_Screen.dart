@@ -286,7 +286,7 @@ class _HomePageState extends State<HomePage> {
         ),
         onPressed: () {
           showDialog(
-            barrierDismissible: false,
+            // barrierDismissible: false,
             useSafeArea: true,
             context: context,
             builder: (_) => Dialog(

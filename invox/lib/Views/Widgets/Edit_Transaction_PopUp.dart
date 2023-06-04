@@ -22,7 +22,7 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
   String txnType = "";
   IconData txnIcon = Icons.movie_creation;
   DateTime _selectedDate = DateTime.now();
-  late TransactionCategory category;
+  late TransactionCategoryModel category;
   late Wallet wallet = Wallet(title: "Cash");
   String uuid = "";
 
