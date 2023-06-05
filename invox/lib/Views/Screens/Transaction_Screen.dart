@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../Models/Transaction_Model.dart';
 import '../Widgets/Add_Transaction.dart';
 import '../Widgets/Summary_card.dart';
 import '../Widgets/TransactionCard.dart';
+import '../../blocs/transactions_bloc.dart';
+import '../../Repositories/TransactionRepository.dart';
 
 class Transaction extends StatefulWidget {
   static const routeName = '/transaction';
@@ -12,6 +17,11 @@ class Transaction extends StatefulWidget {
 }
 
 class _TransactionState extends State<Transaction> {
+  void initState() {
+    TransactionRepository().getTransactions();
+    super.initState();
+  }
+
   final _txnKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -90,14 +100,49 @@ class _TransactionState extends State<Transaction> {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemBuilder: (ctx, index) {
-                              return TransactionCard();
-                            },
-                            itemCount: 5,
-                          ),
-                        ),
+                        BlocBuilder<TransactionsBloc, TransactionsState>(
+                            builder: (context, state) {
+                          if (state is TransactionsInitialState) {
+                            BlocProvider.of<TransactionsBloc>(context)
+                                .add(TransactionLoadingEvent());
+                            return SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else if (state is TransactionsLoadedState) {
+                            List<TransactionModel> allTxns =
+                                state.allTransactions;
+                            if (allTxns.length != 0) {
+                              return Expanded(
+                                child: ListView.builder(
+                                  itemBuilder: (ctx, index) {
+                                    return TransactionCard(txn: allTxns[index]);
+                                  },
+                                  itemCount: allTxns.length,
+                                ),
+                              );
+                            } else {
+                              return SizedBox(
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                child: const Center(
+                                  child: Text("Oops, No Transactions yet!"),
+                                ),
+                              );
+                            }
+                          } else {
+                            return SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                child: Text("Error Loading Data!"),
+                              ),
+                            );
+                          }
+                        }),
                       ],
                     ),
                     Column(
@@ -116,14 +161,49 @@ class _TransactionState extends State<Transaction> {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemBuilder: (ctx, index) {
-                              return TransactionCard();
-                            },
-                            itemCount: 7,
-                          ),
-                        ),
+                        BlocBuilder<TransactionsBloc, TransactionsState>(
+                            builder: (context, state) {
+                          if (state is TransactionsInitialState) {
+                            BlocProvider.of<TransactionsBloc>(context)
+                                .add(TransactionLoadingEvent());
+                            return SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else if (state is TransactionsLoadedState) {
+                            List<TransactionModel> allTxns =
+                                state.allTransactions;
+                            if (allTxns.length != 0) {
+                              return Expanded(
+                                child: ListView.builder(
+                                  itemBuilder: (ctx, index) {
+                                    return TransactionCard(txn: allTxns[index]);
+                                  },
+                                  itemCount: allTxns.length,
+                                ),
+                              );
+                            } else {
+                              return SizedBox(
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                child: const Center(
+                                  child: Text("Oops, No Transactions yet!"),
+                                ),
+                              );
+                            }
+                          } else {
+                            return SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                child: Text("Error Loading Data!"),
+                              ),
+                            );
+                          }
+                        }),
                       ],
                     ),
                     Column(
@@ -142,14 +222,49 @@ class _TransactionState extends State<Transaction> {
                         const SizedBox(
                           height: 10.0,
                         ),
-                        Expanded(
-                          child: ListView.builder(
-                            itemBuilder: (ctx, index) {
-                              return TransactionCard();
-                            },
-                            itemCount: 9,
-                          ),
-                        ),
+                        BlocBuilder<TransactionsBloc, TransactionsState>(
+                            builder: (context, state) {
+                          if (state is TransactionsInitialState) {
+                            BlocProvider.of<TransactionsBloc>(context)
+                                .add(TransactionLoadingEvent());
+                            return SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          } else if (state is TransactionsLoadedState) {
+                            List<TransactionModel> allTxns =
+                                state.allTransactions;
+                            if (allTxns.length != 0) {
+                              return Expanded(
+                                child: ListView.builder(
+                                  itemBuilder: (ctx, index) {
+                                    return TransactionCard(txn: allTxns[index]);
+                                  },
+                                  itemCount: allTxns.length,
+                                ),
+                              );
+                            } else {
+                              return SizedBox(
+                                height: 200,
+                                width: MediaQuery.of(context).size.width,
+                                child: const Center(
+                                  child: Text("Oops, No Transactions yet!"),
+                                ),
+                              );
+                            }
+                          } else {
+                            return SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              child: const Center(
+                                child: Text("Error Loading Data!"),
+                              ),
+                            );
+                          }
+                        }),
                       ],
                     ),
                   ],

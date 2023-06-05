@@ -3,11 +3,20 @@ import 'package:fl_chart/fl_chart.dart';
 
 import '../Widgets/Total_Balance_Card.dart';
 import '../Widgets/WalletSlider.dart';
+import '../Widgets/Add_Wallet_PopUp.dart';
 
-class MyWalletsScreen extends StatelessWidget {
+class MyWalletsScreen extends StatefulWidget {
   static const routeName = '/my_wallets';
 
   MyWalletsScreen({Key? key}) : super(key: key);
+
+  State<MyWalletsScreen> createState() => _MyWalletsScreenState();
+}
+
+class _MyWalletsScreenState extends State<MyWalletsScreen> {
+  void _refreshPage() {
+    setState(() {});
+  }
 
   List<Map<String, dynamic>> wallets = [
     {
@@ -157,7 +166,45 @@ class MyWalletsScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  // barrierDismissible: false,
+                  useSafeArea: true,
+                  context: context,
+                  builder: (_) => Dialog(
+                    insetPadding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width - 40,
+                      height: 260,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "New Wallet",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            AddWalletPopup(),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ).then(
+                  (value) => _refreshPage(),
+                );
+              },
             )
           ],
         ),

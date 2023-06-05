@@ -3,6 +3,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../Repositories/TransactionRepository.dart';
 import '../../Repositories/CategoryRepository.dart';
+import '../../Repositories/WalletRepository.dart';
 import '../../Models/CategoryModel.dart';
 import '../../Models/WalletModel.dart';
 
@@ -27,6 +28,9 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
   CategoryRepository categoryRepo = CategoryRepository();
   late List<TransactionCategoryModel> allCategories =
       categoryRepo.getCategories();
+  late Wallet txnWallet;
+  WalletRepository walletRepo = WalletRepository();
+  late List<Wallet> allWallets = walletRepo.getWallets();
 
   Future<void> _selectDate(BuildContext ctx) async {
     final DateTime? picked = await showDatePicker(
@@ -158,6 +162,70 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                   ),
                   fillColor: Color(0xff8EA7E9),
                   filled: true,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              child: SizedBox(
+                child: DropdownButtonFormField(
+                  isDense: true,
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.white,
+                  ),
+                  dropdownColor: const Color(0xFFFF7B54),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                  decoration: InputDecoration(
+                    hintStyle: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    focusColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    fillColor: Color(0xff8EA7E9),
+                    filled: true,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                  hint: const Text(
+                    "Wallet",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  items:
+                      allWallets.map<DropdownMenuItem<Wallet>>((Wallet value) {
+                    return DropdownMenuItem<Wallet>(
+                      value: value,
+                      child: Text(
+                        value.title,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (Object? value) {
+                    txnWallet = value as Wallet;
+                  },
                 ),
               ),
             ),
@@ -441,7 +509,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         _selectedDate,
                         double.parse(amtController.text),
                         txnType,
-                        Wallet(title: "Essentials"),
+                        txnWallet,
                         txnCategory,
                         txnIcon)
                     .then(

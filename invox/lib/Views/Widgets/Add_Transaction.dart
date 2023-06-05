@@ -37,7 +37,7 @@ class AddTransaction extends StatelessWidget {
             ),
             child: SizedBox(
               width: MediaQuery.of(context).size.width - 40,
-              height: 530,
+              height: MediaQuery.of(context).size.height - 250,
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[

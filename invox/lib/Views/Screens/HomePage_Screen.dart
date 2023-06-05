@@ -238,7 +238,16 @@ class _HomePageState extends State<HomePage> {
           onTap: (int x) {
             switch (x) {
               case 0:
-                Navigator.pushNamed(context, Transaction.routeName);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return BlocProvider(
+                        create: (context) => TransactionsBloc(),
+                        child: Transaction(),
+                      );
+                    },
+                  ),
+                );
                 break;
               case 1:
                 Navigator.pushNamed(context, MyWalletsScreen.routeName);
@@ -297,7 +306,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width - 40,
-                height: 530,
+                height: MediaQuery.of(context).size.height - 250,
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[

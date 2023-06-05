@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../Models/Transaction_Model.dart';
 
 class TransactionCard extends StatelessWidget {
-  final TransactionModel? txn;
-  TransactionCard({this.txn, Key? key}) : super(key: key);
+  final TransactionModel txn;
+  TransactionCard({required this.txn, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double? _amt = (txn?.amount != null) ? txn?.amount : 0.00;
+    final double? _amt = (txn.amount != null) ? txn.amount : 0.00;
 
     return Padding(
       padding: const EdgeInsets.symmetric(
@@ -32,7 +32,7 @@ class TransactionCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(5)),
                 child: Icon(
-                  txn?.icons,
+                  txn.icons,
                   color: Colors.white,
                 ),
               ),
@@ -45,14 +45,14 @@ class TransactionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      txn?.title as String,
+                      txn.title.toString(),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      txn?.description as String,
+                      txn.description.toString(),
                       style: TextStyle(
                         fontSize: 11,
                         color: Color(0xff0A2647),
@@ -65,14 +65,14 @@ class TransactionCard extends StatelessWidget {
                 width: 20,
               ),
               Text(
-                (txn?.txnType == TransactionType.CREDIT)
+                (txn.txnType == TransactionType.CREDIT)
                     ? "+ ₹${_amt?.toStringAsFixed(2)}"
                     : "- ₹${(_amt?.abs())?.toStringAsFixed(2)}",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontStyle: FontStyle.italic,
                   fontSize: 16,
-                  color: (txn?.txnType == TransactionType.CREDIT)
+                  color: (txn.txnType == TransactionType.CREDIT)
                       ? Colors.green
                       : Colors.red,
                 ),
