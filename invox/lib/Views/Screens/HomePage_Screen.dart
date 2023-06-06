@@ -14,6 +14,7 @@ import '../../Repositories/UserRepository.dart';
 import '../../Repositories/TransactionRepository.dart';
 import '../../Models/Transaction_Model.dart';
 import '../../blocs/transactions_bloc.dart';
+import '../../blocs/wallet_bloc.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -250,7 +251,16 @@ class _HomePageState extends State<HomePage> {
                 );
                 break;
               case 1:
-                Navigator.pushNamed(context, MyWalletsScreen.routeName);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return BlocProvider(
+                        create: (context) => WalletBloc(),
+                        child: MyWalletsScreen(),
+                      );
+                    },
+                  ),
+                );
                 break;
               case 2:
                 Navigator.pushNamed(context, Statistics.routeName);

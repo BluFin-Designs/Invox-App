@@ -23,7 +23,8 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
   IconData txnIcon = Icons.movie_creation;
   DateTime _selectedDate = DateTime.now();
   late TransactionCategoryModel category;
-  late Wallet wallet = Wallet(title: "Cash", Uid: "23");
+  late Wallet wallet =
+      Wallet(title: "Cash", Uid: "23", color: Color(0xff7286D3));
   String uuid = "";
 
   Future<void> _selectDate(BuildContext ctx) async {

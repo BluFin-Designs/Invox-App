@@ -16,6 +16,7 @@ class _AddWalletPopupState extends State<AddWalletPopup> {
 
   late String _newWalletTitle;
   late double _newWalletAmount;
+  late Color _newWalletColor;
   _addNewWallet(BuildContext context, Wallet wallet) {
     WalletRepository catRepo = WalletRepository();
     try {
@@ -122,6 +123,77 @@ class _AddWalletPopupState extends State<AddWalletPopup> {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width - 40,
+                child: DropdownButtonFormField(
+                  isDense: true,
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.white,
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                  decoration: InputDecoration(
+                    hintStyle: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    focusColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    fillColor: Color(0xff8EA7E9),
+                    filled: true,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  hint: const Text(
+                    "Color",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  items: <Color>[
+                    Colors.deepOrangeAccent,
+                    Colors.blueAccent,
+                    Colors.greenAccent,
+                    Colors.purpleAccent,
+                  ].map<DropdownMenuItem<Color>>((Color value) {
+                    return DropdownMenuItem<Color>(
+                      value: value,
+                      child: Container(
+                        height: 30,
+                        width: 50,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: value,
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (Color? value) {
+                    _newWalletColor = value!;
+                  },
+                ),
+              ),
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -138,6 +210,7 @@ class _AddWalletPopupState extends State<AddWalletPopup> {
                       Wallet(
                         title: _newWalletTitle,
                         amount: _newWalletAmount,
+                        color: _newWalletColor,
                         Uid: uuid.v1(),
                       ));
                 } else {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:invox/Models/WalletModel.dart';
+import '../../utils/Wallets_Database.dart';
 
 class Wallet_Slider extends StatefulWidget {
   const Wallet_Slider({
@@ -7,7 +9,7 @@ class Wallet_Slider extends StatefulWidget {
     required this.wallets,
   }) : super(key: key);
 
-  final List<Map<String, dynamic>> wallets;
+  final List<Wallet> wallets;
 
   @override
   State<Wallet_Slider> createState() => _Wallet_SliderState();
@@ -80,7 +82,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  element["name"],
+                                  element.title,
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 24,
@@ -90,7 +92,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                                   height: 5,
                                 ),
                                 Text(
-                                  '₹ ${element["value"].toStringAsFixed(2)}',
+                                  '₹ ${element.amount.toStringAsFixed(2)}',
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -105,7 +107,7 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                             right: 30,
                             child: Image(
                               image: AssetImage(
-                                (!element["name"].contains("Card"))
+                                (!element.title.contains("Card"))
                                     ? 'assets/images/money_bag.png'
                                     : 'assets/images/credit_card.png',
                               ),
