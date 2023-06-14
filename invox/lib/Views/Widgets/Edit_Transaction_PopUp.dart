@@ -20,11 +20,10 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
   TextEditingController amtController = TextEditingController();
 
   String txnType = "";
-  IconData txnIcon = Icons.movie_creation;
+  int txnIcon = Icons.movie_creation.codePoint;
   DateTime _selectedDate = DateTime.now();
   late TransactionCategoryModel category;
-  late Wallet wallet =
-      Wallet(title: "Cash", Uid: "23", color: Color(0xff7286D3));
+  late Wallet wallet = Wallet(title: "Cash", Uid: "23", color: 0xff7286D3);
   String uuid = "";
 
   Future<void> _selectDate(BuildContext ctx) async {
@@ -412,23 +411,25 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
                         Icons.movie_creation,
                         color: Colors.white,
                       ),
-                      items: <IconData>[
-                        Icons.movie_creation,
-                        Icons.shopping_basket,
-                        Icons.import_contacts,
-                        Icons.label_important,
-                      ].map<DropdownMenuItem<IconData>>((IconData value) {
-                        return DropdownMenuItem<IconData>(
-                          value: value,
-                          child: Icon(
-                            value,
-                            color: Colors.white,
-                          ),
-                        );
+                      items: <int>[
+                        Icons.movie_creation.codePoint,
+                        Icons.shopping_basket.codePoint,
+                        Icons.import_contacts.codePoint,
+                        Icons.label_important.codePoint,
+                      ].map<DropdownMenuItem<int>>((int value) {
+                        return DropdownMenuItem<int>(
+                            value: value,
+                            child: Icon(
+                              IconData(
+                                value,
+                                fontFamily: 'MaterialIcons',
+                              ),
+                              color: Colors.white,
+                            ));
                       }).toList(),
                       onChanged: (Object? value) {
                         setState(() {
-                          txnIcon = value as IconData;
+                          txnIcon = value as int;
                         });
                       },
                     ),

@@ -16,7 +16,7 @@ class WalletBloc extends Bloc<WalletEvent, WalletState> {
       if (event is WalletLoadingEvent) {
         //Load-Data
         try {
-          allWallets = await walletRepo.getWallets();
+          allWallets = await walletRepo.getWallets() as List<Wallet>;
           emit(WalletLoadedState(allWallets));
         } catch (err) {
           emit(WalletLoadingErrorState());

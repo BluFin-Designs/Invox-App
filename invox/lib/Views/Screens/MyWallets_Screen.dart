@@ -7,7 +7,6 @@ import '../Widgets/Total_Balance_Card.dart';
 import '../Widgets/WalletSlider.dart';
 import '../Widgets/Add_Wallet_PopUp.dart';
 import '../../blocs/wallet_bloc.dart';
-import '../../Repositories/WalletRepository.dart';
 
 class MyWalletsScreen extends StatefulWidget {
   static const routeName = '/my_wallets';
@@ -104,7 +103,8 @@ class _MyWalletsScreenState extends State<MyWalletsScreen> {
                                             height: 15,
                                             width: 15,
                                             decoration: BoxDecoration(
-                                                color: allWallets[i].color,
+                                                color:
+                                                    Color(allWallets[i].color),
                                                 borderRadius:
                                                     BorderRadius.circular(10)),
                                           ),
@@ -118,7 +118,7 @@ class _MyWalletsScreenState extends State<MyWalletsScreen> {
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold,
-                                              color: allWallets[i].color,
+                                              color: Color(allWallets[i].color),
                                             ),
                                           ),
                                         ],
@@ -223,7 +223,7 @@ class _MyWalletsScreenState extends State<MyWalletsScreen> {
     List<PieChartSectionData> data = [];
     for (var element in allWallets) {
       data.add(PieChartSectionData(
-          color: element.color,
+          color: Color(element.color),
           value: element.amount,
           showTitle: true,
           title:

@@ -32,7 +32,7 @@ class TransactionCard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.secondary,
                     borderRadius: BorderRadius.circular(5)),
                 child: Icon(
-                  txn.icons,
+                  IconData(txn.icons, fontFamily: 'MaterialIcons'),
                   color: Colors.white,
                 ),
               ),

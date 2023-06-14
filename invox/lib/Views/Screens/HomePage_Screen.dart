@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../blocs/wallet_bloc.dart';
 import './MyWallets_Screen.dart';
 import './Profile_Screen.dart';
 import './Statistics_Screen.dart';
@@ -14,7 +15,6 @@ import '../../Repositories/UserRepository.dart';
 import '../../Repositories/TransactionRepository.dart';
 import '../../Models/Transaction_Model.dart';
 import '../../blocs/transactions_bloc.dart';
-import '../../blocs/wallet_bloc.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -65,170 +65,176 @@ class _HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 14,
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 14,
-              ),
-              HomePageGraph(),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    "Recent Transactions",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+      body: BlocBuilder<TransactionsBloc, TransactionsState>(
+          builder: (ctx, state) {
+        if (state is TransactionsInitialState) {
+          BlocProvider.of<TransactionsBloc>(context)
+              .add(TransactionLoadingEvent());
+          return SizedBox(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (state is TransactionsLoadedState) {
+          List<TransactionModel> allTxns = state.allTransactions;
+
+          return Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 14,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 14,
                   ),
-                  Icon(Icons.tune),
-                ],
-              ),
-              BlocBuilder<TransactionsBloc, TransactionsState>(
-                builder: (context, state) {
-                  if (state is TransactionsInitialState) {
-                    BlocProvider.of<TransactionsBloc>(context)
-                        .add(TransactionLoadingEvent());
-                    return SizedBox(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
+                  HomePageGraph(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "Recent Transactions",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
-                    );
-                  } else if (state is TransactionsLoadedState) {
-                    List<TransactionModel> allTxns = state.allTransactions;
-                    if (allTxns.length != 0) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (ctx, index) {
-                          return Dismissible(
-                              confirmDismiss: (direction) async {
-                                if (direction == DismissDirection.endToStart) {
-                                  final bool res = await showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          content: const Text(
-                                              "Are you sure you want to delete ?"),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: const Text(
-                                                "Cancel",
-                                                style: TextStyle(
-                                                    color: Colors.black),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context)
-                                                    .pop(false);
-                                              },
-                                            ),
-                                            TextButton(
-                                              child: const Text(
-                                                "Delete",
-                                                style: TextStyle(
-                                                    color: Colors.red),
-                                              ),
-                                              onPressed: () {
-                                                // TODO: Delete the item from DB etc..
-                                                setState(() {
-                                                  TransactionRepository
-                                                          .deleteTransaction(
-                                                              allTxns[index].uid
-                                                                  as String)
-                                                      .then(
-                                                    (value) =>
-                                                        Navigator.pop(context),
-                                                  );
-                                                });
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                  return res;
-                                } else {
-                                  showDialog(
-                                    barrierDismissible: false,
-                                    useSafeArea: true,
-                                    context: context,
-                                    builder: (context) => Dialog(
-                                      insetPadding: const EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 10),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                40,
-                                        height: 530,
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            children: <Widget>[
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              Text(
-                                                "Edit Transaction",
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .primaryColor,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
+                      Icon(Icons.tune),
+                    ],
+                  ),
+                  (allTxns.isNotEmpty)
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (ctx, index) {
+                            return Dismissible(
+                                confirmDismiss: (direction) async {
+                                  if (direction ==
+                                      DismissDirection.endToStart) {
+                                    final bool res = await showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            content: const Text(
+                                                "Are you sure you want to delete ?"),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: const Text(
+                                                  "Cancel",
+                                                  style: TextStyle(
+                                                      color: Colors.black),
                                                 ),
-                                                textAlign: TextAlign.center,
+                                                onPressed: () {
+                                                  Navigator.of(context)
+                                                      .pop(false);
+                                                },
                                               ),
-                                              EditTransactionPopUp(
-                                                  txn: allTxns[index]),
+                                              TextButton(
+                                                child: const Text(
+                                                  "Delete",
+                                                  style: TextStyle(
+                                                      color: Colors.red),
+                                                ),
+                                                onPressed: () {
+                                                  // TODO: Delete the item from DB etc..
+                                                  setState(() {
+                                                    TransactionRepository
+                                                            .deleteTransaction(
+                                                                allTxns[index]
+                                                                        .uid
+                                                                    as String)
+                                                        .then(
+                                                      (value) => Navigator.pop(
+                                                          context),
+                                                    );
+                                                  });
+                                                },
+                                              ),
                                             ],
+                                          );
+                                        });
+                                    return res;
+                                  } else {
+                                    showDialog(
+                                      barrierDismissible: false,
+                                      useSafeArea: true,
+                                      context: context,
+                                      builder: (context) => Dialog(
+                                        insetPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 20, horizontal: 10),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              40,
+                                          height: 530,
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              children: <Widget>[
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text(
+                                                  "Edit Transaction",
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                  ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                                EditTransactionPopUp(
+                                                    txn: allTxns[index]),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ).then((value) => setState(() {}));
-                                }
-                              },
-                              background: slideRightBackground(),
-                              secondaryBackground: slideLeftBackground(),
-                              key: Key(allTxns[index].title as String),
-                              child: TransactionCard(txn: allTxns[index]));
-                        },
-                        itemCount: allTxns.length,
-                      );
-                    } else {
-                      return SizedBox(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: Text("Oops, No Transactions yet!"),
+                                    ).then((value) =>
+                                        BlocProvider.of<TransactionsBloc>(
+                                                context)
+                                            .add(TransactionLoadingEvent()));
+                                  }
+                                },
+                                background: slideRightBackground(),
+                                secondaryBackground: slideLeftBackground(),
+                                key: Key(allTxns[index].title as String),
+                                child: TransactionCard(txn: allTxns[index]));
+                          },
+                          itemCount: allTxns.length,
+                        )
+                      : SizedBox(
+                          height: 200,
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: Text("Oops, No Transactions yet!"),
+                          ),
                         ),
-                      );
-                    }
-                  } else {
-                    return SizedBox(
-                      height: 200,
-                      width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Text("Error Loading Data!"),
-                      ),
-                    );
-                  }
-                },
-              )
-            ],
-          ),
-        ),
-      ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return SizedBox(
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            child: const Center(
+              child: Text("Something Went Wrong!"),
+            ),
+          );
+        }
+      }),
       bottomNavigationBar: BottomAppBar(
         clipBehavior: Clip.antiAlias,
         elevation: 0,
@@ -338,7 +344,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          ).then((value) => setState(() {}));
+          ).then((value) => setState(() {
+                BlocProvider.of<TransactionsBloc>(context)
+                    .add(TransactionLoadingEvent());
+              }));
         },
       ),
     );

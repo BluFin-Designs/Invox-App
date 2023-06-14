@@ -238,8 +238,8 @@ class _CategoryAddPopUpState extends State<CategoryAddPopUp> {
                 context,
                 TransactionCategoryModel(
                   title: _newItemTitle,
-                  color: _newItemColor,
-                  icon: _newItemIcon,
+                  color: _newItemColor.value,
+                  icon: _newItemIcon.codePoint,
                   Uid: uuid.v1(),
                 ),
               ),

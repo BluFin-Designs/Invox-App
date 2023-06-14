@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
+part 'CategoryModel.g.dart';
+
+@HiveType(typeId: 2)
 class TransactionCategoryModel {
+  @HiveField(0)
   String Uid;
-  IconData icon;
-  Color color;
+
+  @HiveField(1)
+  int icon;
+
+  @HiveField(2)
+  int color;
+
+  @HiveField(3)
   String title;
 
   TransactionCategoryModel(

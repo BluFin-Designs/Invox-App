@@ -84,13 +84,16 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                   height: 40,
                                   width: 60,
                                   decoration: BoxDecoration(
-                                    color: CategoriesDatabase
-                                        .categories[index].color,
+                                    color: Color(CategoriesDatabase
+                                        .categories[index].color),
                                     borderRadius: BorderRadius.circular(5),
                                   ),
                                   child: Center(
                                     child: Icon(
-                                      CategoriesDatabase.categories[index].icon,
+                                      IconData(
+                                          CategoriesDatabase
+                                              .categories[index].icon,
+                                          fontFamily: 'MaterialIcons'),
                                       color: Colors.white,
                                       size: 25,
                                     ),
@@ -102,8 +105,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                                 Text(
                                   CategoriesDatabase.categories[index].title,
                                   style: TextStyle(
-                                    color: CategoriesDatabase
-                                        .categories[index].color,
+                                    color: Color(CategoriesDatabase
+                                        .categories[index].color),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                   ),

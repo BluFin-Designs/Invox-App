@@ -20,7 +20,9 @@ class _AddWalletPopupState extends State<AddWalletPopup> {
   _addNewWallet(BuildContext context, Wallet wallet) {
     WalletRepository catRepo = WalletRepository();
     try {
-      catRepo.addWallets(wallet).then((value) => Navigator.of(context).pop());
+      catRepo.addWallets(wallet).then(
+            (value) => Navigator.of(context).pop(true),
+          );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -210,7 +212,7 @@ class _AddWalletPopupState extends State<AddWalletPopup> {
                       Wallet(
                         title: _newWalletTitle,
                         amount: _newWalletAmount,
-                        color: _newWalletColor,
+                        color: _newWalletColor.value,
                         Uid: uuid.v1(),
                       ));
                 } else {

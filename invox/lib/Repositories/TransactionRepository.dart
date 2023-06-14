@@ -7,9 +7,14 @@ import '../Models/WalletModel.dart';
 import '../utils/Transaction_Database.dart';
 
 class TransactionRepository {
+  var mainBox = Hive.box("database");
+
   Future<List<TransactionModel>> getTransactions() async {
+    List<TransactionModel> allTransactions =
+        mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
+    return allTransactions;
     // var mainBox = await Hive.openBox('mainBox');
-    return TransactionDatabase.transactions;
+    // return TransactionDatabase.transactions;
   }
 
   static Future<bool> deleteTransaction(String uui) async {
@@ -27,7 +32,7 @@ class TransactionRepository {
     String txnType,
     Wallet wallet,
     TransactionCategoryModel category,
-    IconData icon,
+    int icon,
   ) async {
     TransactionModel tempTxn = TransactionModel(
       uid: uui,
@@ -47,7 +52,7 @@ class TransactionRepository {
     return tempTxn;
   }
 
-  Future<TransactionModel> addTransaction(
+  Future<bool> addTransaction(
     String uui,
     String title,
     String description,
@@ -56,7 +61,7 @@ class TransactionRepository {
     String txnType,
     Wallet wallet,
     TransactionCategoryModel category,
-    IconData icon,
+    int icon,
   ) async {
     // var mainBox = await Hive.openBox('mainBox');
     // var transactions = await mainBox.get("transactions");
@@ -74,8 +79,16 @@ class TransactionRepository {
       icons: icon,
     );
 
-    TransactionDatabase.transactions.add(tempTxn);
-    return tempTxn;
+    try {
+      // WalletsDatabase.wallets.add(wallet);
+      List<TransactionModel> allTransactions =
+          mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
+      allTransactions.add(tempTxn);
+      mainBox.put("transactions", allTransactions);
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
 
     // transactions.add(tempTxn);
 

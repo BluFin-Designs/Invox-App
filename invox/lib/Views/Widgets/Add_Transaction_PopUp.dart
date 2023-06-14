@@ -22,7 +22,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
   TextEditingController amtController = TextEditingController();
 
   String txnType = "";
-  IconData txnIcon = Icons.movie_creation;
+  int txnIcon = Icons.movie_creation.codePoint;
   DateTime _selectedDate = DateTime.now();
   late TransactionCategoryModel txnCategory;
   CategoryRepository categoryRepo = CategoryRepository();
@@ -30,7 +30,7 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
       categoryRepo.getCategories();
   late Wallet txnWallet;
   WalletRepository walletRepo = WalletRepository();
-  late List<Wallet> allWallets = walletRepo.getWallets();
+  late List<Wallet> allWallets = walletRepo.getWallets() as List<Wallet>;
 
   Future<void> _selectDate(BuildContext ctx) async {
     final DateTime? picked = await showDatePicker(
@@ -467,23 +467,23 @@ class _AddTransactionPopUpState extends State<AddTransactionPopUp> {
                         Icons.movie_creation,
                         color: Colors.white,
                       ),
-                      items: <IconData>[
-                        Icons.movie_creation,
-                        Icons.shopping_basket,
-                        Icons.import_contacts,
-                        Icons.label_important,
-                      ].map<DropdownMenuItem<IconData>>((IconData value) {
-                        return DropdownMenuItem<IconData>(
+                      items: <int>[
+                        Icons.movie_creation.codePoint,
+                        Icons.shopping_basket.codePoint,
+                        Icons.import_contacts.codePoint,
+                        Icons.label_important.codePoint,
+                      ].map<DropdownMenuItem<int>>((int value) {
+                        return DropdownMenuItem<int>(
                           value: value,
                           child: Icon(
-                            value,
+                            IconData(value, fontFamily: 'MaterialIcons'),
                             color: Colors.white,
                           ),
                         );
                       }).toList(),
                       onChanged: (Object? value) {
                         setState(() {
-                          txnIcon = value as IconData;
+                          txnIcon = value as int;
                         });
                       },
                     ),

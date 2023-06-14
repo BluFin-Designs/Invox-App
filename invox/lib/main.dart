@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:invox/Models/CategoryModel.dart';
+import 'package:invox/Models/Transaction_Model.dart';
+import 'package:invox/Models/WalletModel.dart';
 import 'package:invox/blocs/cubits/auth_cubit.dart';
 
 import '../Views/Screens/Categories_Screen.dart';
@@ -16,12 +19,26 @@ import '../Views/Screens/MyWallets_Screen.dart';
 import '../Views/Screens/Preferences_Screen.dart';
 import '../Views/Screens/Budget_Screen.dart';
 import '../Views/Screens/SavingGoals_Screen.dart';
+import 'Repositories/WalletRepository.dart';
 import 'blocs/transactions_bloc.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // initialise Firebase
   await Hive.initFlutter(); // initialise Hive DataBase
+
+  //Register Adapter
+  Hive.registerAdapter(WalletAdapter());
+  Hive.registerAdapter(TransactionModelAdapter());
+  Hive.registerAdapter(TransactionCategoryModelAdapter());
+  Hive.registerAdapter(TransactionTypeAdapter());
+
+  //Open HiveBox
+  await Hive.openBox("database");
+
+  // adding default wallets.
+  WalletRepository();
+
   runApp(const MyApp());
 }
 
@@ -33,7 +50,6 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: MaterialApp(
-        title: 'Flutter Demo',
         theme: ThemeData(
           primaryColor: const Color(0xFF7286D3),
           colorScheme: ColorScheme.fromSwatch().copyWith(
