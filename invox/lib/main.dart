@@ -6,6 +6,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:invox/Models/CategoryModel.dart';
 import 'package:invox/Models/Transaction_Model.dart';
 import 'package:invox/Models/WalletModel.dart';
+import 'package:invox/Repositories/CategoryRepository.dart';
+import 'package:invox/blocs/categories_bloc.dart';
 import 'package:invox/blocs/cubits/auth_cubit.dart';
 
 import '../Views/Screens/Categories_Screen.dart';
@@ -38,6 +40,7 @@ main() async {
 
   // adding default wallets.
   WalletRepository();
+  CategoryRepository();
 
   runApp(const MyApp());
 }
@@ -78,7 +81,10 @@ class MyApp extends StatelessWidget {
           Statistics.routeName: (ctx) => const Statistics(),
           MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
           Preferences.routeName: (ctx) => const Preferences(),
-          CategoriesPage.routeName: (ctx) => const CategoriesPage(),
+          CategoriesPage.routeName: (ctx) => BlocProvider(
+                create: (context) => CategoriesBloc(),
+                child: const CategoriesPage(),
+              ),
           BudgetPage.routeName: (ctx) => const BudgetPage(),
           SavingGoals.routeName: (ctx) => const SavingGoals(),
           GoalDetailsPage.routeName: (ctx) => const GoalDetailsPage(),
