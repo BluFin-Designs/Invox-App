@@ -26,6 +26,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var txninstance = TransactionRepository();
   @override
   void initState() {
     UserRepository();
@@ -79,6 +80,7 @@ class _HomePageState extends State<HomePage> {
           );
         } else if (state is TransactionsLoadedState) {
           List<TransactionModel> allTxns = state.allTransactions;
+          // print(allTxns);
 
           return Padding(
             padding: const EdgeInsets.symmetric(
@@ -116,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                                 confirmDismiss: (direction) async {
                                   if (direction ==
                                       DismissDirection.endToStart) {
-                                    final bool res = await showDialog(
+                                    showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
@@ -143,22 +145,24 @@ class _HomePageState extends State<HomePage> {
                                                 onPressed: () {
                                                   // TODO: Delete the item from DB etc..
                                                   setState(() {
-                                                    TransactionRepository
-                                                            .deleteTransaction(
-                                                                allTxns[index]
-                                                                        .uid
-                                                                    as String)
-                                                        .then(
-                                                      (value) => Navigator.pop(
-                                                          context),
-                                                    );
+                                                    txninstance
+                                                        .deleteTransaction(
+                                                            allTxns[index].uid
+                                                                as String)
+                                                        .then((value) {
+                                                      Navigator.pop(context);
+                                                      BlocProvider.of<
+                                                                  TransactionsBloc>(
+                                                              context)
+                                                          .add(
+                                                              TransactionLoadingEvent());
+                                                    });
                                                   });
                                                 },
                                               ),
                                             ],
                                           );
                                         });
-                                    return res;
                                   } else {
                                     showDialog(
                                       barrierDismissible: false,
@@ -177,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                                   .size
                                                   .width -
                                               40,
-                                          height: 530,
+                                          height: 600,
                                           child: SingleChildScrollView(
                                             child: Column(
                                               children: <Widget>[
@@ -201,15 +205,16 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ),
                                       ),
-                                    ).then((value) =>
-                                        BlocProvider.of<TransactionsBloc>(
-                                                context)
-                                            .add(TransactionLoadingEvent()));
+                                    ).then((value) => setState(() {
+                                          BlocProvider.of<TransactionsBloc>(
+                                                  context)
+                                              .add(TransactionLoadingEvent());
+                                        }));
                                   }
                                 },
                                 background: slideRightBackground(),
                                 secondaryBackground: slideLeftBackground(),
-                                key: Key(allTxns[index].title as String),
+                                key: Key(allTxns[index].title),
                                 child: TransactionCard(txn: allTxns[index]));
                           },
                           itemCount: allTxns.length,
@@ -250,7 +255,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (_) {
                       return BlocProvider(
                         create: (context) => TransactionsBloc(),
-                        child: Transaction(),
+                        child: const Transaction(),
                       );
                     },
                   ),

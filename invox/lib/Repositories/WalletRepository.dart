@@ -30,6 +30,31 @@ class WalletRepository {
     }
   }
 
+  Future<bool> editWallet(
+    String uui,
+    String title,
+    double amount,
+    int color,
+  ) async {
+    Wallet tempWallet = Wallet(
+      Uid: uui,
+      title: title,
+      amount: amount,
+      color: color,
+    );
+    try {
+      // WalletsDatabase.wallets.add(wallet);
+      List<Wallet> allWallets = mainBox.get("wallets")?.cast<Wallet>();
+      final index =
+          allWallets.indexWhere((element) => element.Uid == tempWallet.Uid);
+      allWallets[index] = tempWallet;
+      mainBox.put("wallets", allWallets);
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<bool> deleteWallet(String uuid) async {
     try {
       List<Wallet> allWallets = mainBox.get("wallets")?.cast<Wallet>();

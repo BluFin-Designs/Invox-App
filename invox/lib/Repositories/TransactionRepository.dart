@@ -12,18 +12,27 @@ class TransactionRepository {
   Future<List<TransactionModel>> getTransactions() async {
     List<TransactionModel> allTransactions =
         mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
+    // print(allTransactions);
     return allTransactions;
     // var mainBox = await Hive.openBox('mainBox');
     // return TransactionDatabase.transactions;
   }
 
-  static Future<bool> deleteTransaction(String uui) async {
-    TransactionDatabase.transactions
-        .removeWhere((transactions) => transactions.uid == uui);
-    return true;
+  Future<bool> deleteTransaction(String uui) async {
+    /*TransactionDatabase.transactions
+        .removeWhere((transactions) => transactions.uid == uui);*/
+    try {
+      List<TransactionModel> allTransactions =
+          mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
+      allTransactions.removeWhere((transactions) => transactions.uid == uui);
+      mainBox.put("transactions", allTransactions);
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
-  Future<TransactionModel> editTransaction(
+  Future<bool> editTransaction(
     String uui,
     String title,
     String description,
@@ -40,16 +49,30 @@ class TransactionRepository {
       description: description,
       date: date,
       amount: amount,
+      wallet: wallet,
       txnType: (txnType == "Credit")
           ? TransactionType.CREDIT
           : TransactionType.DEBIT,
       category: category,
       icons: icon,
     );
-    final index = TransactionDatabase.transactions
+    /*final index = TransactionDatabase.transactions
         .indexWhere((element) => element.uid == tempTxn.uid);
     TransactionDatabase.transactions[index] = tempTxn;
-    return tempTxn;
+    return tempTxn;*/
+    try {
+      // WalletsDatabase.wallets.add(wallet);
+      List<TransactionModel> allTransactions =
+          mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
+      final index =
+          allTransactions.indexWhere((element) => element.uid == tempTxn.uid);
+      allTransactions[index] = tempTxn;
+      //print(allTransactions);
+      mainBox.put("transactions", allTransactions);
+      return true;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   Future<bool> addTransaction(
@@ -75,6 +98,7 @@ class TransactionRepository {
       txnType: (txnType == "Credit")
           ? TransactionType.CREDIT
           : TransactionType.DEBIT,
+      wallet: wallet,
       category: category,
       icons: icon,
     );

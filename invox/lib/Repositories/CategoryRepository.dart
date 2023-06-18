@@ -38,8 +38,10 @@ class CategoryRepository {
   //Delete Category :-
   Future<bool> deleteCategory(String uuid) async {
     try {
-      CategoriesDatabase.categories
-          .removeWhere((category) => category.Uid == uuid);
+      List<TransactionCategoryModel> allCategories =
+          mainBox.get("categories")?.cast<TransactionCategoryModel>();
+      allCategories.removeWhere((category) => category.Uid == uuid);
+      mainBox.put("transactions", allCategories);
       return true;
     } catch (e) {
       throw Exception(e);

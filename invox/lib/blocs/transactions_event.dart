@@ -18,3 +18,8 @@ class TransactionLoadedEvent extends TransactionsEvent {
   @override
   List<Object> get props => [];
 }
+
+class TransactionRefreshEvent extends TransactionsEvent {
+  @override
+  List<Object> get props => [];
+}

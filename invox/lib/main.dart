@@ -38,6 +38,9 @@ main() async {
   //Open HiveBox
   await Hive.openBox("database");
 
+  //var mainBox = Hive.box("database");
+  //mainBox.clear();
+
   // adding default wallets.
   WalletRepository();
   CategoryRepository();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:invox/Models/WalletModel.dart';
-import '../../utils/Wallets_Database.dart';
 
 class Wallet_Slider extends StatefulWidget {
   const Wallet_Slider({
@@ -14,6 +13,10 @@ class Wallet_Slider extends StatefulWidget {
   @override
   State<Wallet_Slider> createState() => _Wallet_SliderState();
 }
+
+enum menuOptions { EDIT, DELETE }
+
+menuOptions selectedOption = menuOptions.EDIT;
 
 class _Wallet_SliderState extends State<Wallet_Slider> {
   int _currState = 0;
@@ -112,6 +115,46 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                                     : 'assets/images/credit_card.png',
                               ),
                               height: 100.0,
+                            ),
+                          ),
+                          Positioned(
+                            right: 10,
+                            top: 10,
+                            child: Container(
+                              height: 42,
+                              width: 42,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(255, 255, 255, 0.5),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: SizedBox(
+                                height: 50,
+                                width: 50,
+                                child: PopupMenuButton(
+                                  icon: Icon(
+                                    Icons.more_vert,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  itemBuilder: (BuildContext ctx) => [
+                                    PopupMenuItem(
+                                      child: Text(
+                                        "Edit",
+                                        style: TextStyle(
+                                            color:
+                                                Theme.of(context).primaryColor),
+                                      ),
+                                      value: menuOptions.EDIT,
+                                    ),
+                                    PopupMenuItem(
+                                      child: Text("Delete",
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .primaryColor)),
+                                      value: menuOptions.DELETE,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           )
                         ],

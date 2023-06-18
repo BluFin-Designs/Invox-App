@@ -3,7 +3,9 @@ import 'package:invox/Models/Transaction_Model.dart';
 
 import '../../Repositories/TransactionRepository.dart';
 import '../../Models/CategoryModel.dart';
+import '../../Repositories/CategoryRepository.dart';
 import '../../Models/WalletModel.dart';
+import '../../Repositories/WalletRepository.dart';
 
 class EditTransactionPopUp extends StatefulWidget {
   //Todo:accept transaction model to be edited
@@ -23,7 +25,12 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
   int txnIcon = Icons.movie_creation.codePoint;
   DateTime _selectedDate = DateTime.now();
   late TransactionCategoryModel category;
-  late Wallet wallet = Wallet(title: "Cash", Uid: "23", color: 0xff7286D3);
+  CategoryRepository categoryRepo = CategoryRepository();
+  late List<TransactionCategoryModel> allCategories =
+      categoryRepo.getCategories();
+  late Wallet wallet;
+  WalletRepository walletRepo = WalletRepository();
+  late List<Wallet> allWallets = walletRepo.getWallets() as List<Wallet>;
   String uuid = "";
 
   Future<void> _selectDate(BuildContext ctx) async {
@@ -48,6 +55,7 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
     txnType = widget.txn.txnType.toString();
     _selectedDate = widget.txn.date!;
     txnIcon = widget.txn.icons!;
+    wallet = widget.txn.wallet!;
     category = widget.txn.category!;
     uuid = widget.txn.uid!;
     //wallet=widget.txn.wallet;
@@ -173,6 +181,70 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              child: SizedBox(
+                child: DropdownButtonFormField(
+                  isDense: true,
+                  icon: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: Colors.white,
+                  ),
+                  dropdownColor: const Color(0xFFFF7B54),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                  ),
+                  decoration: InputDecoration(
+                    hintStyle: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    focusColor: Colors.white,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                        style: BorderStyle.solid,
+                      ),
+                    ),
+                    fillColor: Color(0xff8EA7E9),
+                    filled: true,
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                  hint: const Text(
+                    "Wallet",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  items:
+                      allWallets.map<DropdownMenuItem<Wallet>>((Wallet value) {
+                    return DropdownMenuItem<Wallet>(
+                      value: value,
+                      child: Text(
+                        value.title,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (Object? value) {
+                    wallet = value as Wallet;
+                  },
+                ),
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -225,20 +297,20 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
                           fontSize: 16,
                         ),
                       ),
-                      items: <String>[
-                        "Essential Items",
-                        "Entertainment",
-                        "Others",
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
+                      items: allCategories
+                          .map<DropdownMenuItem<TransactionCategoryModel>>(
+                              (TransactionCategoryModel value) {
+                        return DropdownMenuItem<TransactionCategoryModel>(
                           value: value,
                           child: Text(
-                            value,
+                            value.title,
                             style: const TextStyle(fontSize: 16),
                           ),
                         );
                       }).toList(),
-                      onChanged: (Object? value) {},
+                      onChanged: (Object? value) {
+                        category = value as TransactionCategoryModel;
+                      },
                     ),
                   ),
                 ),

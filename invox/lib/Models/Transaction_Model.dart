@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import './CategoryModel.dart';
+import './WalletModel.dart';
 
 part 'Transaction_Model.g.dart';
 
@@ -19,7 +20,7 @@ class TransactionModel {
   String? uid;
 
   @HiveField(1)
-  String? title;
+  String title;
 
   @HiveField(2)
   String? description;
@@ -34,19 +35,23 @@ class TransactionModel {
   DateTime? date;
 
   @HiveField(6)
-  TransactionCategoryModel? category;
+  TransactionCategoryModel category;
 
   @HiveField(7)
   TransactionType? txnType;
 
+  @HiveField(8)
+  Wallet? wallet;
+
   TransactionModel({
     this.uid,
-    this.title,
+    required this.title,
     this.description,
     this.amount,
     required this.icons,
     this.date,
-    this.category,
+    required this.category,
     this.txnType,
+    this.wallet,
   });
 }

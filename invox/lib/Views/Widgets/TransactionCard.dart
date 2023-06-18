@@ -9,7 +9,6 @@ class TransactionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double? _amt = (txn.amount != null) ? txn.amount : 0.00;
-
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
