@@ -16,18 +16,18 @@ class _EditWalletPopupState extends State<EditWalletPopup> {
 
   var _name = "";
   double _amount = 0;
-  Color _color = Colors.white;
+  int _color = Colors.white.value;
   _editWallet(String uui, String title, double amount, int color) {
     WalletRepository catRepo = WalletRepository();
     try {
       catRepo.editWallet(uui, title, amount, color).then(
-            (value) => Navigator.of(context).pop(true),
+            (value) => Navigator.pop(context),
           );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-            "Failed to add new Wallet!",
+            "Failed to edit Wallet!",
           ),
           backgroundColor: Colors.redAccent,
         ),
@@ -38,7 +38,8 @@ class _EditWalletPopupState extends State<EditWalletPopup> {
   void initState() {
     _name = widget.wallet.title;
     _amount = widget.wallet.amount;
-    _color = widget.wallet.color as Color;
+    _color = widget.wallet.color;
+    uuid = widget.wallet.Uid!;
     //wallet=widget.txn.wallet;
     super.initState();
   }
@@ -125,9 +126,11 @@ class _EditWalletPopupState extends State<EditWalletPopup> {
                   filled: true,
                 ),
                 onChanged: (value) {
-                  _amount = double.parse(
-                    value.toString(),
-                  );
+                  setState(() {
+                    _amount = double.parse(
+                      value.toString(),
+                    );
+                  });
                 },
               ),
             ),
@@ -178,26 +181,28 @@ class _EditWalletPopupState extends State<EditWalletPopup> {
                       fontSize: 16,
                     ),
                   ),
-                  items: <Color>[
-                    Colors.deepOrangeAccent,
-                    Colors.blueAccent,
-                    Colors.greenAccent,
-                    Colors.purpleAccent,
-                  ].map<DropdownMenuItem<Color>>((Color value) {
-                    return DropdownMenuItem<Color>(
+                  items: <int>[
+                    Colors.deepOrangeAccent.value,
+                    Colors.blueAccent.value,
+                    Colors.greenAccent.value,
+                    Colors.purpleAccent.value,
+                  ].map<DropdownMenuItem<int>>((int value) {
+                    return DropdownMenuItem<int>(
                       value: value,
                       child: Container(
                         height: 30,
                         width: 50,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: value,
+                          color: Color(value),
                         ),
                       ),
                     );
                   }).toList(),
-                  onChanged: (Color? value) {
-                    _color = value!;
+                  onChanged: (Object? value) {
+                    setState(() {
+                      _color = value! as int;
+                    });
                   },
                 ),
               ),
@@ -212,21 +217,12 @@ class _EditWalletPopupState extends State<EditWalletPopup> {
                     borderRadius: BorderRadius.circular(100),
                   )),
               onPressed: () {
-                if (_amount != 0.0 && _name != null) {
-                  _editWallet(
-                    uuid,
-                    _name,
-                    _amount,
-                    _color.value,
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Please Enter the Valid Values!"),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
+                _editWallet(
+                  uuid,
+                  _name,
+                  _amount,
+                  _color,
+                );
               },
               child: const Padding(
                 padding: EdgeInsets.symmetric(

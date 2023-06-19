@@ -7,6 +7,7 @@ import '../Widgets/Total_Balance_Card.dart';
 import '../Widgets/WalletSlider.dart';
 import '../Widgets/Add_Wallet_PopUp.dart';
 import '../../blocs/wallet_bloc.dart';
+import '../../Repositories/WalletRepository.dart';
 
 class MyWalletsScreen extends StatefulWidget {
   static const routeName = '/my_wallets';
@@ -17,8 +18,16 @@ class MyWalletsScreen extends StatefulWidget {
 }
 
 class _MyWalletsScreenState extends State<MyWalletsScreen> {
-  void _refreshPage() {
-    setState(() {});
+  void refreshPage() {
+    setState(() {
+      BlocProvider.of<WalletBloc>(context).add(WalletLoadingEvent());
+    });
+  }
+
+  void delete(String uid) {
+    setState(() {
+      WalletRepository().deleteWallet(uid);
+    });
   }
   /*WalletRepository walletRepo = WalletRepository();
   late List<Wallet> allWallets = walletRepo.getWallets();*/
@@ -134,7 +143,14 @@ class _MyWalletsScreenState extends State<MyWalletsScreen> {
                       ),
                     ),
                   ),
-                  Wallet_Slider(wallets: allWallets),
+                  Wallet_Slider(
+                    wallets: allWallets,
+                    refresh: () => setState(() {
+                      BlocProvider.of<WalletBloc>(context)
+                          .add(WalletLoadingEvent());
+                    }),
+                    deleteFunction: delete,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -198,7 +214,7 @@ class _MyWalletsScreenState extends State<MyWalletsScreen> {
                           ),
                         ),
                       ).then(
-                        (value) => _refreshPage(),
+                        (value) => refreshPage(),
                       );
                     },
                   )

@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:invox/Models/WalletModel.dart';
+import 'Edit_Wallet_PopPup.dart';
 
 class Wallet_Slider extends StatefulWidget {
-  const Wallet_Slider({
-    Key? key,
-    required this.wallets,
-  }) : super(key: key);
-
+  Wallet_Slider(
+      {Key? key,
+      required this.wallets,
+      required this.refresh,
+      required this.deleteFunction})
+      : super(key: key);
   final List<Wallet> wallets;
+  Function refresh;
+  Function(String) deleteFunction;
 
   @override
   State<Wallet_Slider> createState() => _Wallet_SliderState();
@@ -19,6 +23,7 @@ enum menuOptions { EDIT, DELETE }
 menuOptions selectedOption = menuOptions.EDIT;
 
 class _Wallet_SliderState extends State<Wallet_Slider> {
+  var _popupMenuItemIndex = 0;
   int _currState = 0;
   @override
   Widget build(BuildContext context) {
@@ -131,6 +136,9 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                                 height: 50,
                                 width: 50,
                                 child: PopupMenuButton(
+                                  onSelected: (value) {
+                                    _onMenuItemSelected(value as int);
+                                  },
                                   icon: Icon(
                                     Icons.more_vert,
                                     color: Theme.of(context).primaryColor,
@@ -143,14 +151,14 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
                                             color:
                                                 Theme.of(context).primaryColor),
                                       ),
-                                      value: menuOptions.EDIT,
+                                      value: menuOptions.EDIT.index,
                                     ),
                                     PopupMenuItem(
                                       child: Text("Delete",
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColor)),
-                                      value: menuOptions.DELETE,
+                                      value: menuOptions.DELETE.index,
                                     ),
                                   ],
                                 ),
@@ -195,5 +203,50 @@ class _Wallet_SliderState extends State<Wallet_Slider> {
         )
       ],
     );
+  }
+
+  _onMenuItemSelected(int value) {
+    setState(() {
+      _popupMenuItemIndex = value;
+    });
+
+    if (value == menuOptions.EDIT.index) {
+      showDialog(
+          barrierDismissible: false,
+          useSafeArea: true,
+          context: context,
+          builder: (context) => Dialog(
+                insetPadding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 40,
+                  height: 370,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "Edit Wallet",
+                          style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        EditWalletPopup(wallet: widget.wallets[_currState])
+                      ],
+                    ),
+                  ),
+                ),
+              )).then((value) => widget.refresh);
+    } else if (value == menuOptions.DELETE.index) {
+      widget.deleteFunction(widget.wallets[_currState].Uid);
+    }
   }
 }
