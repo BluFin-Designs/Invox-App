@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 14,
                   ),
-                  HomePageGraph(),
+                  HomePageGraph(transactions: allTxns),
                   const SizedBox(
                     height: 20,
                   ),
