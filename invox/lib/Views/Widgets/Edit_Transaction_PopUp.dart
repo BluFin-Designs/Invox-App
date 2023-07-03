@@ -49,14 +49,14 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
 
   @override
   void initState() {
-    titleController.text = widget.txn.title!;
+    titleController.text = widget.txn.title;
     descController.text = widget.txn.description!;
     amtController.text = widget.txn.amount!.toString();
     txnType = widget.txn.txnType.toString();
     _selectedDate = widget.txn.date!;
-    txnIcon = widget.txn.icons!;
+    txnIcon = widget.txn.icons;
     wallet = widget.txn.wallet!;
-    category = widget.txn.category!;
+    category = widget.txn.category;
     uuid = widget.txn.uid!;
     //wallet=widget.txn.wallet;
     super.initState();

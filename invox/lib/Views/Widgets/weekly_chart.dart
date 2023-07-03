@@ -22,9 +22,36 @@ class WeeklyChart extends StatelessWidget {
     "Sunday"
   ];
 
+  double maxValue = 0;
+  List<double> alltotals = [];
+
+  void _getAllTotals() {
+    DateTime today = DateTime.now();
+
+    for (int i = 0; i < 7; i++) {
+      double totalValue = 0;
+      if (transactions[_days[today.subtract(Duration(days: i)).weekday]] !=
+          null) {
+        for (TransactionModel element in transactions[
+            _days[today.subtract(Duration(days: i)).weekday]]!) {
+          totalValue += element.amount!;
+        }
+      } else {
+        totalValue = 0;
+      }
+
+      if (totalValue > maxValue) {
+        maxValue = totalValue;
+        alltotals.add(totalValue);
+      } else {
+        alltotals.add(totalValue);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    DateTime today = DateTime.now();
+    _getAllTotals();
     return AspectRatio(
       aspectRatio: 2,
       child: Container(
@@ -45,10 +72,7 @@ class WeeklyChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       width: 20,
-                      toY: transactions[_days[
-                              today.subtract(const Duration(days: 6)).weekday]]
-                          ?.length
-                          .toDouble() as double,
+                      toY: alltotals[6],
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.zero,
@@ -64,10 +88,7 @@ class WeeklyChart extends StatelessWidget {
                   x: 1,
                   barRods: [
                     BarChartRodData(
-                      toY: transactions[_days[
-                              today.subtract(const Duration(days: 5)).weekday]]
-                          ?.length
-                          .toDouble() as double,
+                      toY: alltotals[5],
                       width: 20,
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
@@ -85,10 +106,7 @@ class WeeklyChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       width: 20,
-                      toY: transactions[_days[
-                              today.subtract(const Duration(days: 4)).weekday]]
-                          ?.length
-                          .toDouble() as double,
+                      toY: alltotals[4],
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.zero,
@@ -105,10 +123,7 @@ class WeeklyChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       width: 20,
-                      toY: transactions[_days[
-                              today.subtract(const Duration(days: 3)).weekday]]
-                          ?.length
-                          .toDouble() as double,
+                      toY: alltotals[3],
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.zero,
@@ -125,10 +140,7 @@ class WeeklyChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       width: 20,
-                      toY: transactions[_days[
-                              today.subtract(const Duration(days: 2)).weekday]]
-                          ?.length
-                          .toDouble() as double,
+                      toY: alltotals[2],
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.zero,
@@ -145,10 +157,7 @@ class WeeklyChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       width: 20,
-                      toY: transactions[_days[
-                              today.subtract(const Duration(days: 1)).weekday]]
-                          ?.length
-                          .toDouble() as double,
+                      toY: alltotals[1],
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.zero,
@@ -165,8 +174,7 @@ class WeeklyChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       width: 20,
-                      toY: transactions[_days[today.weekday]]?.length.toDouble()
-                          as double,
+                      toY: alltotals[0],
                       gradient: _barsGradient,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.zero,
@@ -181,10 +189,11 @@ class WeeklyChart extends StatelessWidget {
               ],
               gridData: FlGridData(
                 drawHorizontalLine: true,
+                horizontalInterval: maxValue / 5,
                 drawVerticalLine: false,
               ),
               alignment: BarChartAlignment.spaceAround,
-              maxY: 20,
+              maxY: maxValue + (maxValue * 0.5),
               barTouchData: BarTouchData(
                 enabled: false,
                 touchTooltipData: BarTouchTooltipData(
@@ -198,7 +207,7 @@ class WeeklyChart extends StatelessWidget {
                     int rodIndex,
                   ) {
                     return BarTooltipItem(
-                      rod.toY.round().toString(),
+                      (rod.toY != 0) ? rod.toY.round().toString() : '',
                       const TextStyle(
                         color: Color(0xFF7286D3),
                         fontWeight: FontWeight.bold,

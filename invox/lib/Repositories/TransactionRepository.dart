@@ -1,10 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../Models/Transaction_Model.dart';
 import '../Models/CategoryModel.dart';
+import '../Models/Transaction_Model.dart';
 import '../Models/WalletModel.dart';
-import '../utils/Transaction_Database.dart';
 
 class TransactionRepository {
   var mainBox = Hive.box("database");
@@ -12,6 +10,7 @@ class TransactionRepository {
   Future<List<TransactionModel>> getTransactions() async {
     List<TransactionModel> allTransactions =
         mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
+    allTransactions.sort((a, b) => b.date!.compareTo(a.date as DateTime));
     // print(allTransactions);
     return allTransactions;
     // var mainBox = await Hive.openBox('mainBox');
