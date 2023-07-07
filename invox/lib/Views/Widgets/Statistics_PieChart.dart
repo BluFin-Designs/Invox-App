@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
+import '../Screens/Statistics_Screen.dart';
 
 class StatisticsPieChart extends StatelessWidget {
-  List stats;
+  Map<String, StatisticsModel> stats;
 
   StatisticsPieChart({
     super.key,
@@ -11,9 +13,9 @@ class StatisticsPieChart extends StatelessWidget {
 
   double getTotal() {
     double total = 0;
-    for (int i = 0; i < stats.length; i++) {
-      total = total + stats[i]["value"];
-    }
+    stats.forEach((key, value) {
+      total += value.amount;
+    });
     return total;
   }
 
@@ -37,20 +39,19 @@ class StatisticsPieChart extends StatelessWidget {
 
   List<PieChartSectionData> showingSections() {
     List<PieChartSectionData> data = [];
-    for (var element in stats) {
+    stats.forEach((key, value) {
       data.add(PieChartSectionData(
-          color: element["color"],
-          value: element["value"],
+          color: Color(value.color),
+          value: value.amount,
           showTitle: true,
-          title:
-              ('${((element["value"] / getTotal()) * 100).toStringAsFixed(0)}%'),
+          title: ('${((value.amount / getTotal()) * 100).toStringAsFixed(0)}%'),
           titleStyle: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 16.0,
               fontStyle: FontStyle.italic),
           radius: 50.0));
-    }
+    });
     return data;
   }
 }

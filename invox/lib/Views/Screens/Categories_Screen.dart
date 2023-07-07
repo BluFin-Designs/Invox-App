@@ -72,7 +72,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
             return Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 14.0,
-                horizontal: 14,
+                horizontal: 14.0,
               ),
               child: SingleChildScrollView(
                 child: Column(

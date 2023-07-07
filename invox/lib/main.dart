@@ -1,8 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import "package:hive/hive.dart";
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:invox/Models/CategoryModel.dart';
 import 'package:invox/Models/Transaction_Model.dart';
 import 'package:invox/Models/WalletModel.dart';
@@ -10,17 +9,17 @@ import 'package:invox/Repositories/CategoryRepository.dart';
 import 'package:invox/blocs/categories_bloc.dart';
 import 'package:invox/blocs/cubits/auth_cubit.dart';
 
+import '../Views/Screens/Budget_Screen.dart';
 import '../Views/Screens/Categories_Screen.dart';
 import '../Views/Screens/GoalDetails_Screen.dart';
-import '../Views/Screens/LoginSignUp_Screen.dart';
 import '../Views/Screens/HomePage_Screen.dart';
-import '../Views/Screens/Profile_Screen.dart';
-import '../Views/Screens/Transaction_Screen.dart';
-import '../Views/Screens/Statistics_Screen.dart';
+import '../Views/Screens/LoginSignUp_Screen.dart';
 import '../Views/Screens/MyWallets_Screen.dart';
 import '../Views/Screens/Preferences_Screen.dart';
-import '../Views/Screens/Budget_Screen.dart';
+import '../Views/Screens/Profile_Screen.dart';
 import '../Views/Screens/SavingGoals_Screen.dart';
+import '../Views/Screens/Statistics_Screen.dart';
+import '../Views/Screens/Transaction_Screen.dart';
 import 'Repositories/WalletRepository.dart';
 import 'blocs/transactions_bloc.dart';
 
@@ -81,7 +80,13 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (ctx) => const HomePage(),
           Profile.routeName: (ctx) => const Profile(),
           Transaction.routeName: (ctx) => const Transaction(),
-          Statistics.routeName: (ctx) => const Statistics(),
+          Statistics.routeName: (ctx) => MultiBlocProvider(
+                providers: [
+                  BlocProvider(create: (context) => CategoriesBloc()),
+                  BlocProvider(create: (context) => TransactionsBloc()),
+                ],
+                child: const Statistics(),
+              ),
           MyWalletsScreen.routeName: (ctx) => MyWalletsScreen(),
           Preferences.routeName: (ctx) => const Preferences(),
           CategoriesPage.routeName: (ctx) => BlocProvider(

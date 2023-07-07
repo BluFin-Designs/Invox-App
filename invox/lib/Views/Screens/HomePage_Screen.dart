@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/wallet_bloc.dart';
 import './MyWallets_Screen.dart';
 import './Profile_Screen.dart';
 import './Statistics_Screen.dart';
 import './Transaction_Screen.dart';
+import '../../Models/Transaction_Model.dart';
+import '../../Repositories/TransactionRepository.dart';
+import '../../Repositories/UserRepository.dart';
+import '../../blocs/transactions_bloc.dart';
+import '../../blocs/wallet_bloc.dart';
 import '../Widgets/Add_Transaction_PopUp.dart';
 import '../Widgets/Edit_Transaction_PopUp.dart';
 import '../Widgets/HomePage_Graph.dart';
-import '../Widgets/TransactionCard.dart';
 import '../Widgets/MenuDrawer.dart';
-import '../../Repositories/UserRepository.dart';
-import '../../Repositories/TransactionRepository.dart';
-import '../../Models/Transaction_Model.dart';
-import '../../blocs/transactions_bloc.dart';
+import '../Widgets/TransactionCard.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home-page';
@@ -24,6 +24,8 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+late List<TransactionModel> allTxns;
 
 class _HomePageState extends State<HomePage> {
   var txninstance = TransactionRepository();
@@ -79,7 +81,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else if (state is TransactionsLoadedState) {
-          List<TransactionModel> allTxns = state.allTransactions;
+          allTxns = state.allTransactions;
           // print(allTxns);
 
           return Padding(
@@ -274,7 +276,11 @@ class _HomePageState extends State<HomePage> {
                 );
                 break;
               case 2:
-                Navigator.pushNamed(context, Statistics.routeName);
+                Navigator.pushNamed(
+                  context,
+                  Statistics.routeName,
+                  arguments: allTxns,
+                );
                 break;
               case 3:
                 Navigator.pushNamed(context, Profile.routeName);

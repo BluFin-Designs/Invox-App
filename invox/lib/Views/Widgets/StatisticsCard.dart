@@ -39,36 +39,41 @@ class StatisticsCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Container(
-                height: 40,
-                width: 130,
-                decoration: BoxDecoration(
-                    color: color, borderRadius: BorderRadius.circular(5)),
-                child: Center(
-                  child: Text(
-                    text,
-                    style: const TextStyle(
+              Expanded(
+                child: Container(
+                  height: 40,
+                  width: 130,
+                  decoration: BoxDecoration(
+                      color: color, borderRadius: BorderRadius.circular(5)),
+                  child: Center(
+                    child: Text(
+                      text,
+                      style: const TextStyle(
                         fontStyle: FontStyle.italic,
                         color: Colors.white,
-                        fontSize: 16),
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
               ),
               const SizedBox(
                 width: 10,
               ),
-              Expanded(
-                child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                      color: color, borderRadius: BorderRadius.circular(5)),
-                  child: Center(
+              Container(
+                height: 40,
+                decoration: BoxDecoration(
+                    color: color, borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Text(
                       "₹ ${amount?.toStringAsFixed(0)}",
                       style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.white,
-                          fontSize: 16),
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
