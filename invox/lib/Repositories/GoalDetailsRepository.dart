@@ -1,40 +1,44 @@
 import '../Models/GoalsTransactionModel.dart';
-import '../utils/SavingGoals_Database.dart';
 import '../Models/SavingGoalsModel.dart';
+import 'package:hive/hive.dart';
 
 class GoalDetailsRepository {
+  var mainBox = Hive.box("database");
   Future<SavingGoalsModel?> getGoalDetails(String uuid) async {
-    return SavingGoalsDatabase.goals
-        .firstWhere((element) => element.uid == uuid);
+    List<SavingGoalsModel> allGoals =
+        mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+    return allGoals.firstWhere((element) => element.uid == uuid);
   }
 
   Future<bool> addGoalDetails(
       GoalsTransactionModel goalTxn, String uuid) async {
     try {
-      SavingGoalsDatabase.goals
-          .firstWhere((element) => element.uid == uuid)
-          .txn
-          .add(goalTxn);
+      List<SavingGoalsModel> allGoals =
+          mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+      allGoals.firstWhere((element) => element.uid == uuid).txn.add(goalTxn);
+      mainBox.put("goals", allGoals);
       return true;
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  Future<GoalsTransactionModel> editGoalsTransaction(
+  Future<bool> editGoalsTransaction(
       GoalsTransactionModel goalTxn, String uuid) async {
     GoalsTransactionModel tempGoalsTxn = GoalsTransactionModel(
         uid: goalTxn.uid, amount: goalTxn.amount, date: goalTxn.date);
 
     try {
-      final index = SavingGoalsDatabase.goals
+      List<SavingGoalsModel> allGoals =
+          mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+      final index = allGoals
           .firstWhere((element) => element.uid == uuid)
           .txn
           .indexWhere((element) => element.uid == tempGoalsTxn.uid);
-      SavingGoalsDatabase.goals
-          .firstWhere((element) => element.uid == uuid)
-          .txn[index] = tempGoalsTxn;
-      return tempGoalsTxn;
+      allGoals.firstWhere((element) => element.uid == uuid).txn[index] =
+          tempGoalsTxn;
+      mainBox.put("goals", allGoals);
+      return true;
     } catch (e) {
       throw Exception(e);
     }
@@ -42,10 +46,13 @@ class GoalDetailsRepository {
 
   Future<bool> deleteGoalsTxn(String uui, String txnUuid) async {
     try {
-      SavingGoalsDatabase.goals
+      List<SavingGoalsModel> allGoals =
+          mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+      allGoals
           .firstWhere((element) => element.uid == uui)
           .txn
           .removeWhere((goalsTxn) => goalsTxn.uid == txnUuid);
+      mainBox.put("goals", allGoals);
       return true;
     } catch (e) {
       throw Exception(e);

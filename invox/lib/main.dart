@@ -21,6 +21,8 @@ import '../Views/Screens/Profile_Screen.dart';
 import '../Views/Screens/SavingGoals_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/Transaction_Screen.dart';
+import 'Models/GoalsTransactionModel.dart';
+import 'Models/SavingGoalsModel.dart';
 import 'Repositories/WalletRepository.dart';
 import 'blocs/goalDetails_bloc.dart';
 import 'blocs/transactions_bloc.dart';
@@ -35,6 +37,8 @@ main() async {
   Hive.registerAdapter(TransactionModelAdapter());
   Hive.registerAdapter(TransactionCategoryModelAdapter());
   Hive.registerAdapter(TransactionTypeAdapter());
+  Hive.registerAdapter(SavingGoalsModelAdapter());
+  Hive.registerAdapter(GoalsTransactionModelAdapter());
 
   //Open HiveBox
   await Hive.openBox("database");
