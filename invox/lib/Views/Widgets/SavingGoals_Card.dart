@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import '../../Models/SavingGoalsModel.dart';
 
 class SavingGoalsCard extends StatelessWidget {
-  final double value_1;
-  final double value_2;
-  final String itemName;
-  const SavingGoalsCard(
-      {Key? key,
-      required this.value_1,
-      required this.value_2,
-      required this.itemName})
-      : super(key: key);
+  final SavingGoalsModel goal;
+  const SavingGoalsCard({Key? key, required this.goal}) : super(key: key);
+  double getSavingTotal(SavingGoalsModel goal) {
+    double total = 0;
+    for (int i = 0; i < goal.txn.length; i++) {
+      total = total + goal.txn[i].amount;
+    }
+    return total;
+  }
 
   @override
   Widget build(BuildContext context) {
-    double _percentage = ((value_2 - value_1) / value_2) * 100;
+    double _percentage = (getSavingTotal(goal) / goal.requiredAmount) * 100;
     return Container(
       height: 180,
       width: 172,
@@ -65,7 +66,7 @@ class SavingGoalsCard extends StatelessWidget {
             ),
           ),
           Text(
-            itemName,
+            goal.title,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18.0,

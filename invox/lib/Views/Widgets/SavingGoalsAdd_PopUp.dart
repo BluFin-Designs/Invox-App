@@ -1,5 +1,7 @@
-import '../../utils/GoalsData.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import '../../Models/SavingGoalsModel.dart';
+import '../../Repositories/SavingGoalsRepository.dart';
 
 class SavingGoalsAddPopUp extends StatefulWidget {
   const SavingGoalsAddPopUp({Key? key}) : super(key: key);
@@ -9,8 +11,27 @@ class SavingGoalsAddPopUp extends StatefulWidget {
 }
 
 class _SavingGoalsAddPopUpState extends State<SavingGoalsAddPopUp> {
-  String? _newItemTitle;
-  double? _newItemAmount;
+  var uuid = Uuid();
+  late String _newItemTitle;
+  late double _newItemAmount;
+  _addNewGoal(BuildContext context, SavingGoalsModel goal) {
+    SavingGoalsRepository goalRepo = SavingGoalsRepository();
+    try {
+      goalRepo.addGoals(goal).then(
+            (value) => Navigator.of(context).pop(true),
+          );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "Failed to add new Goal!",
+          ),
+          backgroundColor: Colors.redAccent,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -112,11 +133,13 @@ class _SavingGoalsAddPopUpState extends State<SavingGoalsAddPopUp> {
                   )),
               onPressed: () {
                 if (_newItemAmount != 0.0 && _newItemTitle != null) {
-                  Data.details.add({
-                    "ItemName": _newItemTitle,
-                    "RequiredAmount": _newItemAmount,
-                  });
-                  Navigator.of(context).pop();
+                  _addNewGoal(
+                      context,
+                      SavingGoalsModel(
+                          uid: uuid.v1(),
+                          title: _newItemTitle,
+                          txn: [],
+                          requiredAmount: _newItemAmount));
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
