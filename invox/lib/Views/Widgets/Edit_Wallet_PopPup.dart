@@ -39,7 +39,7 @@ class _EditWalletPopupState extends State<EditWalletPopup> {
     _name = widget.wallet.title;
     _amount = widget.wallet.amount;
     _color = widget.wallet.color;
-    uuid = widget.wallet.Uid!;
+    uuid = widget.wallet.Uid;
     //wallet=widget.txn.wallet;
     super.initState();
   }

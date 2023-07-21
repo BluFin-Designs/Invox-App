@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class GoalsCard extends StatelessWidget {
-  GoalsCard({Key? key}) : super(key: key);
-  double amountSaved = 125000.00;
-  double requiredAmount = 280000.00;
+  GoalsCard(
+      {required this.savingAmount, required this.requiredAmount, Key? key})
+      : super(key: key);
+  final double savingAmount;
+  final double requiredAmount;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +36,7 @@ class GoalsCard extends StatelessWidget {
             height: 10.0,
           ),
           Text(
-            '₹ ${amountSaved.toStringAsFixed(0)}',
+            '₹ $savingAmount',
             style: const TextStyle(
               color: Colors.white,
               fontSize: 30.0,
@@ -64,7 +66,7 @@ class GoalsCard extends StatelessWidget {
                               barRods: [
                                 BarChartRodData(
                                   width: 10,
-                                  toY: amountSaved,
+                                  toY: savingAmount,
                                   gradient: _barsGradient,
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10.0)),
@@ -114,7 +116,7 @@ class GoalsCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                '₹ ${amountSaved.toStringAsFixed(0)}',
+                '₹ $savingAmount',
                 style: TextStyle(
                   fontSize: 17.0,
                   fontWeight: FontWeight.bold,
@@ -122,7 +124,7 @@ class GoalsCard extends StatelessWidget {
                 ),
               ),
               Text(
-                '/ ₹ ${requiredAmount.toStringAsFixed(0)}',
+                '/ ₹ $requiredAmount',
                 style: const TextStyle(
                   fontSize: 17.0,
                   fontWeight: FontWeight.bold,

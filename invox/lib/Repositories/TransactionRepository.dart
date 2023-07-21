@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../Models/Transaction_Model.dart';
 import '../Models/CategoryModel.dart';
 import '../Models/WalletModel.dart';
-import '../utils/Transaction_Database.dart';
 
 class TransactionRepository {
   var mainBox = Hive.box("database");
