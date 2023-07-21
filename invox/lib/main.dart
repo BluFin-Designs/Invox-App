@@ -8,6 +8,7 @@ import 'package:invox/Models/WalletModel.dart';
 import 'package:invox/Repositories/CategoryRepository.dart';
 import 'package:invox/blocs/categories_bloc.dart';
 import 'package:invox/blocs/cubits/auth_cubit.dart';
+import 'package:invox/blocs/goals_bloc.dart';
 
 import '../Views/Screens/Budget_Screen.dart';
 import '../Views/Screens/Categories_Screen.dart';
@@ -21,6 +22,7 @@ import '../Views/Screens/SavingGoals_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/Transaction_Screen.dart';
 import 'Repositories/WalletRepository.dart';
+import 'blocs/goalDetails_bloc.dart';
 import 'blocs/transactions_bloc.dart';
 
 main() async {
@@ -94,8 +96,12 @@ class MyApp extends StatelessWidget {
                 child: const CategoriesPage(),
               ),
           BudgetPage.routeName: (ctx) => const BudgetPage(),
-          SavingGoals.routeName: (ctx) => const SavingGoals(),
-          GoalDetailsPage.routeName: (ctx) => const GoalDetailsPage(),
+          SavingGoals.routeName: (ctx) => BlocProvider(
+                create: (context) => GoalsBloc(),
+                child: const SavingGoals(),
+              ),
+          GoalDetailsPage.routeName: (ctx) => BlocProvider(
+              create: (context) => GoalDetailsBloc(), child: GoalDetailsPage()),
         },
       ),
     );

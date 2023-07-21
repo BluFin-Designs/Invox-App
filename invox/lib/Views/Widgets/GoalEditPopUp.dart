@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
+
 import '../../Models/GoalsTransactionModel.dart';
 import '../../Repositories/GoalDetailsRepository.dart';
 
-class GoalAddPopUp extends StatefulWidget {
+class GoalEditPopUp extends StatefulWidget {
+  final GoalsTransactionModel goalTxn;
   final String uid;
-  const GoalAddPopUp({Key? key, required this.uid}) : super(key: key);
+  const GoalEditPopUp({
+    Key? key,required this.goalTxn,required this.uid
+  }) : super(key: key);
 
   @override
-  State<GoalAddPopUp> createState() => _GoalAddPopUpState();
+  State<GoalEditPopUp> createState() => _GoalEditPopUpState();
 }
 
-class _GoalAddPopUpState extends State<GoalAddPopUp> {
-  var uuid = Uuid();
+class _GoalEditPopUpState extends State<GoalEditPopUp> {
+  String uuid = "";
   DateTime _selectedDate = DateTime.now();
-  late double _newAmount;
-
+  double _amount = 0;
   Future<void> _selectDate(BuildContext ctx) async {
     final DateTime? picked = await showDatePicker(
       context: ctx,
@@ -28,6 +30,14 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
         _selectedDate = picked;
       });
     }
+  }
+
+  @override
+  void initState() {
+    _amount = widget.goalTxn.amount;
+    uuid = widget.goalTxn.uid;
+    _selectedDate = widget.goalTxn.date!;
+    super.initState();
   }
 
   @override
@@ -47,14 +57,13 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
                 vertical: 5,
               ),
               child: TextFormField(
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                 ),
                 decoration: InputDecoration(
-                  hintText: "Amount",
+                  hintText: _amount.toString(),
                   hintStyle: const TextStyle(
                     color: Colors.white,
                   ),
@@ -77,7 +86,7 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
                   filled: true,
                 ),
                 onChanged: (value) {
-                  _newAmount = double.parse(
+                  _amount = double.parse(
                     value.toString(),
                   );
                 },
@@ -87,12 +96,12 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
               height: 5,
             ),
             SizedBox(
-              width: 320,
+              width: 330,
               child: Row(
                 children: [
                   Container(
                     height: 50,
-                    width: 320,
+                    width: 330,
                     decoration: BoxDecoration(
                       color: Color(0xff8EA7E9),
                       borderRadius: BorderRadius.circular(10),
@@ -136,26 +145,10 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
                     borderRadius: BorderRadius.circular(100),
                   )),
               onPressed: () {
-                if (_newAmount != 0.0) {
-                  GoalDetailsRepository()
-                      .addGoalDetails(
-                          GoalsTransactionModel(
-                            uid: uuid.v1(),
-                            date: _selectedDate,
-                            amount: _newAmount,
-                          ),
-                          widget.uid)
-                      .then(
-                        (value) => Navigator.pop(context),
-                      );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Please Enter the Valid Values!"),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
+                GoalDetailsRepository().editGoalsTransaction(GoalsTransactionModel(
+                  uid: uuid, date: _selectedDate, amount: _amount,), widget.uid).then(
+                      (value) => Navigator.pop(context),
+                );
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -163,7 +156,7 @@ class _GoalAddPopUpState extends State<GoalAddPopUp> {
                   vertical: 10,
                 ),
                 child: Text(
-                  "Add",
+                  "Edit",
                   style: const TextStyle(
                     fontSize: 20,
                   ),
