@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PreferenceSwitchWidget extends StatefulWidget {
@@ -46,7 +45,7 @@ class _PreferenceSwitchWidgetState extends State<PreferenceSwitchWidget> {
                   fontSize: 16,
                 ),
               ),
-              Switch(
+              Switch.adaptive(
                 value: widget.switchValue,
                 onChanged: (bool val) {
                   setState(() {

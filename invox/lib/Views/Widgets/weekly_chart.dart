@@ -189,7 +189,7 @@ class WeeklyChart extends StatelessWidget {
               ],
               gridData: FlGridData(
                 drawHorizontalLine: true,
-                horizontalInterval: maxValue / 5,
+                horizontalInterval: maxValue != 0 ? maxValue / 5 : 20,
                 drawVerticalLine: false,
               ),
               alignment: BarChartAlignment.spaceAround,

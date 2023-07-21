@@ -25,10 +25,14 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-late List<TransactionModel> allTxns;
+enum Filter { CREDIT, DEBIT, ALL }
 
 class _HomePageState extends State<HomePage> {
-  var txninstance = TransactionRepository();
+  var txnInstance = TransactionRepository();
+  final _key = GlobalKey<ScaffoldState>();
+  late List<TransactionModel> allTxns;
+  Filter _txnFilter = Filter.ALL;
+
   @override
   void initState() {
     UserRepository();
@@ -36,7 +40,29 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  final _key = GlobalKey<ScaffoldState>();
+  List<TransactionModel> getTransactions(List<TransactionModel> txns) {
+    allTxns = [];
+    for (TransactionModel txn in txns) {
+      if (txn.txnType == TransactionType.CREDIT &&
+          _txnFilter == Filter.CREDIT) {
+        allTxns.add(txn);
+      } else if (txn.txnType == TransactionType.DEBIT &&
+          _txnFilter == Filter.DEBIT) {
+        allTxns.add(txn);
+      } else if (_txnFilter == Filter.ALL) {
+        allTxns.add(txn);
+      }
+    }
+    return allTxns;
+  }
+
+  void setFilter(Filter filter) {
+    _txnFilter = filter;
+  }
+
+  _refresh() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +96,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<TransactionsBloc, TransactionsState>(
           builder: (ctx, state) {
+        print("Called!");
         if (state is TransactionsInitialState) {
           BlocProvider.of<TransactionsBloc>(context)
               .add(TransactionLoadingEvent());
@@ -81,7 +108,7 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         } else if (state is TransactionsLoadedState) {
-          allTxns = state.allTransactions;
+          getTransactions(state.allTransactions);
           // print(allTxns);
 
           return Padding(
@@ -100,15 +127,28 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Recent Transactions",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
                       ),
-                      Icon(Icons.tune),
+                      IconButton(
+                        onPressed: () {
+                          showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (_) {
+                                return FilterOption(
+                                  filterGroup: _txnFilter,
+                                  handleFilter: setFilter,
+                                );
+                              }).then((value) => _refresh());
+                        },
+                        icon: const Icon(Icons.tune),
+                      ),
                     ],
                   ),
                   (allTxns.isNotEmpty)
@@ -147,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                                                 onPressed: () {
                                                   // TODO: Delete the item from DB etc..
                                                   setState(() {
-                                                    txninstance
+                                                    txnInstance
                                                         .deleteTransaction(
                                                             allTxns[index].uid
                                                                 as String)
@@ -418,6 +458,146 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FilterOption extends StatefulWidget {
+  Filter filterGroup;
+  Function handleFilter;
+
+  FilterOption({
+    required this.filterGroup,
+    required this.handleFilter,
+    super.key,
+  });
+
+  @override
+  State<FilterOption> createState() => _FilterOptionState();
+}
+
+class _FilterOptionState extends State<FilterOption> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 250,
+      margin: const EdgeInsets.all(16.0),
+      clipBehavior: Clip.antiAlias,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "All",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Radio(
+                      value: Filter.ALL,
+                      groupValue: widget.filterGroup,
+                      onChanged: (value) => setState(
+                        () {
+                          widget.filterGroup = value as Filter;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Debit",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Radio(
+                      value: Filter.DEBIT,
+                      groupValue: widget.filterGroup,
+                      onChanged: (value) => setState(
+                        () {
+                          widget.filterGroup = value as Filter;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Credit",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Radio(
+                      value: Filter.CREDIT,
+                      groupValue: widget.filterGroup,
+                      onChanged: (value) => setState(
+                        () {
+                          widget.filterGroup = value as Filter;
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 20,
+            ),
+            child: InkWell(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Theme.of(context).primaryColor),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  child: Center(
+                    child: Text(
+                      "Apply",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              onTap: () {
+                widget.handleFilter(widget.filterGroup);
+                Navigator.pop(context);
+              },
+            ),
+          )
+        ],
       ),
     );
   }

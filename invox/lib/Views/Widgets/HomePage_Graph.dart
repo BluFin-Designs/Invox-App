@@ -46,7 +46,12 @@ class _HomePageGraphState extends State<HomePageGraph> {
       if (currentDate.isAfter(lastSevenDays) ||
           currentDate.isAtSameMomentAs(lastSevenDays)) {
         String dayOfWeek = DateFormat('EEEE').format(currentDate);
-        dailyTransactions[dayOfWeek]?.add(transaction);
+        if (_isExpense && transaction.txnType == TransactionType.DEBIT) {
+          dailyTransactions[dayOfWeek]?.add(transaction);
+        } else if (!_isExpense &&
+            transaction.txnType == TransactionType.CREDIT) {
+          dailyTransactions[dayOfWeek]?.add(transaction);
+        }
       }
     }
     return dailyTransactions;
@@ -65,8 +70,12 @@ class _HomePageGraphState extends State<HomePageGraph> {
         if (!monthlyTransactions.containsKey(dayOfMonth)) {
           monthlyTransactions[dayOfMonth!] = [];
         }
-
-        monthlyTransactions[dayOfMonth]!.add(transaction);
+        if (_isExpense && transaction.txnType == TransactionType.DEBIT) {
+          monthlyTransactions[dayOfMonth]!.add(transaction);
+        } else if (!_isExpense &&
+            transaction.txnType == TransactionType.CREDIT) {
+          monthlyTransactions[dayOfMonth]!.add(transaction);
+        }
       }
     }
 
@@ -88,13 +97,20 @@ class _HomePageGraphState extends State<HomePageGraph> {
         if (!yearlyTransactions.containsKey(monthOfYear)) {
           yearlyTransactions[monthOfYear] = [];
         }
-
-        yearlyTransactions[monthOfYear]!.add(transaction);
+        if (_isExpense && transaction.txnType == TransactionType.DEBIT) {
+          yearlyTransactions[monthOfYear]!.add(transaction);
+        } else if (!_isExpense &&
+            transaction.txnType == TransactionType.CREDIT) {
+          yearlyTransactions[monthOfYear]!.add(transaction);
+        }
       }
     }
 
     return yearlyTransactions;
   }
+
+  // variables
+  bool _isExpense = true;
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +118,47 @@ class _HomePageGraphState extends State<HomePageGraph> {
       length: 3,
       child: Column(
         children: [
+          Container(
+            height: 50,
+            decoration: const BoxDecoration(
+              color: Color(0xff8EA7E9),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0, left: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    child: Text(
+                      _isExpense ? "Expense" : "Income",
+                      style: TextStyle(
+                        color: _isExpense ? Colors.red : Colors.greenAccent,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 50,
+                    height: 20,
+                    child: Switch.adaptive(
+                      activeColor: Colors.redAccent,
+                      value: _isExpense,
+                      onChanged: (val) {
+                        setState(() {
+                          _isExpense = val;
+                        });
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
           SizedBox(
             height: 200,
             width: MediaQuery.of(context).size.width,
