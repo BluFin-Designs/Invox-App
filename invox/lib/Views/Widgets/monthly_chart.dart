@@ -37,7 +37,7 @@ class MonthlyChart extends StatelessWidget {
         x: i,
         barRods: [
           BarChartRodData(
-            width: (today.day < 20) ? widgetWidth / 35 : 20,
+            width: (today.day < 20) ? widgetWidth / 35 : 10,
             toY: totalValue,
             gradient: _barsGradient,
             borderRadius: const BorderRadius.only(
@@ -48,7 +48,7 @@ class MonthlyChart extends StatelessWidget {
             ),
           )
         ],
-        showingTooltipIndicators: [0],
+        showingTooltipIndicators: [1],
       ));
     }
     return currentMonthTransactions;

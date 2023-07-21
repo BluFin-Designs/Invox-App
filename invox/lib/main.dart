@@ -8,6 +8,7 @@ import 'package:invox/Models/WalletModel.dart';
 import 'package:invox/Repositories/CategoryRepository.dart';
 import 'package:invox/blocs/categories_bloc.dart';
 import 'package:invox/blocs/cubits/auth_cubit.dart';
+import 'package:invox/blocs/cubits/budget_cubit.dart';
 
 import '../Views/Screens/Budget_Screen.dart';
 import '../Views/Screens/Categories_Screen.dart';
@@ -20,6 +21,7 @@ import '../Views/Screens/Profile_Screen.dart';
 import '../Views/Screens/SavingGoals_Screen.dart';
 import '../Views/Screens/Statistics_Screen.dart';
 import '../Views/Screens/Transaction_Screen.dart';
+import 'Repositories/BudgetRepository.dart';
 import 'Repositories/WalletRepository.dart';
 import 'blocs/transactions_bloc.dart';
 
@@ -40,9 +42,10 @@ main() async {
   // var mainBox = Hive.box("database");
   // mainBox.clear();
 
-  // adding default wallets.
+  // adding default values.
   WalletRepository();
   CategoryRepository();
+  BudgetRepository();
 
   runApp(const MyApp());
 }
@@ -93,7 +96,10 @@ class MyApp extends StatelessWidget {
                 create: (context) => CategoriesBloc(),
                 child: const CategoriesPage(),
               ),
-          BudgetPage.routeName: (ctx) => const BudgetPage(),
+          BudgetPage.routeName: (ctx) => BlocProvider(
+                create: (context) => BudgetCubit(),
+                child: const BudgetPage(),
+              ),
           SavingGoals.routeName: (ctx) => const SavingGoals(),
           GoalDetailsPage.routeName: (ctx) => const GoalDetailsPage(),
         },

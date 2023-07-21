@@ -259,7 +259,8 @@ class _HomePageState extends State<HomePage> {
                                 key: Key(allTxns[index].title),
                                 child: TransactionCard(txn: allTxns[index]));
                           },
-                          itemCount: allTxns.length,
+                          itemCount:
+                              (allTxns.length < 50) ? allTxns.length : 50,
                         )
                       : SizedBox(
                           height: 200,

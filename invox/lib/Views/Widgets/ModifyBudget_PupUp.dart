@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/BudgetData.dart';
+import '../../Repositories/BudgetRepository.dart';
 
 class ModifyBudgetPopUp extends StatefulWidget {
-  final Budget budgetId;
+  final budgetType budgetId;
   const ModifyBudgetPopUp({required this.budgetId, Key? key}) : super(key: key);
 
   @override
@@ -11,6 +11,7 @@ class ModifyBudgetPopUp extends StatefulWidget {
 }
 
 class _ModifyBudgetPopUpState extends State<ModifyBudgetPopUp> {
+  BudgetRepository budgetRepo = BudgetRepository();
   double? _newAmount;
 
   @override
@@ -75,8 +76,12 @@ class _ModifyBudgetPopUpState extends State<ModifyBudgetPopUp> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   )),
-              onPressed: () {
-                BudgetData.modifyData(widget.budgetId, _newAmount!);
+              onPressed: () async {
+                // BudgetData.modifyData(widget.budgetId, _newAmount!);
+                // BlocProvider.of<BudgetCubit>(context)
+                //     .updateBudget(widget.budgetId, _newAmount!);
+                await budgetRepo.updateBudget(widget.budgetId, _newAmount!);
+
                 Navigator.pop(context);
               },
               child: const Padding(

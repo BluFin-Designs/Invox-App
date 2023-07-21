@@ -1,40 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invox/blocs/cubits/budget_cubit.dart';
 
-import '../../utils/BudgetData.dart';
+import '../../Repositories/BudgetRepository.dart';
 import '../Widgets/ModifyBudget_PupUp.dart';
 
-class BudgetPage extends StatelessWidget {
+class BudgetPage extends StatefulWidget {
   static String routeName = '/budget';
   const BudgetPage({Key? key}) : super(key: key);
 
   @override
+  State<BudgetPage> createState() => _BudgetPageState();
+}
+
+class _BudgetPageState extends State<BudgetPage> {
+  _refreshPage() {
+    setState(() {
+      BlocProvider.of<BudgetCubit>(context).updateData();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("Called!");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Budget"),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(14.0),
-        child: Column(
-          children: [
-            BudgetCard(
-              title: BudgetData.allCategories[0]["title"],
-              value: BudgetData.allCategories[0]["Amount"],
-              color: Theme.of(context).primaryColor,
-              id: BudgetData.allCategories[0]["id"],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            BudgetCard(
-              title: BudgetData.allCategories[1]["title"],
-              value: BudgetData.allCategories[1]["Amount"],
-              color: Theme.of(context).colorScheme.secondary,
-              id: BudgetData.allCategories[1]["id"],
-            ),
-          ],
-        ),
+      body: BlocBuilder<BudgetCubit, BudgetState>(
+        builder: (context, state) {
+          if (state is BudgetLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is BudgetLoadedState) {
+            return Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Column(
+                children: [
+                  BudgetCard(
+                    title: "Monthly",
+                    value: state.monthly,
+                    color: Theme.of(context).primaryColor,
+                    id: budgetType.MONTH,
+                    updateHandle: _refreshPage,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  BudgetCard(
+                    title: "Weekly",
+                    value: state.weekly,
+                    color: Theme.of(context).colorScheme.secondary,
+                    id: budgetType.WEEK,
+                    updateHandle: _refreshPage,
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return const Center(
+              child: Text("Error Loading Data :("),
+            );
+          }
+        },
       ),
     );
   }
@@ -44,9 +74,11 @@ class BudgetCard extends StatelessWidget {
   String title;
   double value;
   Color color;
-  Budget id;
+  VoidCallback updateHandle;
+  budgetType id;
 
   BudgetCard({
+    required this.updateHandle,
     required this.color,
     required this.title,
     required this.value,
@@ -136,7 +168,7 @@ class BudgetCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                );
+                ).then((value) => updateHandle());
               },
               icon: const Icon(
                 Icons.edit,
