@@ -1,22 +1,28 @@
 import '../Models/SavingGoalsModel.dart';
-import '../utils/SavingGoals_Database.dart';
 import '../Models/GoalsTransactionModel.dart';
+import 'package:hive/hive.dart';
 
 class SavingGoalsRepository {
+  var mainBox = Hive.box("database");
   Future<List<SavingGoalsModel>> getGoals() async {
-    return SavingGoalsDatabase.goals;
+    List<SavingGoalsModel> allGoals =
+        mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+    return allGoals;
   }
 
   Future<bool> addGoals(SavingGoalsModel goal) async {
     try {
-      SavingGoalsDatabase.goals.add(goal);
+      List<SavingGoalsModel> allGoals =
+          mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+      allGoals.add(goal);
+      mainBox.put("goals", allGoals);
       return true;
     } catch (e) {
       throw Exception(e);
     }
   }
 
-  Future<SavingGoalsModel> editGoals(
+  Future<bool> editGoals(
     String uui,
     String title,
     List<GoalsTransactionModel> txn,
@@ -26,10 +32,13 @@ class SavingGoalsRepository {
         uid: uui, title: title, txn: txn, requiredAmount: requiredAmount);
 
     try {
-      final index = SavingGoalsDatabase.goals
-          .indexWhere((element) => element.uid == tempGoals.uid);
-      SavingGoalsDatabase.goals[index] = tempGoals;
-      return tempGoals;
+      List<SavingGoalsModel> allGoals =
+          mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+      final index =
+          allGoals.indexWhere((element) => element.uid == tempGoals.uid);
+      allGoals[index] = tempGoals;
+      mainBox.put("goals", allGoals);
+      return true;
     } catch (e) {
       throw Exception(e);
     }
@@ -37,7 +46,10 @@ class SavingGoalsRepository {
 
   Future<bool> deleteGoals(String uui) async {
     try {
-      SavingGoalsDatabase.goals.removeWhere((goals) => goals.uid == uui);
+      List<SavingGoalsModel> allGoals =
+          mainBox.get("goals")?.cast<SavingGoalsModel>() ?? [];
+      allGoals.removeWhere((goals) => goals.uid == uui);
+      mainBox.put("goals", allGoals);
       return true;
     } catch (e) {
       throw Exception(e);
