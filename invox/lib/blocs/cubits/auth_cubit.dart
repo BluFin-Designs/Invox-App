@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_state.dart';
 
@@ -9,12 +9,33 @@ class AuthCubit extends Cubit<AuthState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   AuthCubit() : super(AuthInitial()) {
     User? currentUser = _auth.currentUser;
+    // getGender();
     if (currentUser != null) {
       emit(LoggedInState(currentUser));
     } else {
       emit(LoggedOutState());
     }
   }
+
+  GoogleSignIn googleSignIn = GoogleSignIn(
+      scopes: ['email', "https://www.googleapis.com/auth/userinfo.profile"]);
+
+  // get gender
+  // Future<String> getGender() async {
+  //   await googleSignIn.signIn();
+  //   var url = Uri.https(
+  //       'people.googleapis.com', 'v1/people/me?personFields=genders&key=');
+  //
+  //   final headers = await googleSignIn.currentUser?.authHeaders;
+  //   final r = await http.get(url,
+  //       headers: {"Authorization": headers!["Authorization"] as String});
+  //   final response = jsonDecode(r.body);
+  //
+  //   debugPrint(response.toString());
+  //   debugPrint(response["genders"][0]["formattedValue"]);
+  //
+  //   return response["genders"][0]["formattedValue"];
+  // }
 
   Future signInWithGoogle() async {
     //Emitting Loading State

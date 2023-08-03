@@ -96,7 +96,8 @@ class _HomePageState extends State<HomePage> {
       ),
       body: BlocBuilder<TransactionsBloc, TransactionsState>(
           builder: (ctx, state) {
-        print("Called!");
+        // print("Called!");
+        // print(state);
         if (state is TransactionsInitialState) {
           BlocProvider.of<TransactionsBloc>(context)
               .add(TransactionLoadingEvent());

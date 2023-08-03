@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
 
 class ProfileStatsCard extends StatelessWidget {
   final Color color_1;
   final Color color_2;
   final double value_1;
   final double value_2;
+  final String title;
 
   const ProfileStatsCard({
     Key? key,
@@ -13,6 +14,7 @@ class ProfileStatsCard extends StatelessWidget {
     required this.value_2,
     required this.color_1,
     required this.color_2,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -29,15 +31,15 @@ class ProfileStatsCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            "MONTHLY BUDGET BALANCE",
-            style: TextStyle(
+          Text(
+            "$title BUDGET BALANCE",
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
             textAlign: TextAlign.center,
           ),
-          Container(
+          SizedBox(
             height: 140,
             child: Stack(
               alignment: Alignment.center,

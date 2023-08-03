@@ -5,8 +5,15 @@ class UserModel {
   String? uid;
   String? profileImg;
   String? email;
+  String? gender;
 
-  UserModel({this.name, this.uid, this.email, this.profileImg});
+  UserModel({
+    this.name,
+    this.uid,
+    this.email,
+    this.profileImg,
+    this.gender,
+  });
 }
 
 class UserRepository {
