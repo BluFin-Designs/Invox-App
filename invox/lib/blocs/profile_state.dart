@@ -25,6 +25,7 @@ class ProfileLoadedState extends ProfileState {
   double weeklyBudget;
   double weekTotalSpent;
   double monthTotalSpent;
+  int buyingStreak;
 
   ProfileLoadedState({
     required this.userInfo,
@@ -32,6 +33,7 @@ class ProfileLoadedState extends ProfileState {
     required this.weeklyBudget,
     required this.monthTotalSpent,
     required this.weekTotalSpent,
+    required this.buyingStreak,
   });
 
   @override

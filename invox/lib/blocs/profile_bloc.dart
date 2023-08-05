@@ -47,14 +47,44 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         //get budgets
         Map<dynamic, dynamic> budgets = budgetRepo.getBudgets();
 
+        // getting Streaks
+        int streaks = _getStreaks(txns);
+
         emit(ProfileLoadedState(
           userInfo: userinfo,
           monthlyBudget: budgets["monthly"],
           weeklyBudget: budgets["weekly"],
           monthTotalSpent: thisMonthTotal,
           weekTotalSpent: thisWeekTotal,
+          buyingStreak: streaks,
         ));
       }
     });
+  }
+
+  // Get streaks
+  int _getStreaks(List<TransactionModel> txns) {
+    int streak = 0;
+
+    DateTime today = DateTime.now();
+    for (int i = 0; i < 30; i++) {
+      DateTime currentDate = today.subtract(Duration(days: i));
+      int flag = 0;
+      for (var txn in txns) {
+        if ((txn.date?.day == currentDate.day) &&
+            (txn.date?.month == currentDate.month) &&
+            (txn.date?.year == currentDate.year) &&
+            (txn.txnType == TransactionType.DEBIT)) {
+          streak = i + 1;
+          flag = 1;
+          break;
+        }
+      }
+      if (flag == 0) {
+        break;
+      }
+    }
+
+    return streak;
   }
 }

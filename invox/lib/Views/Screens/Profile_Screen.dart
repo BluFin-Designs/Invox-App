@@ -8,7 +8,17 @@ import '../Widgets/Profile_Stats_Card.dart';
 
 class Profile extends StatelessWidget {
   static const routeName = '/profile';
-  const Profile({Key? key}) : super(key: key);
+  Profile({Key? key}) : super(key: key);
+
+  String _getBuyerRating(int streak) {
+    if (streak <= 10) {
+      return "Normal";
+    } else if (streak > 10 && streak <= 20) {
+      return "impulsive";
+    } else {
+      return "Extreme";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +32,7 @@ class Profile extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is ProfileLoadedState) {
+            debugPrint(state.buyingStreak.toString());
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -90,8 +101,8 @@ class Profile extends StatelessWidget {
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Text(
+                                children: [
+                                  const Text(
                                     'You\'re an ',
                                     style: TextStyle(
                                       fontSize: 20.0,
@@ -99,8 +110,8 @@ class Profile extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Impulsive Buyer',
-                                    style: TextStyle(
+                                    _getBuyerRating(state.buyingStreak),
+                                    style: const TextStyle(
                                       fontSize: 20.0,
                                       color: Color(0xFF91D8E4),
                                     ),
@@ -151,7 +162,10 @@ class Profile extends StatelessWidget {
                                                       barRods: [
                                                         BarChartRodData(
                                                           width: 10,
-                                                          toY: 20,
+                                                          toY: state
+                                                                  .buyingStreak
+                                                                  .toDouble() +
+                                                              1,
                                                           gradient:
                                                               _barsGradient,
                                                           borderRadius:
@@ -212,9 +226,9 @@ class Profile extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  const Text(
-                                    '20 Days',
-                                    style: TextStyle(
+                                  Text(
+                                    '${state.buyingStreak} Days',
+                                    style: const TextStyle(
                                       fontSize: 16.0,
                                       fontWeight: FontWeight.bold,
                                     ),

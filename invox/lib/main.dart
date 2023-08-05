@@ -90,7 +90,7 @@ class MyApp extends StatelessWidget {
           HomePage.routeName: (ctx) => const HomePage(),
           Profile.routeName: (ctx) => BlocProvider(
                 create: (context) => ProfileBloc(),
-                child: const Profile(),
+                child: Profile(),
               ),
           Transaction.routeName: (ctx) => const Transaction(),
           Statistics.routeName: (ctx) => MultiBlocProvider(
@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget {
                 create: (context) => CategoriesBloc(),
                 child: const CategoriesPage(),
               ),
-          BudgetPage.routeName: (ctx) => BlocProvider(
+          BudgetPage.routeName: (ctx) => BlocProvider<BudgetCubit>(
                 create: (context) => BudgetCubit(),
                 child: const BudgetPage(),
               ),
