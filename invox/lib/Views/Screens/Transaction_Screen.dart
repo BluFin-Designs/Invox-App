@@ -19,6 +19,7 @@ class Transaction extends StatefulWidget {
 
 class _TransactionState extends State<Transaction> {
   var txninstance = TransactionRepository();
+  @override
   void initState() {
     TransactionRepository().getTransactions();
     super.initState();
@@ -27,6 +28,12 @@ class _TransactionState extends State<Transaction> {
   late List<TransactionModel> dailyTxn = [];
   late List<TransactionModel> monthlyTxn = [];
   late List<TransactionModel> yearlyTxn = [];
+  double dailyDebit = 0;
+  double dailyCredit = 0;
+  double monthlyDebit = 0;
+  double monthlyCredit = 0;
+  double yearlyDebit = 0;
+  double yearlyCredit = 0;
 
   void txnDivision(List<TransactionModel> allTxns) {
     DateTime today = DateTime.now();
@@ -36,12 +43,27 @@ class _TransactionState extends State<Transaction> {
       if (todate.isAtSameMomentAs(
           DateTime(currentDate.year, currentDate.month, currentDate.day))) {
         dailyTxn.add(transaction);
+        if (transaction.txnType == TransactionType.DEBIT) {
+          dailyDebit = dailyDebit + transaction.amount!;
+        } else if (transaction.txnType == TransactionType.CREDIT) {
+          dailyCredit = dailyCredit + transaction.amount!;
+        }
       }
       if (currentDate.month == today.month && currentDate.year == today.year) {
         monthlyTxn.add(transaction);
+        if (transaction.txnType == TransactionType.DEBIT) {
+          monthlyDebit = monthlyDebit + transaction.amount!;
+        } else if (transaction.txnType == TransactionType.CREDIT) {
+          monthlyCredit = monthlyCredit + transaction.amount!;
+        }
       }
       if (currentDate.year == today.year) {
         yearlyTxn.add(transaction);
+        if (transaction.txnType == TransactionType.DEBIT) {
+          yearlyDebit = yearlyDebit + transaction.amount!;
+        } else if (transaction.txnType == TransactionType.CREDIT) {
+          yearlyCredit = yearlyCredit + transaction.amount!;
+        }
       }
     }
   }
@@ -94,22 +116,22 @@ class _TransactionState extends State<Transaction> {
                           color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        tabs: [
-                          const Text(
+                        tabs: const [
+                          Text(
                             "Daily",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.0,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "Monthly",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16.0,
                             ),
                           ),
-                          const Text(
+                          Text(
                             "Yearly",
                             style: TextStyle(
                               color: Colors.white,
@@ -135,14 +157,15 @@ class _TransactionState extends State<Transaction> {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 5.0),
-                                  child: SummaryCard(credit: 1956, debit: 134),
+                                  child: SummaryCard(
+                                      credit: dailyCredit, debit: dailyDebit),
                                 ),
                                 const SizedBox(
                                   height: 20.0,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.0),
                                   child: AddTransaction(),
                                 ),
                                 const SizedBox(
@@ -305,14 +328,16 @@ class _TransactionState extends State<Transaction> {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 5.0),
-                                  child: SummaryCard(credit: 11956, debit: 834),
+                                  child: SummaryCard(
+                                      credit: monthlyCredit,
+                                      debit: monthlyDebit),
                                 ),
                                 const SizedBox(
                                   height: 20.0,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.0),
                                   child: AddTransaction(),
                                 ),
                                 const SizedBox(
@@ -475,15 +500,15 @@ class _TransactionState extends State<Transaction> {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 5.0),
-                                  child:
-                                      SummaryCard(credit: 111956, debit: 5734),
+                                  child: SummaryCard(
+                                      credit: yearlyCredit, debit: yearlyDebit),
                                 ),
                                 const SizedBox(
                                   height: 20.0,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
+                                const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 5.0),
                                   child: AddTransaction(),
                                 ),
                                 const SizedBox(
