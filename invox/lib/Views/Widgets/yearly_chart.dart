@@ -90,7 +90,7 @@ class YearlyChart extends StatelessWidget {
               gridData: FlGridData(
                 drawHorizontalLine: true,
                 drawVerticalLine: false,
-                horizontalInterval: maxValue / 5,
+                horizontalInterval: maxValue != 0 ? maxValue / 5 : 10,
               ),
               alignment: BarChartAlignment.center,
               maxY: maxValue + (maxValue * 0.5),

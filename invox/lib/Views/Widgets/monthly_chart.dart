@@ -75,7 +75,7 @@ class MonthlyChart extends StatelessWidget {
               gridData: FlGridData(
                 drawHorizontalLine: true,
                 drawVerticalLine: false,
-                horizontalInterval: maxValue / 5,
+                horizontalInterval: maxValue != 0 ? maxValue / 5 : 15,
               ),
               alignment: BarChartAlignment.spaceEvenly,
               maxY: maxValue + (maxValue * .5),
