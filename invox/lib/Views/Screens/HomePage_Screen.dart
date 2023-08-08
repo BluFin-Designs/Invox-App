@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     UserRepository();
-    TransactionRepository().getTransactions();
+    // TransactionRepository().getTransactions();
     super.initState();
   }
 
@@ -122,7 +122,10 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 14,
                   ),
-                  HomePageGraph(transactions: allTxns),
+                  HomePageGraph(
+                    key: UniqueKey(),
+                    transactions: allTxns,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -194,18 +197,18 @@ class _HomePageState extends State<HomePage> {
                                                                 as String)
                                                         .then((value) {
                                                       Navigator.pop(context);
-                                                      BlocProvider.of<
-                                                                  TransactionsBloc>(
-                                                              context)
-                                                          .add(
-                                                              TransactionLoadingEvent());
                                                     });
                                                   });
                                                 },
                                               ),
                                             ],
                                           );
-                                        });
+                                        }).then(
+                                      (value) =>
+                                          BlocProvider.of<TransactionsBloc>(
+                                                  context)
+                                              .add(TransactionLoadingEvent()),
+                                    );
                                   } else {
                                     showDialog(
                                       barrierDismissible: false,

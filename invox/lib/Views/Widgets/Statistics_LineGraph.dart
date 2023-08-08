@@ -28,38 +28,24 @@ class StatisticsGraph extends StatelessWidget {
     for (TransactionModel txn in allTransactions) {
       if (txn.txnType == TransactionType.DEBIT) {
         if (txn.date!.isAfter(today.subtract(const Duration(days: 1)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["0"] = graphValue["0"]! + txn.amount!;
         } else if (txn.date!.isAfter(today.subtract(const Duration(days: 2))) &&
             txn.date!.isBefore(today.subtract(const Duration(days: 1)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["1"] = graphValue["1"]! + txn.amount!;
         } else if (txn.date!.isAfter(today.subtract(const Duration(days: 3))) &&
             txn.date!.isBefore(today.subtract(const Duration(days: 2)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["2"] = graphValue["2"]! + txn.amount!;
         } else if (txn.date!.isAfter(today.subtract(const Duration(days: 4))) &&
             txn.date!.isBefore(today.subtract(const Duration(days: 3)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["3"] = graphValue["3"]! + txn.amount!;
         } else if (txn.date!.isAfter(today.subtract(const Duration(days: 5))) &&
             txn.date!.isBefore(today.subtract(const Duration(days: 4)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["4"] = graphValue["4"]! + txn.amount!;
         } else if (txn.date!.isAfter(today.subtract(const Duration(days: 6))) &&
             txn.date!.isBefore(today.subtract(const Duration(days: 5)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["5"] = graphValue["5"]! + txn.amount!;
         } else if (txn.date!.isAfter(today.subtract(const Duration(days: 7))) &&
             txn.date!.isBefore(today.subtract(const Duration(days: 6)))) {
-          debugPrint(txn.date.toString());
-          debugPrint(txn.amount.toString());
           graphValue["6"] = graphValue["6"]! + txn.amount!;
         }
       }
@@ -74,13 +60,6 @@ class StatisticsGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _getAllTotals();
-    // debugPrint(graphValue["0"].toString());
-    // debugPrint(graphValue["1"].toString());
-    // debugPrint(graphValue["2"].toString());
-    // debugPrint(graphValue["3"].toString());
-    // debugPrint(graphValue["4"].toString());
-    // debugPrint(graphValue["5"].toString());
-    // debugPrint(graphValue["6"].toString());
     return Column(
       children: [
         Container(

@@ -112,7 +112,6 @@ class MyApp extends StatelessWidget {
               ),
           SavingGoals.routeName: (ctx) => const SavingGoals(),
           GoalDetailsPage.routeName: (ctx) => GoalDetailsPage(),
-          BudgetPage.routeName: (ctx) => const BudgetPage(),
           SavingGoals.routeName: (ctx) => BlocProvider(
                 create: (context) => GoalsBloc(),
                 child: const SavingGoals(),

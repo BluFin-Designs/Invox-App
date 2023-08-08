@@ -107,7 +107,6 @@ class _StatisticsState extends State<Statistics> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (snapshot.hasData) {
-                  debugPrint(snapshot.data.toString());
                   List<StatisticsModel> statsData =
                       (snapshot.data as Map<String, StatisticsModel>)
                           .values
