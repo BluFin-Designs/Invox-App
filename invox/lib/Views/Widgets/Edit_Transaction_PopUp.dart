@@ -9,6 +9,7 @@ import '../../Repositories/WalletRepository.dart';
 
 class EditTransactionPopUp extends StatefulWidget {
   //Todo:accept transaction model to be edited
+
   final TransactionModel txn;
   const EditTransactionPopUp({required this.txn, Key? key}) : super(key: key);
 
@@ -20,6 +21,7 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descController = TextEditingController();
   TextEditingController amtController = TextEditingController();
+  late double previousAmt;
 
   String txnType = "";
   int txnIcon = Icons.movie_creation.codePoint;
@@ -58,6 +60,7 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
     wallet = widget.txn.wallet!;
     category = widget.txn.category;
     uuid = widget.txn.uid!;
+    previousAmt = widget.txn.amount!;
     //wallet=widget.txn.wallet;
     super.initState();
   }
@@ -529,7 +532,8 @@ class _EditTransactionPopUpState extends State<EditTransactionPopUp> {
                         txnType,
                         wallet,
                         category,
-                        txnIcon)
+                        txnIcon,
+                        previousAmt)
                     .then(
                       (value) => Navigator.pop(context),
                     );

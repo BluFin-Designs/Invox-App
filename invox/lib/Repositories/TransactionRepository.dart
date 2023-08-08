@@ -18,13 +18,36 @@ class TransactionRepository {
   }
 
   Future<bool> deleteTransaction(String uui) async {
+    double? tempAmt = 0;
+    Wallet? wallett;
+    TransactionType? type;
     /*TransactionDatabase.transactions
         .removeWhere((transactions) => transactions.uid == uui);*/
     try {
       List<TransactionModel> allTransactions =
           mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
-      allTransactions.removeWhere((transactions) => transactions.uid == uui);
+      allTransactions.removeWhere((transactions) {
+        if (transactions.uid == uui) {
+          tempAmt = transactions.amount;
+          wallett = transactions.wallet;
+          type = transactions.txnType;
+          return true;
+        } else {
+          return false;
+        }
+      });
       mainBox.put("transactions", allTransactions);
+      List<Wallet> allWallets = mainBox.get("wallets")?.cast<Wallet>();
+      for (var wallet in allWallets) {
+        if (wallet == wallett) {
+          if (type == TransactionType.CREDIT) {
+            wallet.amount = wallet.amount - tempAmt!;
+          } else if (type == TransactionType.DEBIT) {
+            wallet.amount = wallet.amount + tempAmt!;
+          }
+        }
+      }
+      mainBox.put("wallets", allWallets);
       return true;
     } catch (e) {
       throw Exception(e);
@@ -41,6 +64,7 @@ class TransactionRepository {
     Wallet wallet,
     TransactionCategoryModel category,
     int icon,
+    double prevAmt,
   ) async {
     TransactionModel tempTxn = TransactionModel(
       uid: uui,
@@ -68,6 +92,17 @@ class TransactionRepository {
       allTransactions[index] = tempTxn;
       //print(allTransactions);
       mainBox.put("transactions", allTransactions);
+      List<Wallet> allWallets = mainBox.get("wallets")?.cast<Wallet>();
+      for (var wallet in allWallets) {
+        if (tempTxn.wallet == wallet) {
+          if (tempTxn.amount! - prevAmt < 0) {
+            wallet.amount = wallet.amount + (prevAmt - tempTxn.amount!);
+          } else if (tempTxn.amount! - prevAmt > 0) {
+            wallet.amount = wallet.amount - (tempTxn.amount! - prevAmt);
+          }
+        }
+      }
+      mainBox.put("wallets", allWallets);
       return true;
     } catch (e) {
       throw Exception(e);
@@ -108,6 +143,17 @@ class TransactionRepository {
           mainBox.get("transactions")?.cast<TransactionModel>() ?? [];
       allTransactions.add(tempTxn);
       mainBox.put("transactions", allTransactions);
+      List<Wallet> allWallets = mainBox.get("wallets")?.cast<Wallet>();
+      for (var wallet in allWallets) {
+        if (tempTxn.wallet == wallet) {
+          if (tempTxn.txnType == TransactionType.CREDIT) {
+            wallet.amount = wallet.amount + tempTxn.amount!;
+          } else if (tempTxn.txnType == TransactionType.DEBIT) {
+            wallet.amount = wallet.amount - tempTxn.amount!;
+          }
+        }
+      }
+      mainBox.put("wallets", allWallets);
       return true;
     } catch (e) {
       throw Exception(e);

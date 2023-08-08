@@ -8,7 +8,7 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _percentage = ((credit - debit) / credit) * 100;
+    double _percentage = ((credit) / (credit + debit)) * 100;
     return Container(
       height: 142.0,
       width: double.infinity,
@@ -29,9 +29,11 @@ class SummaryCard extends StatelessWidget {
                 sections: [
                   PieChartSectionData(
                       color: Color(0xFF91D8E4),
-                      value: _percentage,
+                      value: (credit != 0 || debit != 0) ? _percentage : 100,
                       showTitle: true,
-                      title: ('${(_percentage).toStringAsFixed(0)}%'),
+                      title: (credit != 0 || debit != 0)
+                          ? ('${(_percentage).toStringAsFixed(0)}%')
+                          : 0.toString(),
                       titleStyle: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -40,9 +42,12 @@ class SummaryCard extends StatelessWidget {
                       radius: 22.0),
                   PieChartSectionData(
                       color: Theme.of(context).primaryColor,
-                      value: 100 - _percentage,
+                      value:
+                          (credit != 0 || debit != 0) ? 100 - _percentage : 0,
                       showTitle: true,
-                      title: ('${(100 - _percentage).toStringAsFixed(0)}%'),
+                      title: (credit != 0 || debit != 0)
+                          ? ('${(100 - _percentage).toStringAsFixed(0)}%')
+                          : 0.toString(),
                       titleStyle: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
