@@ -29,7 +29,8 @@ Future<Map<String, StatisticsModel>>? _getCategorisedAmount(
   for (TransactionCategoryModel cat in categories) {
     double tempTotal = 0;
     for (TransactionModel txn in transactions) {
-      if (txn.category.Uid == cat.Uid) {
+      if ((txn.category.Uid == cat.Uid) &&
+          (txn.txnType == TransactionType.DEBIT)) {
         tempTotal += txn.amount!;
       }
     }
@@ -81,7 +82,7 @@ class _StatisticsState extends State<Statistics> {
       extendBody: true,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text("Statistics"),
+        title: const Text("Expense Statistics"),
         // centerTitle: false,
       ),
       body: BlocBuilder<CategoriesBloc, CategoriesState>(
@@ -127,7 +128,7 @@ class _StatisticsState extends State<Statistics> {
                           const SizedBox(
                             height: 22.0,
                           ),
-                          const StatisticsGraph(),
+                          StatisticsGraph(allTransactions: txns),
                           const SizedBox(
                             height: 18.0,
                           ),
