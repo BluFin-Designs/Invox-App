@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../Models/Transaction_Model.dart';
+import '../../Repositories/TransactionRepository.dart';
+import '../../blocs/transactions_bloc.dart';
 import '../Widgets/Add_Transaction.dart';
+import '../Widgets/Edit_Transaction_PopUp.dart';
 import '../Widgets/Summary_card.dart';
 import '../Widgets/TransactionCard.dart';
-import '../../blocs/transactions_bloc.dart';
-import '../../Repositories/TransactionRepository.dart';
-import '../Widgets/Edit_Transaction_PopUp.dart';
 
 class Transaction extends StatefulWidget {
   static const routeName = '/transaction';
@@ -147,7 +147,7 @@ class _TransactionState extends State<Transaction> {
                   ),
                   SingleChildScrollView(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height - 158,
+                      height: MediaQuery.of(context).size.height - 190,
                       child: TabBarView(
                         children: [
                           SizedBox(

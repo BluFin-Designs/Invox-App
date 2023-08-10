@@ -87,7 +87,10 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           LoginSignUp.routeName: (ctx) => const LoginSignUp(),
-          HomePage.routeName: (ctx) => const HomePage(),
+          HomePage.routeName: (ctx) => BlocProvider(
+                create: (context) => TransactionsBloc(),
+                child: const HomePage(),
+              ),
           Profile.routeName: (ctx) => BlocProvider(
                 create: (context) => ProfileBloc(),
                 child: Profile(),

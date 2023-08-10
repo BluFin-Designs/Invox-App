@@ -21,20 +21,27 @@ class StatisticsPieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: AspectRatio(
-        aspectRatio: 1.7,
-        child: PieChart(
-          PieChartData(
-            startDegreeOffset: -90,
-            sectionsSpace: 0,
-            centerSpaceRadius: 40,
-            sections: showingSections(),
-          ),
-        ),
-      ),
-    );
+    return (getTotal() != 0)
+        ? SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: AspectRatio(
+              aspectRatio: 1.7,
+              child: PieChart(
+                PieChartData(
+                  startDegreeOffset: -90,
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 40,
+                  sections: showingSections(),
+                ),
+              ),
+            ),
+          )
+        : const SizedBox(
+            height: 200,
+            child: Center(
+              child: Text("No Transactions yet :("),
+            ),
+          );
   }
 
   List<PieChartSectionData> showingSections() {

@@ -17,6 +17,16 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  logout() async {
+    emit(AuthInitial());
+    await _signOut();
+    emit(LoggedOutState());
+  }
+
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
+
   GoogleSignIn googleSignIn = GoogleSignIn(
       scopes: ['email', "https://www.googleapis.com/auth/userinfo.profile"]);
 

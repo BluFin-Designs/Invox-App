@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:invox/Views/Screens/LoginSignUp_Screen.dart';
+import 'package:invox/blocs/cubits/auth_cubit.dart';
 import 'package:invox/blocs/profile_bloc.dart';
 
 import '../../Repositories/UserRepository.dart';
@@ -114,6 +116,13 @@ class Profile extends StatelessWidget {
                                     style: const TextStyle(
                                       fontSize: 20.0,
                                       color: Color(0xFF91D8E4),
+                                    ),
+                                  ),
+                                  const Text(
+                                    ' Buyer',
+                                    style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: Color(0xFFD9D9D9),
                                     ),
                                   ),
                                 ],
@@ -239,15 +248,37 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                            top: 45,
-                            left: 10,
+                          top: 45,
+                          left: 10,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.arrow_back,
+                                color: Colors.white, size: 25.0),
+                          ),
+                        ),
+                        Positioned(
+                          top: 45,
+                          right: 10,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white24,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                             child: IconButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                BlocProvider.of<AuthCubit>(context,
+                                        listen: false)
+                                    .logout();
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    LoginSignUp.routeName, (route) => false);
                               },
-                              icon: const Icon(Icons.arrow_back,
-                                  color: Colors.white, size: 25.0),
-                            )),
+                              icon: const Icon(Icons.logout,
+                                  color: Colors.red, size: 25.0),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -290,7 +321,7 @@ class Profile extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    height: 170,
+                    height: 130,
                     decoration: const BoxDecoration(
                       color: Color(0xFFF6F8FF),
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -299,18 +330,6 @@ class Profile extends StatelessWidget {
                         left: 20, top: 15, right: 20, bottom: 15),
                     child: Stack(
                       children: [
-                        const Positioned(
-                          right: 8.0,
-                          top: 8.0,
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xFF8EA7E9),
-                            child: Icon(
-                              Icons.edit,
-                              size: 20.0,
-                              color: Color(0xffF0F5FF),
-                            ),
-                          ),
-                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

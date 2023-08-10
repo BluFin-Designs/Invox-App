@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:invox/Views/Screens/Preferences_Screen.dart';
+import 'package:url_launcher/url_launcher.dart' as u;
 
 import '../../Repositories/UserRepository.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({Key? key}) : super(key: key);
+
+  dynamic launchBrowser(String link) async {
+    try {
+      Uri email = Uri(scheme: 'https', path: link);
+
+      await u.launchUrl(email);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +109,19 @@ class MenuDrawer extends StatelessWidget {
                   menu: "Preferences",
                 ),
               ),
-              MenuItems(
-                menu: "GitHub Repo",
+              InkWell(
+                child: MenuItems(
+                  menu: "GitHub Repo",
+                ),
+                onTap: () =>
+                    launchBrowser("www.github.com/BluFin-Designs/Invox-App"),
               ),
-              MenuItems(
-                menu: "Licenses",
+              InkWell(
+                child: MenuItems(
+                  menu: "Licenses",
+                ),
+                onTap: () => launchBrowser(
+                    "www.github.com/BluFin-Designs/Invox-App/blob/main/LICENSE.md"),
               ),
               const Expanded(
                 child: SizedBox(),
